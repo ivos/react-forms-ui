@@ -32,7 +32,8 @@ module.exports = function (grunt) {
 			bundle: {
 				cwd: 'target/build/',
 				src: ['target/build/**'],
-				dest: 'target/' + app.name + '-' + app.version + '.zip'
+				dest: 'target/' + app.name + '-' + app.version + '.zip',
+				compression: 'DEFLATE'
 			}
 		},
 		aws_s3: {
