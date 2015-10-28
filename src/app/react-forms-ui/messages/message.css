@@ -1,0 +1,19 @@
+.inline-message {
+	padding: 5px 15px;
+	margin: 1px 5px 0 0;
+	display: inline-block;
+}
+
+@media (max-width: 767px) {
+	.inline-message {
+		margin-top: 2px;
+	}
+}
+
+.inline-message-icon {
+	font-size: 115%;
+}
+
+.alert-dismissible {
+	padding-right: 35px;
+}

@@ -1,0 +1,308 @@
+/* Print columns */
+@media print {
+	.col-print-1, .col-print-2, .col-print-3, .col-print-4, .col-print-5,
+		.col-print-6, .col-print-7, .col-print-8, .col-print-9, .col-print-10,
+		.col-print-11, .col-print-12 {
+		float: left;
+	}
+	.col-print-12 {
+		width: 100%;
+	}
+	.col-print-11 {
+		width: 91.66666667%;
+	}
+	.col-print-10 {
+		width: 83.33333333%;
+	}
+	.col-print-9 {
+		width: 75%;
+	}
+	.col-print-8 {
+		width: 66.66666667%;
+	}
+	.col-print-7 {
+		width: 58.33333333%;
+	}
+	.col-print-6 {
+		width: 50%;
+	}
+	.col-print-5 {
+		width: 41.66666667%;
+	}
+	.col-print-4 {
+		width: 33.33333333%;
+	}
+	.col-print-3 {
+		width: 25%;
+	}
+	.col-print-2 {
+		width: 16.66666667%;
+	}
+	.col-print-1 {
+		width: 8.33333333%;
+	}
+}
+
+/* Hide abbr title in print */
+@media print {
+	abbr[title]:after {
+		content: "";
+	}
+}
+
+/* Color OK */
+.color-ok {
+	color: limegreen;
+}
+
+.well-white {
+	background-color: white;
+}
+
+/* Disabled link */
+a[disabled] {
+	pointer-events: none;
+}
+
+/* Action buttons */
+.action-buttons-group {
+	margin-bottom: 5px;
+}
+
+.action-buttons-group button, .action-buttons-group a.btn {
+	margin-bottom: 5px;
+}
+
+.action-buttons-group a:not(.btn) {
+	margin: 5px;
+}
+
+/* Navbar dropdown header */
+.dropdown-header {
+	font-size: inherit;
+}
+
+/* Gravatar */
+img.gravatar {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* Fixed navbar */
+body {
+	padding-top: 70px;
+}
+
+/* Help */
+.help-icon {
+	font-size: 130%;
+	padding: 6px 0px;
+	height: 32px;
+}
+
+a.help-link {
+	margin-right: 3px;
+	height: 32px;
+}
+
+/* Focused record in table grayed as on hover */
+.table-hover>tbody>tr:focus {
+	background-color: #f5f5f5;
+}
+
+/* Column XL */
+.visible-xl-block, .visible-xl-inline, .visible-xl-inline-block,
+	.visible-xl {
+	display: none !important;
+}
+
+@media ( min-width : 1600px) {
+	.xl-margin-right {
+		margin-right: 15px;
+	}
+	.container {
+		width: 1570px;
+	}
+	.col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6,
+		.col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
+		float: left;
+	}
+	.col-xl-12 {
+		width: 100%;
+	}
+	.col-xl-11 {
+		width: 91.66666667%;
+	}
+	.col-xl-10 {
+		width: 83.33333333%;
+	}
+	.col-xl-9 {
+		width: 75%;
+	}
+	.col-xl-8 {
+		width: 66.66666667%;
+	}
+	.col-xl-7 {
+		width: 58.33333333%;
+	}
+	.col-xl-6 {
+		width: 50%;
+	}
+	.col-xl-5 {
+		width: 41.66666667%;
+	}
+	.col-xl-4 {
+		width: 33.33333333%;
+	}
+	.col-xl-3 {
+		width: 25%;
+	}
+	.col-xl-2 {
+		width: 16.66666667%;
+	}
+	.col-xl-1 {
+		width: 8.33333333%;
+	}
+	.col-xl-pull-12 {
+		right: 100%;
+	}
+	.col-xl-pull-11 {
+		right: 91.66666667%;
+	}
+	.col-xl-pull-10 {
+		right: 83.33333333%;
+	}
+	.col-xl-pull-9 {
+		right: 75%;
+	}
+	.col-xl-pull-8 {
+		right: 66.66666667%;
+	}
+	.col-xl-pull-7 {
+		right: 58.33333333%;
+	}
+	.col-xl-pull-6 {
+		right: 50%;
+	}
+	.col-xl-pull-5 {
+		right: 41.66666667%;
+	}
+	.col-xl-pull-4 {
+		right: 33.33333333%;
+	}
+	.col-xl-pull-3 {
+		right: 25%;
+	}
+	.col-xl-pull-2 {
+		right: 16.66666667%;
+	}
+	.col-xl-pull-1 {
+		right: 8.33333333%;
+	}
+	.col-xl-pull-0 {
+		right: auto;
+	}
+	.col-xl-push-12 {
+		left: 100%;
+	}
+	.col-xl-push-11 {
+		left: 91.66666667%;
+	}
+	.col-xl-push-10 {
+		left: 83.33333333%;
+	}
+	.col-xl-push-9 {
+		left: 75%;
+	}
+	.col-xl-push-8 {
+		left: 66.66666667%;
+	}
+	.col-xl-push-7 {
+		left: 58.33333333%;
+	}
+	.col-xl-push-6 {
+		left: 50%;
+	}
+	.col-xl-push-5 {
+		left: 41.66666667%;
+	}
+	.col-xl-push-4 {
+		left: 33.33333333%;
+	}
+	.col-xl-push-3 {
+		left: 25%;
+	}
+	.col-xl-push-2 {
+		left: 16.66666667%;
+	}
+	.col-xl-push-1 {
+		left: 8.33333333%;
+	}
+	.col-xl-push-0 {
+		left: auto;
+	}
+	.col-xl-offset-12 {
+		margin-left: 100%;
+	}
+	.col-xl-offset-11 {
+		margin-left: 91.66666667%;
+	}
+	.col-xl-offset-10 {
+		margin-left: 83.33333333%;
+	}
+	.col-xl-offset-9 {
+		margin-left: 75%;
+	}
+	.col-xl-offset-8 {
+		margin-left: 66.66666667%;
+	}
+	.col-xl-offset-7 {
+		margin-left: 58.33333333%;
+	}
+	.col-xl-offset-6 {
+		margin-left: 50%;
+	}
+	.col-xl-offset-5 {
+		margin-left: 41.66666667%;
+	}
+	.col-xl-offset-4 {
+		margin-left: 33.33333333%;
+	}
+	.col-xl-offset-3 {
+		margin-left: 25%;
+	}
+	.col-xl-offset-2 {
+		margin-left: 16.66666667%;
+	}
+	.col-xl-offset-1 {
+		margin-left: 8.33333333%;
+	}
+	.col-xl-offset-0 {
+		margin-left: 0;
+	}
+	.visible-xl {
+		display: block !important;
+	}
+	table.visible-xl {
+		display: table;
+	}
+	tr.visible-xl {
+		display: table-row !important;
+	}
+	th.visible-xl, td.visible-xl {
+		display: table-cell !important;
+	}
+	.visible-xl-block {
+		display: block !important;
+	}
+	.visible-xl-inline {
+		display: inline !important;
+	}
+	.visible-xl-inline-block {
+		display: inline-block !important;
+	}
+	.hidden-xl {
+		display: none !important;
+	}
+}
