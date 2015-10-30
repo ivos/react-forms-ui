@@ -2,6 +2,7 @@ import React from 'react';
 import {setTitle, emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, TextField, PasswordField, PlainField, FormMessagesField} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
+import i18n from '../i18n';
 
 export default React.createClass({
 
@@ -45,6 +46,7 @@ export default React.createClass({
 	render() {
 		var fieldClasses = 'col-sm-2,col-sm-6,col-sm-4';
 		var buttonsClass = 'col-sm-offset-2 col-sm-10';
+		setTitle(i18n.t('home'));
 		return (
 			<div>
 				<h2>React Forms UI</h2>
@@ -86,7 +88,6 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		setTitle('Home');
 	},
 
 

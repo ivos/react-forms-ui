@@ -24,7 +24,7 @@ export default React.createClass({
 					<Route path="companies/:id" component={CompanyDetail}/>
 					<Route path="companies/:id/edit" component={CompanyEdit}/>
 					<Route path="partners" component={Partners}/>
-					<Redirect from="*" to="/" />
+					<Redirect from="*" to="/"/>
 				</Route>
 			</Router>
 		);

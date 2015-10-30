@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
+import i18n from '../i18n';
 
 export default React.createClass({
 
@@ -23,7 +24,9 @@ export default React.createClass({
 	},
 
 	setLocale(locale){
-		this.setState({locale: locale});
+		i18n.changeLanguage(locale, function () {
+			this.setState({locale: locale});
+		}.bind(this));
 	}
 
 });

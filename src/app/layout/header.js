@@ -6,7 +6,7 @@ export default React.createClass({
 		var {active, locale='en'} = this.props;
 		var localeLabels = {
 			en: <span><img src="img/flag-en.jpg" height="14" width="23"/>&nbsp;English</span>,
-			cz: <span><img src="img/flag-cz.jpg" height="14" width="21"/>&nbsp;Česky</span>
+			cs: <span><img src="img/flag-cs.jpg" height="14" width="21"/>&nbsp;Česky</span>
 		};
 		var currentLocaleLabel = localeLabels[locale];
 		return (
@@ -50,9 +50,9 @@ export default React.createClass({
 										<a href="#" onClick={this.setLocaleEn}>{localeLabels.en}</a>
 									</li>
 									}
-									{'cz' !== locale &&
+									{'cs' !== locale &&
 									<li>
-										<a href="#" onClick={this.setLocaleCz}>{localeLabels.cz}</a>
+										<a href="#" onClick={this.setLocaleCs}>{localeLabels.cs}</a>
 									</li>
 									}
 								</ul>
@@ -72,10 +72,10 @@ export default React.createClass({
 		onLocaleChange('en');
 	},
 
-	setLocaleCz(event){
+	setLocaleCs(event){
 		event.preventDefault();
 		var {onLocaleChange} = this.props;
-		onLocaleChange('cz');
+		onLocaleChange('cs');
 	}
 
 });

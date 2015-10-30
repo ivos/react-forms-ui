@@ -13,7 +13,8 @@
     "extract-text-webpack-plugin": "~0.8.2",
     "jquery": "~1.11.3",
     "history": "~1.12.6",
-    "react-router": "~1.0.0-rc3"
+    "react-router": "~1.0.0-rc3",
+    "i18next": "~2.0.0-alpha.13"
   },
   "devDependencies": {
     "babel-loader": "~5.3.2",
