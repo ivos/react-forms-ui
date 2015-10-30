@@ -3,7 +3,7 @@ import React from 'react';
 export default React.createClass({
 
 	render() {
-		var {active, locale='en'} = this.props;
+		var {active, locale} = this.props;
 		var localeLabels = {
 			en: <span><img src="img/flag-en.jpg" height="14" width="23"/>&nbsp;English</span>,
 			cs: <span><img src="img/flag-cs.jpg" height="14" width="21"/>&nbsp;Česky</span>

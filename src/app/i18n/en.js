@@ -1,5 +1,10 @@
 export default {
 	translation: {
-		'home': 'Home'
+		home: {
+			title: 'Home',
+			example: {
+				title: 'Example form'
+			}
+		}
 	}
 }

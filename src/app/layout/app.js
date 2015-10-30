@@ -1,18 +1,14 @@
 import React from 'react';
+import AppRouter from '../router';
 import Header from './header';
 import Footer from './footer';
 import i18n from '../i18n';
 
 export default React.createClass({
 
-	getInitialState(){
-		return {locale: 'en'};
-	},
-
 	render() {
-		var {pathname} = this.props.location;
+		var {location: {pathname}, locale} = this.props;
 		var active = pathname.split('/')[1] || 'home';
-		var {locale} = this.state;
 		return (
 			<div>
 				<Header active={active} locale={locale} onLocaleChange={this.setLocale}/>
@@ -25,7 +21,8 @@ export default React.createClass({
 
 	setLocale(locale){
 		i18n.changeLanguage(locale, function () {
-			this.setState({locale: locale});
+			var {history} = this.props;
+			React.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 		}.bind(this));
 	}
 

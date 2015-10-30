@@ -1,5 +1,10 @@
 export default {
 	translation: {
-		'home': 'Úvod'
+		home: {
+			title: 'Úvod',
+			example: {
+				title: 'Ukázkový formulář'
+			}
+		}
 	}
 }

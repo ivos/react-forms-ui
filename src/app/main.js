@@ -5,13 +5,19 @@ import React from 'react';
 import createHistory from 'history/lib/createHashHistory';
 import i18n from './i18n';
 
-moment.locale('en');
+var supportedLocales = ['en', 'cs'];
+var locale = navigator.language.substr(0, 2);
+if (supportedLocales.indexOf(locale) === -1) {
+	locale = 'en';
+}
+
+moment.locale(locale);
 
 // Opt-out of persistent state
-let history = createHistory({
+var history = createHistory({
 	queryKey: false
 });
 
-i18n.changeLanguage(navigator.language, function () {
-	React.render(<AppRouter history={history}/>, document.getElementById('app-content'));
+i18n.changeLanguage(locale, function () {
+	React.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 });

@@ -7,8 +7,6 @@ var resources = {
 	cs: cs
 };
 
-console.log(resources);
-
 i18n.init({
 	defaultNS: 'translation',
 	lngWhitelist: ['en', 'cs'],

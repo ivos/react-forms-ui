@@ -46,13 +46,12 @@ export default React.createClass({
 	render() {
 		var fieldClasses = 'col-sm-2,col-sm-6,col-sm-4';
 		var buttonsClass = 'col-sm-offset-2 col-sm-10';
-		setTitle(i18n.t('home'));
 		return (
 			<div>
 				<h2>React Forms UI</h2>
 
 				<Form id="form-example" onSubmit={this._onSubmit}>
-					<Panel content="panel-body" title="Example form">
+					<Panel content="panel-body" title={i18n.t('home.example.title')}>
 						<TextField form={this} ref="textNotValidated" id="textNotValidated"
 						           label="Text not validated" classes={fieldClasses}/>
 						<TextField form={this} ref="textFree" id="textFree" label="Text free" classes={fieldClasses}/>
@@ -88,6 +87,7 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
+		setTitle(i18n.t('home.title'));
 	},
 
 

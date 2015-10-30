@@ -14,9 +14,14 @@ import Partners from './partner/partners-page';
 export default React.createClass({
 
 	render() {
-		var {history} = this.props;
+		var {history, locale} = this.props;
+
+		function createElement(Component, props) {
+			return <Component history={history} locale={locale} {...props}/>;
+		}
+
 		return (
-			<Router history={history}>
+			<Router history={history} createElement={createElement}>
 				<Route path="/" component={App}>
 					<IndexRoute component={Home}/>
 					<Route path="companies" component={CompanyList}/>
