@@ -1,3 +1,5 @@
+import Options from '../options/options';
+
 var Validation = function (values) {
 	this.messages = {};
 	this.values = values;
@@ -59,28 +61,36 @@ Object.assign(Validation.prototype, {
 	required(field) {
 		var value = this.values[field];
 		if (typeof value !== 'undefined' && null === value || '' === value) {
-			this.add(field, 'Required.');
+			var label = Options.translate ? Options.translate('validation:required') : 'Required.';
+			this.add(field, label);
 		}
 	},
 
 	minLength(field, minLength) {
 		var value = this.values[field];
 		if (value && minLength && value.length < minLength) {
-			this.add(field, 'Must have at least ' + minLength + ' character' + this.suffix(minLength) + '.');
+			var label = Options.translate ?
+				Options.translate('validation:minLength', {count: minLength})
+				: 'Must have at least ' + minLength + ' characters.';
+			this.add(field, label);
 		}
 	},
 
 	maxLength(field, maxLength) {
 		var value = this.values[field];
 		if (value && maxLength && value.length > maxLength) {
-			this.add(field, 'Must have at most ' + maxLength + ' character' + this.suffix(maxLength) + '.');
+			var label = Options.translate ?
+				Options.translate('validation:maxLength', {count: maxLength})
+				: 'Must have at most ' + maxLength + ' characters.';
+			this.add(field, label);
 		}
 	},
 
 	pattern(field, pattern) {
 		var value = this.values[field];
 		if (value && pattern && !pattern.test(value)) {
-			this.add(field, 'Invalid format.');
+			var label = Options.translate ? Options.translate('validation:invalidFormat') : 'Invalid format.';
+			this.add(field, label);
 		}
 	},
 

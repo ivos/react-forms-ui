@@ -4,6 +4,9 @@ import AppRouter from './router';
 import React from 'react';
 import createHistory from 'history/lib/createHashHistory';
 import i18n from './i18n';
+import {ReactFormsUiOptions} from './react-forms-ui/index';
+
+ReactFormsUiOptions.translate = i18n.t.bind(i18n);
 
 var supportedLocales = ['en', 'cs'];
 var locale = navigator.language.substr(0, 2);

@@ -1,3 +1,8 @@
+// options
+
+import _Options from './options/options';
+export var ReactFormsUiOptions = _Options;
+
 // validation
 
 import _Validation from './validation/validation';

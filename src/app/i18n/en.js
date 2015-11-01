@@ -1,5 +1,5 @@
 export default {
-	translation: {
+	label: {
 		home: {
 			title: 'Home',
 			example: {

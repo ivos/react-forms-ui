@@ -3,6 +3,7 @@ import {setTitle, emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, TextField, PasswordField, PlainField, FormMessagesField} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import i18n from '../i18n';
+var t = i18n.t.bind(i18n);
 
 export default React.createClass({
 
@@ -51,7 +52,7 @@ export default React.createClass({
 				<h2>React Forms UI</h2>
 
 				<Form id="form-example" onSubmit={this._onSubmit}>
-					<Panel content="panel-body" title={i18n.t('home.example.title')}>
+					<Panel content="panel-body" title={t('home.example.title')}>
 						<TextField form={this} ref="textNotValidated" id="textNotValidated"
 						           label="Text not validated" classes={fieldClasses}/>
 						<TextField form={this} ref="textFree" id="textFree" label="Text free" classes={fieldClasses}/>
@@ -87,7 +88,7 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		setTitle(i18n.t('home.title'));
+		setTitle(t('home.title'));
 	},
 
 

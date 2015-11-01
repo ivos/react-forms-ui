@@ -1,14 +1,16 @@
 import i18n from 'i18next/lib/index';
-import en from './i18n/en';
-import cs from './i18n/cs';
+import enForms from './react-forms-ui/i18n/en';
+import csForms from './react-forms-ui/i18n/cs';
+import enApp from './i18n/en';
+import csApp from './i18n/cs';
 
 var resources = {
-	en: en,
-	cs: cs
+	en: Object.assign(enForms, enApp),
+	cs: Object.assign(csForms, csApp)
 };
 
 i18n.init({
-	defaultNS: 'translation',
+	defaultNS: 'label',
 	lngWhitelist: ['en', 'cs'],
 	fallbackLng: 'en',
 	resources: resources
