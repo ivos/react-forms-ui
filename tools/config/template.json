@@ -2,7 +2,6 @@
 	"host" : "my.hostname.com",
 	"username" : "my-ssh-user",
 	"privateKeyFile" : "/home/my-local-user/some/path/to/my-private-key.pem",
-	"path" : "/var/www/app/flexis-frontend",
 	"AWSAccessKeyId": "AKxxxxxxxxxx",
 	"AWSSecretKey": "super-secret-key",
 	"deploymentBundleBucket": "my-deployments",
