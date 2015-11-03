@@ -39,14 +39,13 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var self = this;
 		getList('companies', {
-			success(data) {
-				self.setState({data}, function () {
-					focusFirst(React.findDOMNode(self.refs.wrapper));
+			success: function (data) {
+				this.setState({data}, function () {
+					focusFirst(React.findDOMNode(this.refs.wrapper));
 					setTitle('Companies');
 				});
-			}
+			}.bind(this)
 		});
 	}
 

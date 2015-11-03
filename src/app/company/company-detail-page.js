@@ -51,15 +51,14 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {id} = this.props.params;
-		var self = this;
 		getOne('companies', id, {
-			success(data) {
+			success: function (data) {
 				var values = Nested.expand(data, 'invoicingContact');
-				self.setState({values}, function () {
+				this.setState({values}, function () {
 					focusFirst(React.findDOMNode(this.refs.buttons));
 					setTitle('Company');
 				});
-			}
+			}.bind(this)
 		})
 	}
 
