@@ -35,6 +35,9 @@ export var TextField = _TextField;
 import _PasswordField from './fields/password-field';
 export var PasswordField = _PasswordField;
 
+import _SelectField from './fields/select-field';
+export var SelectField = _SelectField;
+
 import _PlainField from './fields/plain-field';
 export var PlainField = _PlainField;
 

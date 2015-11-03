@@ -1,7 +1,8 @@
 import React from 'react';
 import {setTitle, emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, TextField, PasswordField, PlainField, FormMessagesField} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, TextField, PasswordField, SelectField, PlainField, FormMessagesField} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
+import {getList} from '../store';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
 
@@ -33,13 +34,17 @@ export default React.createClass({
 		passwordFree: {},
 		passwordRequired: {
 			required: true
+		},
+		selectFree: {},
+		selectRequired: {
+			required: true
 		}
 	},
 
 	getInitialState: function () {
 		return {
 			fields: ['textNotValidated', 'textFree', 'textRequired', 'textMinMax', 'textMinMaxReq',
-				'textNumbers', 'textBackend', 'passwordFree', 'passwordRequired'],
+				'textNumbers', 'textBackend', 'passwordFree', 'passwordRequired', 'selectFree', 'selectRequired'],
 			values: {}
 		};
 	},
@@ -71,6 +76,10 @@ export default React.createClass({
 						<PasswordField form={this} ref="passwordRequired" id="passwordRequired"
 						               label="Password required"
 						               classes={fieldClasses} required/>
+						<SelectField form={this} ref="selectFree" id="selectFree" label="Select free"
+						             classes={fieldClasses} query={this.loadCompanies}/>
+						<SelectField form={this} ref="selectRequired" id="selectRequired" label="Select required"
+						             classes={fieldClasses} query={this.loadCompanies} required/>
 
 						<div className="form-group">
 							<div className={buttonsClass}>
@@ -91,6 +100,17 @@ export default React.createClass({
 		setTitle(t('home.title'));
 	},
 
+	loadCompanies(query) {
+		getList('companies', {
+			data: {name: query.term},
+			success: function (data) {
+				var formatted = data.map(function (item) {
+					return {id: item.id, text: item.name};
+				});
+				query.callback({results: formatted});
+			}.bind(this)
+		});
+	},
 
 	onSubmit() {
 		var {values} = this.state;
