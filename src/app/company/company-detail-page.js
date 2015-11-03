@@ -1,5 +1,5 @@
 import React from 'react';
-import {setTitle} from '../ui/utils';
+import {setTitle, focusFirst} from '../ui/utils';
 import {FormMixin, Panel, TextField, PlainField} from '../react-forms-ui/index';
 import FetchMixin from '../ui/fetch-mixin';
 import {LinkEdit, LinkBack} from '../ui/buttons';
@@ -42,8 +42,8 @@ export default React.createClass({
 
 				<ContactDetail form={this} id="invoicingContact" label="Invoicing contact"/>
 
-				<div className={buttonsClass + 'form-group'}>
-					<LinkEdit ref="edit" href={'#companies/' + id + '/edit'} title="Edit company data."/>
+				<div ref="buttons" className={buttonsClass + 'form-group'}>
+					<LinkEdit href={'#companies/' + id + '/edit'} title="Edit company data."/>
 					<LinkBack href="#companies" title="Back to companies list."/>
 				</div>
 			</Panel>
@@ -52,7 +52,6 @@ export default React.createClass({
 
 	componentDidMount() {
 		setTitle('Company');
-		React.findDOMNode(this.refs.edit).focus();
 	},
 
 	onSync() {
@@ -62,7 +61,7 @@ export default React.createClass({
 	},
 
 	onFetch() {
-		React.findDOMNode(this.refs.edit).focus();
+		focusFirst(React.findDOMNode(this.refs.buttons));
 	}
 
 });
