@@ -1,24 +1,22 @@
 import React from 'react';
 import {setTitle, focusFirst} from '../ui/utils';
 import {Panel} from '../react-forms-ui/index';
-import FetchMixin from '../ui/fetch-mixin';
 import {LinkCreate} from '../ui/buttons';
+import {getList} from '../store';
 
 export default React.createClass({
 
-	mixins: [FetchMixin],
-
 	getInitialState() {
 		return {
-			collection: {name: 'companies', data: []}
+			data: []
 		};
 	},
 
 	render() {
-		var collection = this.state.collection.data;
+		var {data} = this.state;
 		return (
 			<div ref="wrapper">
-				{!collection.length ?
+				{!data.length ?
 					<div className="alert alert-info">
 						<p><strong>You have no company defined now.</strong></p>
 
@@ -26,8 +24,8 @@ export default React.createClass({
 					</div>
 					:
 					<Panel content="list-group"
-					       title={<span>Companies <span className="badge pull-right">{collection.length}</span></span>}>
-						{collection.map(function (model, index) {
+					       title={<span>Companies <span className="badge pull-right">{data.length}</span></span>}>
+						{data.map(function (model, index) {
 							return (
 								<a ref={'row' + index} key={model.id} href={'#companies/' + model.id}
 								   className="list-group-item">{model.name}</a>
@@ -41,11 +39,15 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		setTitle('Companies');
-	},
-
-	onFetch() {
-		focusFirst(React.findDOMNode(this.refs.wrapper));
+		var self = this;
+		getList('companies', {
+			success(data) {
+				self.setState({data}, function () {
+					focusFirst(React.findDOMNode(self.refs.wrapper));
+					setTitle('Companies');
+				});
+			}
+		});
 	}
 
 });

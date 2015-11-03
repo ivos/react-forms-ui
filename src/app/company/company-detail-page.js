@@ -1,19 +1,18 @@
 import React from 'react';
 import {setTitle, focusFirst} from '../ui/utils';
 import {FormMixin, Panel, TextField, PlainField} from '../react-forms-ui/index';
-import FetchMixin from '../ui/fetch-mixin';
 import {LinkEdit, LinkBack} from '../ui/buttons';
 import ContactDetail from '../contact/contact-detail';
 import Nested from '../shared/nested'
+import {getOne} from '../store';
 
 export default React.createClass({
 
-	mixins: [FetchMixin, FormMixin],
+	mixins: [FormMixin],
 
 	getInitialState() {
 		var {id} = this.props.params;
 		return {
-			model: {name: 'companies', id: id},
 			values: {}
 		};
 	},
@@ -51,17 +50,17 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		setTitle('Company');
-	},
-
-	onSync() {
-		var {model} = this.state;
-		var values = Nested.expand(model.attributes, 'invoicingContact');
-		this.setState({values: values});
-	},
-
-	onFetch() {
-		focusFirst(React.findDOMNode(this.refs.buttons));
+		var {id} = this.props.params;
+		var self = this;
+		getOne('companies', id, {
+			success(data) {
+				var values = Nested.expand(data, 'invoicingContact');
+				self.setState({values}, function () {
+					focusFirst(React.findDOMNode(this.refs.buttons));
+					setTitle('Company');
+				});
+			}
+		})
 	}
 
 });

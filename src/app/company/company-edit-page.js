@@ -1,18 +1,17 @@
 import React from 'react';
 import {setTitle} from '../ui/utils';
 import {FormMixin, Panel, Form, TextField, PlainField, FormMessagesField} from '../react-forms-ui/index';
-import FetchMixin from '../ui/fetch-mixin';
 import Company from './company';
 import {ButtonSave, LinkBack} from '../ui/buttons';
 import Contact from '../contact/contact';
 import Nested from '../shared/nested'
 import pick from '../shared/pick'
 import State from '../state';
-import {put} from '../store';
+import {getOne, put} from '../store';
 
 export default React.createClass({
 
-	mixins: [FetchMixin, FormMixin],
+	mixins: [FormMixin],
 
 	validations: Object.assign(
 		{},
@@ -26,7 +25,6 @@ export default React.createClass({
 			fields: ['name', 'taxId', 'companyId', 'invoicingContact.name', 'invoicingContact.phone',
 				'invoicingContact.email', 'invoicingContact.country', 'invoicingContact.city',
 				'invoicingContact.street', 'invoicingContact.zip'],
-			model: {name: 'companies', id: id},
 			values: {}
 		};
 	},
@@ -83,27 +81,26 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {id} = this.props.params;
-		setTitle(id ? 'Edit company' : 'Create company');
-	},
-
-	onSync() {
-		var {model} = this.state;
-		var values = Nested.expand(model.attributes, 'invoicingContact');
-		this.setState({values: values});
-	},
-
-	onFetch() {
-		this.focusFirstField();
+		var self = this;
+		getOne('companies', id, {
+			success(data) {
+				var values = Nested.expand(data, 'invoicingContact');
+				self.setState({values}, function () {
+					this.focusFirstField();
+					setTitle(id ? 'Edit company' : 'Create company');
+				});
+			}
+		})
 	},
 
 	onSubmit() {
 		var {history, params:{id}} = this.props;
-		var {model, values} = this.state;
+		var {values} = this.state;
 		values = Nested.collapse(values, 'invoicingContact');
 		var data = pick(values, 'id', 'name', 'taxId', 'companyId');
 		data.invoicingContact = values.invoicingContact;
 		if (!id) {
-			data.id = State[model.name].length;
+			data.id = State['companies'].length;
 		}
 		put('companies', data.id, {
 			data,
