@@ -36,7 +36,7 @@ export default React.createClass({
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
 		var value = this.refs.input.getDOMNode().value;
-		form.onChange(id, value);
+		form._onChange(id, value);
 	}
 
 });

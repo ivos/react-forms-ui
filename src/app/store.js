@@ -1,14 +1,25 @@
 import State from './state';
 
-export function getList(entitiesName, options) {
-	options.success(State[entitiesName]);
+export function getList(urlBase, options) {
+	var result = State[urlBase].filter(function (item) {
+		var matches = true;
+		if (options.data) {
+			Object.keys(options.data).forEach(function (key) {
+				if (typeof item[key] === 'string' && !item[key].toLowerCase().startsWith(options.data[key].toLowerCase())) {
+					matches = false;
+				}
+			});
+		}
+		return matches;
+	});
+	options.success(result);
 }
 
-export function getOne(entitiesName, id, options) {
-	options.success(State[entitiesName][id]);
+export function getOne(urlBase, id, options) {
+	options.success(State[urlBase][id]);
 }
 
-export function put(entitiesName, id, options) {
-	State[entitiesName][id] = options.data;
-	options.success(State[entitiesName][id]);
+export function put(urlBase, id, options) {
+	State[urlBase][id] = options.data;
+	options.success(State[urlBase][id]);
 }

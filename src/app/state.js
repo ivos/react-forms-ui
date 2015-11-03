@@ -29,6 +29,21 @@ export default {
 				street: '1200 Railway street',
 				zip: '32100'
 			}
+		},
+		{
+			id: 2,
+			name: 'First sales',
+			taxId: 'US100321',
+			companyId: '10000321',
+			invoicingContact: {
+				name: 'Pete Hunt',
+				phone: '+1 134-555-777',
+				email: 'peteh@sales.com',
+				country: 'USA',
+				city: 'Florida',
+				street: '321 Canal st.',
+				zip: '54300'
+			}
 		}
 	]
 };

@@ -12,11 +12,18 @@ export default {
 		this.focusFirstField();
 	},
 
-	onChange(id, value) {
+	_onChange(id, value) {
 		var {values} = this.state;
 		values = Object.assign({}, values);
 		values[id] = value;
-		this.setState({values: values}, this.validate);
+		this.setState({values: values}, this.changed);
+	},
+
+	changed() {
+		this.validate();
+		if (this.onChange) {
+			this.onChange();
+		}
 	},
 
 	validate(values, afterMessagesSet) {
@@ -33,7 +40,7 @@ export default {
 		var {fields} = this.state;
 		fields && fields.find(function (field) {
 			var ref = this.refs[field];
-			if (ref.focus) {
+			if (ref && ref.focus) {
 				ref.focus();
 				return true;
 			}
@@ -55,7 +62,7 @@ export default {
 		var {fields} = this.state;
 		['_form', ...fields].forEach(function (field) {
 			var ref = this.refs[field];
-			if (typeof ref.state.showFeedback !== 'undefined') {
+			if (ref && typeof ref.state.showFeedback !== 'undefined') {
 				ref.setState({showFeedback: 'all'});
 			}
 		}, this);
