@@ -1,4 +1,4 @@
-import State from '../state';
+import {getList, getOne} from '../store';
 
 export default {
 
@@ -10,12 +10,21 @@ export default {
 
 	componentDidMount() {
 		var {model, collection} = this.state;
+		var self = this;
 		if (collection) {
-			collection.data = State[collection.name];
-			this._onSync();
+			getList(collection.name, {
+				success(data) {
+					collection.data = data;
+					self._onSync();
+				}
+			});
 		} else if (model && model.id) {
-			model.attributes = State[model.name][model.id];
-			this._onSync();
+			getOne(model.name, model.id, {
+				success(data) {
+					model.attributes = data;
+					self._onSync();
+				}
+			})
 		}
 	},
 

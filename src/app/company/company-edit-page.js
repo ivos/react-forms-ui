@@ -8,6 +8,7 @@ import Contact from '../contact/contact';
 import Nested from '../shared/nested'
 import pick from '../shared/pick'
 import State from '../state';
+import {put} from '../store';
 
 export default React.createClass({
 
@@ -104,8 +105,12 @@ export default React.createClass({
 		if (!id) {
 			data.id = State[model.name].length;
 		}
-		State[model.name][data.id] = data;
-		history.pushState(null, '/companies/' + data.id);
+		put('companies', data.id, {
+			data,
+			success() {
+				history.pushState(null, '/companies/' + data.id);
+			}
+		})
 	}
 
 });
