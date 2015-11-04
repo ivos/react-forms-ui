@@ -1,6 +1,6 @@
 import React from 'react';
 import {setTitle, focusFirst} from '../ui/utils';
-import {FormMixin, Form, Panel, TextField} from '../react-forms-ui/index';
+import {FormMixin, Form, Panel, Text} from '../react-forms-ui/index';
 import {LinkCreate} from '../ui/buttons';
 import {getList} from '../store';
 
@@ -32,7 +32,7 @@ export default React.createClass({
 					<Panel title={<span>Companies <span className="badge pull-right">{data.length}</span></span>}>
 
 						<div className="panel-body">
-							<TextField form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
+							<Text form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
 						</div>
 
 						<div className="list-group">

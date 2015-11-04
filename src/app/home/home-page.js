@@ -1,6 +1,6 @@
 import React from 'react';
 import {setTitle, emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, TextField, PasswordField, SelectField, PlainField, FormMessagesField} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, Text, Password, Select, Plain, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import {getList} from '../store';
 import i18n from '../i18n';
@@ -58,28 +58,27 @@ export default React.createClass({
 
 				<Form id="form-example" onSubmit={this._onSubmit}>
 					<Panel content="panel-body" title={t('home.example.title')}>
-						<TextField form={this} ref="textNotValidated" id="textNotValidated"
-						           label="Text not validated" classes={fieldClasses}/>
-						<TextField form={this} ref="textFree" id="textFree" label="Text free" classes={fieldClasses}/>
-						<TextField form={this} ref="textRequired" id="textRequired" label="Text required"
-						           classes={fieldClasses} required/>
-						<TextField form={this} ref="textMinMax" id="textMinMax" label="Text min max"
-						           placeholder="Text with min and max" classes={fieldClasses}/>
-						<TextField form={this} ref="textMinMaxReq" id="textMinMaxReq" label="Text min max req"
-						           placeholder="Text with min and max required" classes={fieldClasses} required/>
-						<TextField form={this} ref="textNumbers" id="textNumbers" label="Text numbers only"
-						           classes={fieldClasses}/>
-						<TextField form={this} ref="textBackend" id="textBackend" label="Text backend"
-						           placeholder="Text validated on backend" classes={fieldClasses} required/>
-						<PasswordField form={this} ref="passwordFree" id="passwordFree" label="Password free"
-						               classes={fieldClasses}/>
-						<PasswordField form={this} ref="passwordRequired" id="passwordRequired"
-						               label="Password required"
-						               classes={fieldClasses} required/>
-						<SelectField form={this} ref="selectFree" id="selectFree" label="Select free"
-						             classes={fieldClasses} query={this.loadCompanies}/>
-						<SelectField form={this} ref="selectRequired" id="selectRequired" label="Select required"
-						             classes={fieldClasses} query={this.loadCompanies} required/>
+						<Text form={this} ref="textNotValidated" id="textNotValidated" label="Text not validated"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="textFree" id="textFree" label="Text free" classes={fieldClasses}/>
+						<Text form={this} ref="textRequired" id="textRequired" label="Text required"
+						      classes={fieldClasses} required/>
+						<Text form={this} ref="textMinMax" id="textMinMax" label="Text min max"
+						      placeholder="Text with min and max" classes={fieldClasses}/>
+						<Text form={this} ref="textMinMaxReq" id="textMinMaxReq" label="Text min max req"
+						      placeholder="Text with min and max required" classes={fieldClasses} required/>
+						<Text form={this} ref="textNumbers" id="textNumbers" label="Text numbers only"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="textBackend" id="textBackend" label="Text backend"
+						      placeholder="Text validated on backend" classes={fieldClasses} required/>
+						<Password form={this} ref="passwordFree" id="passwordFree" label="Password free"
+						          classes={fieldClasses}/>
+						<Password form={this} ref="passwordRequired" id="passwordRequired" label="Password required"
+						          classes={fieldClasses} required/>
+						<Select form={this} ref="selectFree" id="selectFree" label="Select free" classes={fieldClasses}
+						        query={this.loadCompanies}/>
+						<Select form={this} ref="selectRequired" id="selectRequired" label="Select required"
+						        classes={fieldClasses} query={this.loadCompanies} required/>
 
 						<div className="form-group">
 							<div className={buttonsClass}>
@@ -87,7 +86,7 @@ export default React.createClass({
 							</div>
 						</div>
 
-						<FormMessagesField form={this} ref="_form" className={buttonsClass}/>
+						<FormMessages form={this} ref="_form" className={buttonsClass}/>
 					</Panel>
 				</Form>
 				Submitted:

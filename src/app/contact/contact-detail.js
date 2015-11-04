@@ -1,5 +1,5 @@
 import React from 'react';
-import {Panel, TextField, PlainField, Label} from '../react-forms-ui/index';
+import {Panel, Text, Plain, Label} from '../react-forms-ui/index';
 
 export default React.createClass({
 
@@ -11,13 +11,13 @@ export default React.createClass({
 		var fieldClasses = labelClass + ',' + fieldClass;
 		return (
 			<Panel title={label} content="panel-body">
-				<TextField form={form} id={id + '.name'} label="Name" classes={fieldClasses} readonly/>
-				<TextField form={form} id={id + '.phone'} label="Phone" classes={fieldClasses} readonly/>
-				<PlainField id={id + '.email'} label="E-mail" classes={fieldClasses} readonly>
+				<Text form={form} id={id + '.name'} label="Name" classes={fieldClasses} readonly/>
+				<Text form={form} id={id + '.phone'} label="Phone" classes={fieldClasses} readonly/>
+				<Plain id={id + '.email'} label="E-mail" classes={fieldClasses} readonly>
 					<p className="form-control-static">
 						<a href={'mailto:' + values.email} target="_blank">{values[id + '.email']}</a>
 					</p>
-				</PlainField>
+				</Plain>
 
 				<div className="form-group">
 					<Label className={labelClass}>Address</Label>

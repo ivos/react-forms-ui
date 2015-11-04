@@ -1,6 +1,6 @@
 import React from 'react';
 import {setTitle, focusFirst} from '../ui/utils';
-import {FormMixin, Panel, TextField, PlainField} from '../react-forms-ui/index';
+import {FormMixin, Panel, Text, Plain} from '../react-forms-ui/index';
 import {LinkEdit, LinkBack} from '../ui/buttons';
 import ContactDetail from '../contact/contact-detail';
 import Nested from '../shared/nested'
@@ -27,15 +27,15 @@ export default React.createClass({
 			       title={<span><span className="text-muted">Company</span> <strong>{values.name}</strong></span>}>
 				<div className="well well-sm well-white">
 
-					<TextField form={this} id="name" label="Name" classes={fieldClasses} readonly/>
+					<Text form={this} id="name" label="Name" classes={fieldClasses} readonly/>
 
-					<PlainField id="taxId" label="Tax id" classes={fieldClasses} readonly>
+					<Plain id="taxId" label="Tax id" classes={fieldClasses} readonly>
 						<p className="form-control-static">{values.taxId ? <code>{values.taxId}</code> : ''}</p>
-					</PlainField>
+					</Plain>
 
-					<PlainField id="companyId" label="Company id" classes={fieldClasses} readonly>
+					<Plain id="companyId" label="Company id" classes={fieldClasses} readonly>
 						<p className="form-control-static">{values.companyId ? <code>{values.companyId}</code> : ''}</p>
-					</PlainField>
+					</Plain>
 
 				</div>
 

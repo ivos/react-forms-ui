@@ -1,6 +1,6 @@
 import React from 'react';
 import {setTitle} from '../ui/utils';
-import {FormMixin, Panel, Form, TextField, PlainField, FormMessagesField} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, Text, Plain, FormMessages} from '../react-forms-ui/index';
 import Company from './company';
 import {ButtonSave, LinkBack} from '../ui/buttons';
 import Contact from '../contact/contact';
@@ -39,27 +39,27 @@ export default React.createClass({
 				<Panel content="panel-body"
 				       title={<span><span className="text-muted">Company</span> <strong>{values.name}</strong></span>}>
 					<div className="well well-sm well-white">
-						<TextField form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
-						<TextField form={this} ref="taxId" id="taxId" label="Tax id" classes={fieldClasses}/>
-						<TextField form={this} ref="companyId" id="companyId" label="Company id"
-						           classes={fieldClasses}/>
+						<Text form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
+						<Text form={this} ref="taxId" id="taxId" label="Tax id" classes={fieldClasses}/>
+						<Text form={this} ref="companyId" id="companyId" label="Company id"
+						      classes={fieldClasses}/>
 					</div>
 
 					<Panel title="Invoicing contact" content="panel-body">
-						<TextField form={this} ref="invoicingContact.name" id="invoicingContact.name"
-						           label="Name" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.phone" id="invoicingContact.phone"
-						           label="Phone" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.email" id="invoicingContact.email"
-						           label="E-mail" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.country" id="invoicingContact.country"
-						           label="Country" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.city" id="invoicingContact.city"
-						           label="City" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.street" id="invoicingContact.street"
-						           label="Street" classes={fieldClasses}/>
-						<TextField form={this} ref="invoicingContact.zip" id="invoicingContact.zip" label="ZIP"
-						           classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.name" id="invoicingContact.name" label="Name"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.phone" id="invoicingContact.phone" label="Phone"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.email" id="invoicingContact.email" label="E-mail"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.country" id="invoicingContact.country" label="Country"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.city" id="invoicingContact.city" label="City"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.street" id="invoicingContact.street" label="Street"
+						      classes={fieldClasses}/>
+						<Text form={this} ref="invoicingContact.zip" id="invoicingContact.zip" label="ZIP"
+						      classes={fieldClasses}/>
 					</Panel>
 
 					<div className="form-group">
@@ -73,7 +73,7 @@ export default React.createClass({
 						</div>
 					</div>
 
-					<FormMessagesField form={this} ref="_form" className={buttonsClass}/>
+					<FormMessages form={this} ref="_form" className={buttonsClass}/>
 				</Panel>
 			</Form>
 		);
