@@ -18,8 +18,12 @@ export default React.createClass({
 
 				<div className={classes[1]}>
 					{!readonly ? (
-						<input ref="input" id={id} name={id} type="hidden" className="form-control field"
-						       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
+						<div ref="group" className="input-group date">
+							<input ref="input" id={id} name={id} type="text" className="form-control field datepicker"
+							       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
+							       onChange={this._onChange} onBlur={this._onBlur}/>
+							<span className="input-group-addon"><span className="fa fa-calendar"></span></span>
+						</div>
 					) : (
 						<p className="form-control-static">{value}</p>
 					)}
@@ -34,21 +38,21 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {query} = this.props;
-		$(React.findDOMNode(this.refs.input)).select2({
-			allowClear: true,
-			minimumInputLength: 0,
-			query
-		}).on('change', this._onChange).on('select2-blur', this._onBlur);
+		$(React.findDOMNode(this.refs.group)).datetimepicker({
+			locale: moment.locale(),
+			showTodayButton: true,
+			format: 'l'
+		}).on('dp.change', this._onChange);
 	},
 
 	focus() {
-		$(React.findDOMNode(this.refs.input)).select2('focus');
+		React.findDOMNode(this.refs.input).focus();
 	},
 
 	_onChange(event) {
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
-		var value = event.val;
+		var value = (event.date ? event.date.format('l') : event.target.value) || null;
 		form._onChange(id, value);
 	}
 

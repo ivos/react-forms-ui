@@ -1,6 +1,6 @@
 import React from 'react';
 import {setTitle, emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, Text, Password, Select, Plain, FormMessages} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, Text, Password, Select, Date, Plain, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import {getList} from '../store';
 import i18n from '../i18n';
@@ -38,13 +38,18 @@ export default React.createClass({
 		selectFree: {},
 		selectRequired: {
 			required: true
+		},
+		dateFree: {},
+		dateRequired: {
+			required: true
 		}
 	},
 
 	getInitialState: function () {
 		return {
 			fields: ['textNotValidated', 'textFree', 'textRequired', 'textMinMax', 'textMinMaxReq',
-				'textNumbers', 'textBackend', 'passwordFree', 'passwordRequired', 'selectFree', 'selectRequired'],
+				'textNumbers', 'textBackend', 'passwordFree', 'passwordRequired',
+				'selectFree', 'selectRequired', 'dateFree', 'dateRequired'],
 			values: {}
 		};
 	},
@@ -79,6 +84,9 @@ export default React.createClass({
 						        query={this.loadCompanies}/>
 						<Select form={this} ref="selectRequired" id="selectRequired" label="Select required"
 						        classes={fieldClasses} query={this.loadCompanies} required/>
+						<Date form={this} ref="dateFree" id="dateFree" label="Date free" classes={fieldClasses}/>
+						<Date form={this} ref="dateRequired" id="dateRequired" label="Date required"
+						      classes={fieldClasses} required/>
 
 						<div className="form-group">
 							<div className={buttonsClass}>

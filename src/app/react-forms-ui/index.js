@@ -38,6 +38,9 @@ export var Password = _Password;
 import _Select from './fields/select';
 export var Select = _Select;
 
+import _Date from './fields/date';
+export var Date = _Date;
+
 import _Plain from './fields/plain';
 export var Plain = _Plain;
 

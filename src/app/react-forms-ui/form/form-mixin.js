@@ -16,7 +16,7 @@ export default {
 		var {values} = this.state;
 		values = Object.assign({}, values);
 		values[id] = value;
-		this.setState({values: values}, this.changed);
+		this.setState({values}, this.changed);
 	},
 
 	changed() {
@@ -75,7 +75,7 @@ export default {
 			values[field] = '';
 		});
 		values = Object.assign(values, this.state.values);
-		this.setState({values: values});
+		this.setState({values});
 		return values;
 	},
 

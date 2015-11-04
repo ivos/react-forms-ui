@@ -22,6 +22,7 @@ export default React.createClass({
 	setLocale(locale){
 		i18n.changeLanguage(locale, function () {
 			var {history} = this.props;
+			moment.locale(locale);
 			React.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 		}.bind(this));
 	}
