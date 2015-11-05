@@ -47,20 +47,25 @@ export default React.createClass({
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.text.title')}>
 					<Text form={this} ref="textNotValidated" id="textNotValidated"
-					      label={t('home.text.textNotValidated')} classes={fieldClasses}/>
+					      label={t('home.text.textNotValidated.label')} classes={fieldClasses}>
+						<span className="help-block">{t('home.text.textNotValidated.help')}</span>
+					</Text>
 					<Text form={this} ref="textFree" id="textFree" label={t('home.text.textFree')}
 					      classes={fieldClasses}/>
 					<Text form={this} ref="textRequired" id="textRequired" label={t('home.text.textRequired')}
 					      classes={fieldClasses} required/>
 					<Text form={this} ref="textMinMax" id="textMinMax" label={t('home.text.textMinMax.label')}
 					      placeholder={t('home.text.textMinMax.placeholder')} classes={fieldClasses}/>
-					<Text form={this} ref="textMinMaxReq" id="textMinMaxReq"
-					      label={t('home.text.textMinMaxReq.label')}
-					      placeholder={t('home.text.textMinMaxReq.placeholder')} classes={fieldClasses} required/>
+					<Text form={this} ref="textMinMaxReq" id="textMinMaxReq" label={t('home.text.textMinMaxReq.label')}
+					      placeholder={t('home.text.textMinMaxReq.placeholder')} classes={fieldClasses} required>
+						<span className="help-block">{t('home.text.textMinMaxReq.help')}</span>
+					</Text>
 					<Text form={this} ref="textNumbers" id="textNumbers" label={t('home.text.textNumbers')}
 					      classes={fieldClasses}/>
 					<Text form={this} ref="textBackend" id="textBackend" label={t('home.text.textBackend.label')}
-					      placeholder={t('home.text.textBackend.placeholder')} classes={fieldClasses} required/>
+					      placeholder={t('home.text.textBackend.placeholder')} classes={fieldClasses} required>
+						<span className="help-block">{t('home.text.textBackend.help')}</span>
+					</Text>
 
 					<div className="form-group">
 						<div className={buttonsClass}>

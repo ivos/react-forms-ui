@@ -8,7 +8,10 @@ export default {
 			sent: 'Odesláno',
 			text: {
 				title: 'Textové pole',
-				textNotValidated: 'Text bez validace',
+				textNotValidated: {
+					label: 'Text bez validace',
+					help: 'Toto pole nemá definovánu žádnou validaci.'
+				},
 				textFree: 'Text volný',
 				textRequired: 'Text povinný',
 				textMinMax: {
@@ -17,12 +20,14 @@ export default {
 				},
 				textMinMaxReq: {
 					label: 'Text min max req',
-					placeholder: 'Text s minimem a maximem povinný'
+					placeholder: 'Text s minimem a maximem povinný',
+					help: 'Musí mít 4 až 10 znaků.'
 				},
 				textNumbers: 'Text pouze čísla',
 				textBackend: {
 					label: 'Text backend',
-					placeholder: 'Text validovaný na backendu'
+					placeholder: 'Text validovaný na backendu',
+					help: 'Pole validované při odeslání na backendu neposkytuje zpětnou vazbu pro platné hodnoty, pouze pro chyby.'
 				}
 			},
 			password: {
@@ -30,12 +35,12 @@ export default {
 				passwordFree: 'Heslo volné',
 				passwordRequired: 'Heslo povinné'
 			},
-			select:{
+			select: {
 				title: 'Výběr',
 				selectFree: 'Výběr volný',
 				selectRequired: 'Výběr povinný'
 			},
-			date:{
+			date: {
 				title: 'Datum',
 				dateFree: 'Datum volný',
 				dateRequired: 'Datum povinný'

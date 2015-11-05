@@ -95,6 +95,10 @@ body {
 }
 
 /* Help */
+.help-block {
+	margin-bottom: 0;
+}
+
 .help-icon {
 	font-size: 130%;
 	padding: 6px 0px;
