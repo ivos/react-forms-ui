@@ -1,10 +1,12 @@
 import React from 'react';
+import i18n from '../i18n';
+var t = i18n.t.bind(i18n);
 
 export var ButtonSave = React.createClass({
 	render() {
 		return (
-			<button type="submit" className="btn btn-primary" accessKey="S">
-				<span className="fa fa-check"></span> <u>S</u>ave
+			<button type="submit" className="btn btn-primary" accessKey="S" title="Alt+S">
+				<span className="fa fa-check"></span> {t('button.save')}
 			</button>
 		);
 	}
