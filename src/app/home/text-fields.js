@@ -29,14 +29,24 @@ export default React.createClass({
 		textBackend: {
 			required: true,
 			autoSuccess: false
-		}
+		},
+		textValue: {},
+		textValueRequired: {
+			required: true
+		},
+		textReadonly: {}
 	},
 
 	getInitialState: function () {
 		return {
 			fields: ['textNotValidated', 'textFree', 'textRequired', 'textMinMax', 'textMinMaxReq',
-				'textNumbers', 'textBackend'],
-			values: {}
+				'textNumbers', 'textBackend', 'textValue', 'textValueRequired'],
+			values: {
+				textValue: 'Initial value',
+				textValueRequired: 'Initial value in required',
+				textReadonly: 'Read-only value',
+				textReadonlyEmpty: null
+			}
 		};
 	},
 
@@ -66,6 +76,14 @@ export default React.createClass({
 					      placeholder={t('home.text.textBackend.placeholder')} classes={fieldClasses} required>
 						<span className="help-block">{t('home.text.textBackend.help')}</span>
 					</Text>
+					<Text form={this} ref="textValue" id="textValue" label={t('home.text.textValue')}
+					      classes={fieldClasses}/>
+					<Text form={this} ref="textValueRequired" id="textValueRequired"
+					      label={t('home.text.textValueRequired')} classes={fieldClasses} required/>
+					<Text form={this} ref="textReadonly" id="textReadonly" label={t('home.text.textReadonly')}
+					      classes={fieldClasses} readonly/>
+					<Text form={this} ref="textReadonlyEmpty" id="textReadonlyEmpty"
+					      label={t('home.text.textReadonlyEmpty')} classes={fieldClasses} readonly/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>

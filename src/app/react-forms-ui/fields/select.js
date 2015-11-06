@@ -8,7 +8,7 @@ export default React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, query, ...otherProps} = this.props;
 		var value = form.state.values[id];
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();

@@ -14,13 +14,19 @@ export default React.createClass({
 		selectFree: {},
 		selectRequired: {
 			required: true
+		},
+		selectValue: {},
+		selectValueRequired: {
+			required: true
 		}
 	},
 
 	getInitialState: function () {
 		return {
-			fields: ['selectFree', 'selectRequired'],
-			values: {}
+			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired'],
+			values: {
+				selectValue: '1'
+			}
 		};
 	},
 
@@ -30,10 +36,21 @@ export default React.createClass({
 		return (
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
-					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')} classes={fieldClasses}
+					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
+					        classes={fieldClasses}
 					        query={this.loadCompanies}/>
 					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
 					        classes={fieldClasses} query={this.loadCompanies} required/>
+					<Select form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
+					        classes={fieldClasses} query={this.loadCompanies}/>
+					<Select form={this} ref="selectValueRequired" id="selectValueRequired"
+					        label={t('home.select.selectValueRequired')} classes={fieldClasses}
+					        query={this.loadCompanies} required/>
+					<Select form={this} ref="selectReadonly" id="selectReadonly" label={t('home.select.selectReadonly')}
+					        classes={fieldClasses} query={this.loadCompanies} readonly/>
+					<Select form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
+					        label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
+					        query={this.loadCompanies} readonly/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>

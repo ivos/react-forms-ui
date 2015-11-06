@@ -28,17 +28,29 @@ export default {
 					label: 'Text backend',
 					placeholder: 'Text validated on backend',
 					help: 'A field further validated on submit on backend does not provide success feedback, only error feedback.'
-				}
+				},
+				textValue: 'Text w/ value',
+				textValueRequired: 'Required w/ value',
+				textReadonly: 'Readonly text',
+				textReadonlyEmpty: 'Readonly text empty'
 			},
 			password: {
 				title: 'Password field',
 				passwordFree: 'Password free',
-				passwordRequired: 'Password required'
+				passwordRequired: 'Password required',
+				passwordValue: 'Password w/ value',
+				passwordValueRequired: 'Password req w/ value',
+				passwordReadonly: 'Password readonly',
+				passwordReadonlyEmpty: 'Password readonly empty'
 			},
 			select: {
 				title: 'Select field',
 				selectFree: 'Select free',
-				selectRequired: 'Select required'
+				selectRequired: 'Select required',
+				selectValue: 'Select w/ value',
+				selectValueRequired: 'Select req w/ value',
+				selectReadonly: 'Select readonly',
+				selectReadonlyEmpty: 'Select readonly empty'
 			},
 			date: {
 				title: 'Date field',

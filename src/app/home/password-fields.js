@@ -13,13 +13,22 @@ export default React.createClass({
 		passwordFree: {},
 		passwordRequired: {
 			required: true
+		},
+		passwordValue: {},
+		passwordValueRequired: {
+			required: true
 		}
 	},
 
 	getInitialState: function () {
 		return {
-			fields: ['passwordFree', 'passwordRequired'],
-			values: {}
+			fields: ['passwordFree', 'passwordRequired', 'passwordValue', 'passwordValueRequired'],
+			values: {
+				passwordValue: 'secret',
+				passwordValueRequired: 'secret required',
+				passwordReadonly: 'readonly',
+				passwordReadonlyEmpty: null
+			}
 		};
 	},
 
@@ -33,6 +42,14 @@ export default React.createClass({
 					          classes={fieldClasses}/>
 					<Password form={this} ref="passwordRequired" id="passwordRequired"
 					          label={t('home.password.passwordRequired')} classes={fieldClasses} required/>
+					<Password form={this} ref="passwordValue" id="passwordValue"
+					          label={t('home.password.passwordValue')} classes={fieldClasses}/>
+					<Password form={this} ref="passwordValueRequired" id="passwordValueRequired"
+					          label={t('home.password.passwordValueRequired')} classes={fieldClasses} required/>
+					<Password form={this} ref="passwordReadonly" id="passwordReadonly"
+					          label={t('home.password.passwordReadonly')} classes={fieldClasses} readonly/>
+					<Password form={this} ref="passwordReadonlyEmpty" id="passwordReadonlyEmpty"
+					          label={t('home.password.passwordReadonlyEmpty')} classes={fieldClasses} readonly/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>

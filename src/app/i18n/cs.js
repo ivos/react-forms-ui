@@ -28,17 +28,29 @@ export default {
 					label: 'Text backend',
 					placeholder: 'Text validovaný na backendu',
 					help: 'Pole validované při odeslání na backendu neposkytuje zpětnou vazbu pro platné hodnoty, pouze pro chyby.'
-				}
+				},
+				textValue: 'Text s hodnotou',
+				textValueRequired: 'Povinný text s hodnotou',
+				textReadonly: 'Needitovatelný text',
+				textReadonlyEmpty: 'Needitovatelný text prázdný'
 			},
 			password: {
 				title: 'Heslo',
 				passwordFree: 'Heslo volné',
-				passwordRequired: 'Heslo povinné'
+				passwordRequired: 'Heslo povinné',
+				passwordValue: 'Heslo s hodnotou',
+				passwordValueRequired: 'Heslo povinné s hodnotou',
+				passwordReadonly: 'Needitovatelné heslo',
+				passwordReadonlyEmpty: 'Needitovatelné heslo prázdné'
 			},
 			select: {
 				title: 'Výběr',
 				selectFree: 'Výběr volný',
-				selectRequired: 'Výběr povinný'
+				selectRequired: 'Výběr povinný',
+				selectValue: 'Výběr s hodnotou',
+				selectValueRequired: 'Výběr pov s hodnotou',
+				selectReadonly: 'Výběr needitovatelný',
+				selectReadonlyEmpty: 'Výběr needit prázdný'
 			},
 			date: {
 				title: 'Datum',
