@@ -48,11 +48,17 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {query} = this.props;
+		var {query, form} = this.props;
 		$(React.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
-			format: this.localFormat
+			format: this.localFormat,
+			keyBinds: {
+				enter: function (element) {
+					this.hide();
+					form._onSubmit();
+				}
+			}
 		}).on('dp.change', this._onChange);
 	},
 
