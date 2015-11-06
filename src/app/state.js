@@ -44,6 +44,21 @@ export default {
 				street: '321 Canal st.',
 				zip: '54300'
 			}
+		},
+		{
+			id: 3,
+			name: 'Big wig',
+			taxId: 'US100643',
+			companyId: '100002342',
+			invoicingContact: {
+				name: 'Paul Stunt',
+				phone: '+1 134-555-356',
+				email: 'stunt@wig.com',
+				country: 'USA',
+				city: 'Little Rock',
+				street: '321 Black st.',
+				zip: '63200'
+			}
 		}
 	]
 };

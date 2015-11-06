@@ -2,7 +2,7 @@ import React from 'react';
 import {emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, Select, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
-import {getList} from '../store';
+import {getList, getOne} from '../store';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
 
@@ -25,7 +25,10 @@ export default React.createClass({
 		return {
 			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired'],
 			values: {
-				selectValue: '1'
+				selectValue: '1',
+				selectValueRequired: '2',
+				selectReadonly: '0',
+				selectReadonlyEmpty: null
 			}
 		};
 	},
@@ -42,12 +45,14 @@ export default React.createClass({
 					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
 					        classes={fieldClasses} query={this.loadCompanies} required/>
 					<Select form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
-					        classes={fieldClasses} query={this.loadCompanies}/>
+					        classes={fieldClasses} query={this.loadCompanies}
+					        initSelection={this.initSelectionCompany}/>
 					<Select form={this} ref="selectValueRequired" id="selectValueRequired"
 					        label={t('home.select.selectValueRequired')} classes={fieldClasses}
-					        query={this.loadCompanies} required/>
+					        query={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
 					<Select form={this} ref="selectReadonly" id="selectReadonly" label={t('home.select.selectReadonly')}
-					        classes={fieldClasses} query={this.loadCompanies} readonly/>
+					        classes={fieldClasses} query={this.loadCompanies} initSelection={this.initSelectionCompany}
+					        readonly/>
 					<Select form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
 					        label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
 					        query={this.loadCompanies} readonly/>
@@ -76,6 +81,14 @@ export default React.createClass({
 				});
 				query.callback({results: formatted});
 			}.bind(this)
+		});
+	},
+
+	initSelectionCompany(element, callback){
+		getOne('companies', element.val(), {
+			success(data) {
+				callback({id: data.id, text: data.name});
+			}
 		});
 	},
 

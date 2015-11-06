@@ -80,7 +80,9 @@ export default {
 	},
 
 	_onSubmit(event) {
-		event.preventDefault();
+		if (event) {
+			event.preventDefault();
+		}
 		this.showErrorOnAllFields();
 		var values = this.setAllFieldValues();
 		var validation = this.validate(values, this.focusFirstErrorField);

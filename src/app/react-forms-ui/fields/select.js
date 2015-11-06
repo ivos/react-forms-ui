@@ -8,7 +8,7 @@ export default React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, query, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, query, initSelection, ...otherProps} = this.props;
 		var value = form.state.values[id];
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
@@ -17,12 +17,8 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{!readonly ? (
-						<input ref="input" id={id} name={id} type="hidden" className="form-control field"
-						       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
-					) : (
-						<p className="form-control-static">{value}</p>
-					)}
+					<input ref="input" id={id} name={id} type="hidden" className="form-control field"
+					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
 				</div>
 				{!readonly && (
 					<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
@@ -33,16 +29,27 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {query} = this.props;
-		$(React.findDOMNode(this.refs.input)).select2({
+		var {query, initSelection, readonly, form} = this.props;
+		var element = React.findDOMNode(this.refs.input);
+		$(element).select2({
 			allowClear: true,
 			minimumInputLength: 0,
-			query
-		}).on('change', this._onChange).on('select2-blur', this._onBlur);
+			openOnEnter: false,
+			query,
+			initSelection
+		}).on('change', this._onChange)
+			.on('select2-blur', this._onBlur)
+			.select2('readonly', typeof readonly !== 'undefined');
+		$(element).prev('.select2-container').on('keyup', function (e) {
+			if (13 === e.keyCode) {
+				form._onSubmit();
+			}
+		});
 	},
 
 	focus() {
-		$(React.findDOMNode(this.refs.input)).select2('focus');
+		var element = React.findDOMNode(this.refs.input);
+		$(element).select2('focus');
 	},
 
 	_onChange(event) {
