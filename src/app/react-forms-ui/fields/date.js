@@ -5,11 +5,22 @@ import FieldMixin from './field-mixin';
 
 export default React.createClass({
 
+	isoFormat: 'YYYY-MM-DD',
+	localFormat: 'l',
+
 	mixins: [FieldMixin],
+
+	getInitialState (){
+		return {localValue: null};
+	},
 
 	render() {
 		var {id, label, classes, required, readonly, form, placeholder, ...otherProps} = this.props;
-		var value = form.state.values[id];
+		var {localValue} = this.state;
+		if (!localValue) {
+			var value = form.state.values[id];
+			localValue = value ? moment(value).format(this.localFormat) : null;
+		}
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
 		return (
@@ -20,12 +31,12 @@ export default React.createClass({
 					{!readonly ? (
 						<div ref="group" className="input-group date">
 							<input ref="input" id={id} name={id} type="text" className="form-control field datepicker"
-							       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
-							       onChange={this._onChange} onBlur={this._onBlur}/>
+							       autoComplete="off" placeholder={placeholder || label}
+							       value={localValue} {...otherProps} onChange={this._onChange} onBlur={this._onBlur}/>
 							<span className="input-group-addon"><span className="fa fa-calendar"></span></span>
 						</div>
 					) : (
-						<p className="form-control-static">{value}</p>
+						<p className="form-control-static">{localValue}</p>
 					)}
 				</div>
 				{!readonly && (
@@ -41,7 +52,7 @@ export default React.createClass({
 		$(React.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
-			format: 'l'
+			format: this.localFormat
 		}).on('dp.change', this._onChange);
 	},
 
@@ -50,10 +61,35 @@ export default React.createClass({
 	},
 
 	_onChange(event) {
-		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
-		var value = (event.date ? event.date.format('l') : event.target.value) || null;
-		form._onChange(id, value);
+		if (!event.date) { // partial date being entered manually
+			this.setState({
+				showFeedback: 'positive',
+				localValue: event.target.value
+			});
+			form._onChange(id, null);
+		}
+		else { // full valid date selected or entered
+			this.setState({
+				showFeedback: 'positive',
+				localValue: null
+			});
+			var value = event.date.format(this.isoFormat);
+			form._onChange(id, value);
+		}
+	},
+
+	onBlur(event) {
+		var {localValue} = this.state;
+		if (localValue) {
+			var {id, form} = this.props;
+			localValue = event.target.value;
+			this.setState({
+				localValue
+			});
+			var value = moment(localValue, this.localFormat).format(this.isoFormat);
+			form._onChange(id, value);
+		}
 	}
 
 });

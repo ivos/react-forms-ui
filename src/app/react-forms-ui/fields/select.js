@@ -40,8 +40,8 @@ export default React.createClass({
 		}).on('change', this._onChange)
 			.on('select2-blur', this._onBlur)
 			.select2('readonly', typeof readonly !== 'undefined');
-		$(element).prev('.select2-container').on('keyup', function (e) {
-			if (13 === e.keyCode) {
+		$(element).prev('.select2-container').on('keyup', function (event) {
+			if (13 === event.keyCode) {
 				form._onSubmit();
 			}
 		});

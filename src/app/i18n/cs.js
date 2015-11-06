@@ -55,7 +55,11 @@ export default {
 			date: {
 				title: 'Datum',
 				dateFree: 'Datum volný',
-				dateRequired: 'Datum povinný'
+				dateRequired: 'Datum povinný',
+				dateValue: 'Datum s hodnotou',
+				dateValueRequired: 'Datum pov s hodnotou',
+				dateReadonly: 'Needit datum',
+				dateReadonlyEmpty: 'Needit datum prázdný'
 			}
 		}
 	}

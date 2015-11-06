@@ -69,9 +69,12 @@ export default {
 		return this.refs.messages.hasError();
 	},
 
-	_onBlur() {
+	_onBlur(event) {
 		if ('positive' === this.state.showFeedback) {
 			this.setState({showFeedback: 'all'});
+		}
+		if (this.onBlur) {
+			this.onBlur(event);
 		}
 	}
 

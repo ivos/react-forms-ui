@@ -55,7 +55,11 @@ export default {
 			date: {
 				title: 'Date field',
 				dateFree: 'Date free',
-				dateRequired: 'Date required'
+				dateRequired: 'Date required',
+				dateValue: 'Date w/ value',
+				dateValueRequired: 'Date req w/ value',
+				dateReadonly: 'Date readonly',
+				dateReadonlyEmpty: 'Date readonly empty'
 			}
 		}
 	}
