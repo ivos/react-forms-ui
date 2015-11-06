@@ -30,8 +30,8 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {query, initSelection, readonly, form} = this.props;
-		var element = React.findDOMNode(this.refs.input);
-		$(element).select2({
+		var $element = $(React.findDOMNode(this.refs.input));
+		$element.select2({
 			allowClear: true,
 			minimumInputLength: 0,
 			openOnEnter: false,
@@ -40,16 +40,17 @@ export default React.createClass({
 		}).on('change', this._onChange)
 			.on('select2-blur', this._onBlur)
 			.select2('readonly', typeof readonly !== 'undefined');
-		$(element).prev('.select2-container').on('keyup', function (event) {
+		var $container = $element.prev('.select2-container');
+		$container.on('keyup', function (event) {
 			if (13 === event.keyCode) {
 				form._onSubmit();
 			}
-		});
+		}.bind(this));
 	},
 
 	focus() {
-		var element = React.findDOMNode(this.refs.input);
-		$(element).select2('focus');
+		var $element = $(React.findDOMNode(this.refs.input));
+		$element.select2('focus');
 	},
 
 	_onChange(event) {
