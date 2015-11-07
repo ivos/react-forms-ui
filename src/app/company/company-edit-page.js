@@ -7,7 +7,7 @@ import Contact from '../contact/contact';
 import Nested from '../shared/nested'
 import pick from '../shared/pick'
 import State from '../state';
-import {getOne, put} from '../store';
+import {getOne, put, post} from '../store';
 
 export default React.createClass({
 
@@ -81,15 +81,17 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {id} = this.props.params;
-		getOne('companies', id, {
-			success: function (data) {
-				var values = Nested.expand(data, 'invoicingContact');
-				this.setState({values}, function () {
-					this.focusFirstField();
-					setTitle(id ? 'Edit company' : 'Create company');
-				});
-			}.bind(this)
-		})
+		if (id) {
+			getOne('companies', id, {
+				success: function (data) {
+					var values = Nested.expand(data, 'invoicingContact');
+					this.setState({values}, function () {
+						this.focusFirstField();
+						setTitle(id ? 'Edit company' : 'Create company');
+					});
+				}.bind(this)
+			})
+		}
 	},
 
 	onSubmit() {
@@ -99,14 +101,20 @@ export default React.createClass({
 		var data = pick(values, 'id', 'name', 'taxId', 'companyId');
 		data.invoicingContact = values.invoicingContact;
 		if (!id) {
-			data.id = State['companies'].length;
+			post('companies', {
+				data,
+				success(data) {
+					history.pushState(null, '/companies/' + data.id);
+				}
+			})
+		} else {
+			put('companies', data.id, {
+				data,
+				success(data) {
+					history.pushState(null, '/companies/' + data.id);
+				}
+			})
 		}
-		put('companies', data.id, {
-			data,
-			success() {
-				history.pushState(null, '/companies/' + data.id);
-			}
-		})
 	}
 
 });

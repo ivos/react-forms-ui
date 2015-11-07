@@ -23,3 +23,11 @@ export function put(urlBase, id, options) {
 	State[urlBase][id] = options.data;
 	options.success(State[urlBase][id]);
 }
+
+export function post(urlBase, options) {
+	var array = State[urlBase];
+	var id = array[array.length - 1].id + 1;
+	options.data.id = id;
+	array.push(options.data);
+	options.success(State[urlBase][id]);
+}
