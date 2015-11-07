@@ -84,7 +84,7 @@ export default React.createClass({
 		});
 	},
 
-	initSelectionCompany(element, callback){
+	initSelectionCompany(element, callback) {
 		getOne('companies', element.val(), {
 			success(data) {
 				callback({id: data.id, text: data.name});
