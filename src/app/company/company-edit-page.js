@@ -40,8 +40,7 @@ export default React.createClass({
 					<div className="well well-sm well-white">
 						<Text form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
 						<Text form={this} ref="taxId" id="taxId" label="Tax id" classes={fieldClasses}/>
-						<Text form={this} ref="companyId" id="companyId" label="Company id"
-						      classes={fieldClasses}/>
+						<Text form={this} ref="companyId" id="companyId" label="Company id" classes={fieldClasses}/>
 					</div>
 
 					<Panel title="Invoicing contact" content="panel-body">

@@ -22,13 +22,7 @@ export default React.createClass({
 
 	getInitialState: function () {
 		return {
-			fields: ['passwordFree', 'passwordRequired', 'passwordValue', 'passwordValueRequired'],
-			values: {
-				passwordValue: 'secret',
-				passwordValueRequired: 'secret required',
-				passwordReadonly: 'readonly',
-				passwordReadonlyEmpty: null
-			}
+			fields: ['passwordFree', 'passwordRequired', 'passwordValue', 'passwordValueRequired']
 		};
 	},
 
@@ -64,6 +58,17 @@ export default React.createClass({
 				</Panel>
 			</Form>
 		);
+	},
+
+	componentDidMount() {
+		this.setState({
+			values: {
+				passwordValue: 'secret',
+				passwordValueRequired: 'secret required',
+				passwordReadonly: 'readonly',
+				passwordReadonlyEmpty: null
+			}
+		});
 	},
 
 	onSubmit() {

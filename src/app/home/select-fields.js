@@ -18,18 +18,14 @@ export default React.createClass({
 		selectValue: {},
 		selectValueRequired: {
 			required: true
-		}
+		},
+		selectValPreloaded: {}
 	},
 
 	getInitialState: function () {
 		return {
-			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired'],
-			values: {
-				selectValue: '1',
-				selectValueRequired: '2',
-				selectReadonly: '0',
-				selectReadonlyEmpty: null
-			}
+			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired',
+				'selectReadonly', 'selectReadonlyEmpty', 'selectValPreloaded']
 		};
 	},
 
@@ -56,6 +52,9 @@ export default React.createClass({
 					<Select form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
 					        label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
 					        query={this.loadCompanies} readonly/>
+					<Select form={this} ref="selectValPreloaded" id="selectValPreloaded"
+					        label={t('home.select.selectValPreloaded')} classes={fieldClasses}
+					        query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>
@@ -72,6 +71,21 @@ export default React.createClass({
 		);
 	},
 
+	componentDidMount() {
+		this._selectPreloaded = {
+			selectValPreloaded: {id: 2, name: 'First sales'}
+		};
+		this.setState({
+			values: {
+				selectValue: '1',
+				selectValueRequired: '2',
+				selectReadonly: '0',
+				selectReadonlyEmpty: null,
+				selectValPreloaded: 2
+			}
+		});
+	},
+
 	loadCompanies(query) {
 		getList('companies', {
 			data: {name: query.term},
@@ -80,16 +94,21 @@ export default React.createClass({
 					return {id: item.id, text: item.name};
 				});
 				query.callback({results: formatted});
-			}.bind(this)
+			}
 		});
 	},
 
-	initSelectionCompany(element, callback) {
-		getOne('companies', element.val(), {
-			success(data) {
-				callback({id: data.id, text: data.name});
-			}
-		});
+	initSelectionCompany($element, callback) {
+		var preloaded = this._selectPreloaded[$element[0].id];
+		if (preloaded) {
+			callback({id: preloaded.id, text: preloaded.name});
+		} else {
+			getOne('companies', $element.val(), {
+				success(data) {
+					callback({id: data.id, text: data.name});
+				}
+			});
+		}
 	},
 
 	onSubmit() {

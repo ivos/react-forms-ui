@@ -50,7 +50,8 @@ export default {
 				selectValue: 'Select w/ value',
 				selectValueRequired: 'Select req w/ value',
 				selectReadonly: 'Select readonly',
-				selectReadonlyEmpty: 'Select readonly empty'
+				selectReadonlyEmpty: 'Select readonly empty',
+				selectValPreloaded: 'Select val preloaded'
 			},
 			date: {
 				title: 'Date field',

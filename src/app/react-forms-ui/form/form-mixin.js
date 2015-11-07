@@ -12,6 +12,22 @@ export default {
 		this.focusFirstField();
 	},
 
+	componentWillUpdate(nextProps, nextState) {
+		var {fields, values} = this.state;
+		if (fields) {
+			fields.forEach(function (field) {
+				var ref = this.refs[field];
+				if (ref && ref.setSelection) {
+					var nextValue = nextState.values[field];
+					var prevValue = values ? values[field] : undefined;
+					if (typeof nextValue !== 'undefined' && nextValue !== null && typeof prevValue === 'undefined') {
+						ref.setSelection(nextValue);
+					}
+				}
+			}, this);
+		}
+	},
+
 	_onChange(id, value) {
 		var {values} = this.state;
 		values = Object.assign({}, values);
@@ -38,24 +54,28 @@ export default {
 
 	focusFirstField() {
 		var {fields} = this.state;
-		fields && fields.find(function (field) {
-			var ref = this.refs[field];
-			if (ref && ref.focus) {
-				ref.focus();
-				return true;
-			}
-		}, this);
+		if (fields) {
+			fields.find(function (field) {
+				var ref = this.refs[field];
+				if (ref && ref.focus) {
+					ref.focus();
+					return true;
+				}
+			}, this);
+		}
 	},
 
 	focusFirstErrorField() {
 		var {fields} = this.state;
-		fields.find(function (field) {
-			var ref = this.refs[field];
-			if (ref.focus && ref.hasError && ref.hasError()) {
-				ref.focus();
-				return true;
-			}
-		}, this);
+		if (fields) {
+			fields.find(function (field) {
+				var ref = this.refs[field];
+				if (ref.focus && ref.hasError && ref.hasError()) {
+					ref.focus();
+					return true;
+				}
+			}, this);
+		}
 	},
 
 	showErrorOnAllFields() {
@@ -71,9 +91,11 @@ export default {
 	setAllFieldValues() {
 		var {fields} = this.state;
 		var values = {};
-		fields && fields.forEach(function (field) {
-			values[field] = '';
-		});
+		if (fields) {
+			fields.forEach(function (field) {
+				values[field] = '';
+			});
+		}
 		values = Object.assign(values, this.state.values);
 		this.setState({values});
 		return values;

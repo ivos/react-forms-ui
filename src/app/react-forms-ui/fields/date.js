@@ -18,7 +18,7 @@ export default React.createClass({
 		var {id, label, classes, required, readonly, form, placeholder, ...otherProps} = this.props;
 		var {localValue} = this.state;
 		if (!localValue) {
-			var value = form.state.values[id];
+			var value = (form && form.state.values) ? form.state.values[id] : null;
 			localValue = value ? moment(value).format(this.localFormat) : null;
 		}
 		classes = classes ? classes.split(',') : [];
@@ -56,7 +56,9 @@ export default React.createClass({
 			keyBinds: {
 				enter: function (element) {
 					this.hide();
-					form._onSubmit();
+					if (form) {
+						form._onSubmit();
+					}
 				}
 			}
 		}).on('dp.change', this._onChange);
@@ -73,15 +75,19 @@ export default React.createClass({
 				showFeedback: 'positive',
 				localValue: event.target.value
 			});
-			form._onChange(id, null);
+			if (form) {
+				form._onChange(id, null);
+			}
 		}
 		else { // full valid date selected or entered
 			this.setState({
 				showFeedback: 'positive',
 				localValue: null
 			});
-			var value = event.date.format(this.isoFormat);
-			form._onChange(id, value);
+			if (form) {
+				var value = event.date.format(this.isoFormat);
+				form._onChange(id, value);
+			}
 		}
 	},
 
@@ -93,8 +99,10 @@ export default React.createClass({
 			this.setState({
 				localValue
 			});
-			var value = moment(localValue, this.localFormat).format(this.isoFormat);
-			form._onChange(id, value);
+			if (form) {
+				var value = moment(localValue, this.localFormat).format(this.isoFormat);
+				form._onChange(id, value);
+			}
 		}
 	}
 

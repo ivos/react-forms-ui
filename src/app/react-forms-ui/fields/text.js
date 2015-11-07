@@ -9,7 +9,7 @@ export default React.createClass({
 
 	render() {
 		var {id, label, classes, required, readonly, form, placeholder, ...otherProps} = this.props;
-		var value = form.state.values[id];
+		var value = (form && form.state.values) ? form.state.values[id] : null;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
 		return (
@@ -41,8 +41,10 @@ export default React.createClass({
 	_onChange() {
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
-		var value = this.refs.input.getDOMNode().value;
-		form._onChange(id, value);
+		if (form) {
+			var value = this.refs.input.getDOMNode().value;
+			form._onChange(id, value);
+		}
 	}
 
 });

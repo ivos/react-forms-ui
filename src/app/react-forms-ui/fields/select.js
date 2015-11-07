@@ -9,7 +9,7 @@ export default React.createClass({
 
 	render() {
 		var {id, label, classes, required, readonly, form, placeholder, query, initSelection, ...otherProps} = this.props;
-		var value = form.state.values[id];
+		var value = (form && form.state.values) ? form.state.values[id] : null;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
 		return (
@@ -40,12 +40,23 @@ export default React.createClass({
 		}).on('change', this._onChange)
 			.on('select2-blur', this._onBlur)
 			.select2('readonly', typeof readonly !== 'undefined');
-		var $container = $element.prev('.select2-container');
-		$container.on('keyup', function (event) {
-			if (13 === event.keyCode) {
-				form._onSubmit();
-			}
-		}.bind(this));
+		if (form) {
+			var $container = $element.prev('.select2-container');
+			$container.on('keyup', function (event) {
+				if (13 === event.keyCode) {
+					form._onSubmit();
+				}
+			});
+		}
+	},
+
+	setSelection(value) {
+		this._selection = value;
+		var $element = $(React.findDOMNode(this.refs.input));
+		if (typeof value === 'object') {
+			value = value.id;
+		}
+		$element.select2('val', value);
 	},
 
 	focus() {
@@ -56,8 +67,10 @@ export default React.createClass({
 	_onChange(event) {
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
-		var value = event.val;
-		form._onChange(id, value);
+		if (form) {
+			var value = event.val;
+			form._onChange(id, value);
+		}
 	}
 
 });

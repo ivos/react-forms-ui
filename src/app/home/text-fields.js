@@ -40,13 +40,7 @@ export default React.createClass({
 	getInitialState: function () {
 		return {
 			fields: ['textNotValidated', 'textFree', 'textRequired', 'textMinMax', 'textMinMaxReq',
-				'textNumbers', 'textBackend', 'textValue', 'textValueRequired'],
-			values: {
-				textValue: 'Initial value',
-				textValueRequired: 'Initial value in required',
-				textReadonly: 'Read-only value',
-				textReadonlyEmpty: null
-			}
+				'textNumbers', 'textBackend', 'textValue', 'textValueRequired']
 		};
 	},
 
@@ -98,6 +92,17 @@ export default React.createClass({
 				</Panel>
 			</Form>
 		);
+	},
+
+	componentDidMount() {
+		this.setState({
+			values: {
+				textValue: 'Initial value',
+				textValueRequired: 'Initial value in required',
+				textReadonly: 'Read-only value',
+				textReadonlyEmpty: null
+			}
+		});
 	},
 
 	onSubmit() {

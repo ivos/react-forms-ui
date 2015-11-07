@@ -50,7 +50,8 @@ export default {
 				selectValue: 'Výběr s hodnotou',
 				selectValueRequired: 'Výběr pov s hodnotou',
 				selectReadonly: 'Výběr needitovatelný',
-				selectReadonlyEmpty: 'Výběr needit prázdný'
+				selectReadonlyEmpty: 'Výběr needit prázdný',
+				selectValPreloaded: 'Výběr preloaded'
 			},
 			date: {
 				title: 'Datum',

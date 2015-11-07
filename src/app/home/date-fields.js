@@ -22,13 +22,7 @@ export default React.createClass({
 
 	getInitialState: function () {
 		return {
-			fields: ['dateFree', 'dateRequired', 'dateValue', 'dateValueRequired'],
-			values: {
-				dateValue: '2015-10-20',
-				dateValueRequired: '2015-10-21',
-				dateReadonly: '2015-10-22',
-				dateReadonlyEmpty: null
-			}
+			fields: ['dateFree', 'dateRequired', 'dateValue', 'dateValueRequired']
 		};
 	},
 
@@ -64,6 +58,17 @@ export default React.createClass({
 				</Panel>
 			</Form>
 		);
+	},
+
+	componentDidMount() {
+		this.setState({
+			values: {
+				dateValue: '2015-10-20',
+				dateValueRequired: '2015-10-21',
+				dateReadonly: '2015-10-22',
+				dateReadonlyEmpty: null
+			}
+		});
 	},
 
 	onSubmit() {

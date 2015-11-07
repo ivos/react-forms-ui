@@ -66,7 +66,7 @@ export default {
 	},
 
 	hasError() {
-		return this.refs.messages.hasError();
+		return this.refs.messages && this.refs.messages.hasError();
 	},
 
 	_onBlur(event) {
