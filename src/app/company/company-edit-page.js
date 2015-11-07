@@ -6,7 +6,6 @@ import {ButtonSave, LinkBack} from '../ui/buttons';
 import Contact from '../contact/contact';
 import Nested from '../shared/nested'
 import pick from '../shared/pick'
-import State from '../state';
 import {getOne, put, post} from '../store';
 
 export default React.createClass({
