@@ -28,21 +28,19 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{!readonly ? (
-						<div ref="group" className="input-group date">
-							<input ref="input" id={id} name={id} type="text" className="form-control field datepicker"
-							       autoComplete="off" placeholder={placeholder || label}
-							       value={localValue} {...otherProps} onChange={this._onChange} onBlur={this._onBlur}/>
-							<span className="input-group-addon"><span className="fa fa-calendar"></span></span>
-						</div>
-					) : (
-						<p className="form-control-static">{localValue}</p>
-					)}
+					{!readonly &&
+					<div ref="group" className="input-group date">
+						<input ref="input" id={id} name={id} type="text" className="form-control field datepicker"
+						       autoComplete="off" placeholder={placeholder || label}
+						       value={localValue} {...otherProps} onChange={this._onChange} onBlur={this._onBlur}/>
+						<span className="input-group-addon"><span className="fa fa-calendar"></span></span>
+					</div>}
+					{readonly && <p className="form-control-static">{localValue}</p>}
 				</div>
-				{!readonly && (
-					<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
-					          showFeedback={this.state.showFeedback} className={classes[2]}/>
-				)}
+				{!readonly &&
+				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
+				          showFeedback={this.state.showFeedback} className={classes[2]}/>
+				}
 			</div>
 		);
 	},

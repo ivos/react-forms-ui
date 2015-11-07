@@ -40,7 +40,7 @@ export default React.createClass({
 	getInitialState: function () {
 		return {
 			fields: ['textNotValidated', 'textFree', 'textRequired', 'textMinMax', 'textMinMaxReq',
-				'textNumbers', 'textBackend', 'textValue', 'textValueRequired']
+				'textNumbers', 'textBackend', 'textValue', 'textValueRequired', 'textReadonly']
 		};
 	},
 

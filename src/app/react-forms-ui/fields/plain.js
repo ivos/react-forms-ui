@@ -17,10 +17,10 @@ export default React.createClass({
 				<div className={classes[1]}>
 					{this.props.children}
 				</div>
-				{!readonly && (
-					<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
-					          showFeedback={this.state.showFeedback} className={classes[2]}/>
-				)}
+				{!readonly &&
+				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
+				          showFeedback={this.state.showFeedback} className={classes[2]}/>
+				}
 			</div>
 		);
 	}

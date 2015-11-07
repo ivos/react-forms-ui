@@ -17,19 +17,18 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{!readonly ? (
-						<input ref="input" id={id} name={id} type="text" className="form-control field"
-						       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
-						       onChange={this._onChange} onBlur={this._onBlur}/>
-					) : (
-						<p className="form-control-static">{value}</p>
-					)}
-					{this.getFeedback()}
+					{!readonly &&
+					<input ref="input" id={id} name={id} type="text" className="form-control field"
+					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
+					       onChange={this._onChange} onBlur={this._onBlur}/>
+					}
+					{!readonly && this.getFeedback()}
+					{readonly && <p className="form-control-static">{value}</p>}
 				</div>
-				{!readonly && (
-					<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
-					          showFeedback={this.state.showFeedback} className={classes[2]}/>
-				)}
+				{!readonly &&
+				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
+				          showFeedback={this.state.showFeedback} className={classes[2]}/>
+				}
 			</div>
 		);
 	},

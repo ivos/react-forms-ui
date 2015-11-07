@@ -20,10 +20,10 @@ export default React.createClass({
 					<input ref="input" id={id} name={id} type="hidden" className="form-control field"
 					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
 				</div>
-				{!readonly && (
-					<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
-					          showFeedback={this.state.showFeedback} className={classes[2]}/>
-				)}
+				{!readonly &&
+				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
+				          showFeedback={this.state.showFeedback} className={classes[2]}/>
+				}
 			</div>
 		);
 	},

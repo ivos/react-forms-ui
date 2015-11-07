@@ -22,7 +22,8 @@ export default React.createClass({
 
 	getInitialState: function () {
 		return {
-			fields: ['passwordFree', 'passwordRequired', 'passwordValue', 'passwordValueRequired']
+			fields: ['passwordFree', 'passwordRequired', 'passwordValue', 'passwordValueRequired',
+				'passwordReadonly', 'passwordReadonlyEmpty']
 		};
 	},
 

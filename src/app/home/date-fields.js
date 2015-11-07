@@ -22,7 +22,7 @@ export default React.createClass({
 
 	getInitialState: function () {
 		return {
-			fields: ['dateFree', 'dateRequired', 'dateValue', 'dateValueRequired']
+			fields: ['dateFree', 'dateRequired', 'dateValue', 'dateValueRequired', 'dateReadonly', 'dateReadonlyEmpty']
 		};
 	},
 
