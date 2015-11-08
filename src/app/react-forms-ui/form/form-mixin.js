@@ -17,11 +17,11 @@ export default {
 		if (fields) {
 			fields.forEach(function (field) {
 				var ref = this.refs[field];
-				if (ref && ref.setSelection) {
+				if (ref && ref.initWidgetValue) {
 					var nextValue = nextState.values[field];
 					var prevValue = values ? values[field] : undefined;
 					if (typeof nextValue !== 'undefined' && nextValue !== null && typeof prevValue === 'undefined') {
-						ref.setSelection(nextValue);
+						ref.initWidgetValue(nextValue);
 					}
 				}
 			}, this);

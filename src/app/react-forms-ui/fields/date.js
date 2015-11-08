@@ -63,11 +63,11 @@ export default React.createClass({
 		}).on('dp.change', this._onChange);
 	},
 
-	setSelection(nextValue) {
+	initWidgetValue(value) {
 		var picker = $(React.findDOMNode(this.refs.group)).data("DateTimePicker");
 		if (picker) {
-			var localValue = nextValue ? moment(nextValue).format(this.localFormat) : null;
-			var {id} = this.props;
+			var localValue = value ? moment(value).format(this.localFormat) : null;
+			this._initWidgetValue = true;
 			window.setTimeout(function () {
 				picker.date(localValue);
 			}, 0);
@@ -79,6 +79,10 @@ export default React.createClass({
 	},
 
 	_onChange(event) {
+		if (this._initWidgetValue) {
+			this._initWidgetValue = undefined;
+			return;
+		}
 		var {id, form} = this.props;
 		if (!event.date) { // partial date being entered manually
 			this.setState({

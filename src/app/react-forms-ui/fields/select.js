@@ -50,7 +50,7 @@ export default React.createClass({
 		}
 	},
 
-	setSelection(value) {
+	initWidgetValue(value) {
 		var $element = $(React.findDOMNode(this.refs.input));
 		if (typeof value === 'object') {
 			value = value.id;
