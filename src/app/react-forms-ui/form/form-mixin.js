@@ -20,7 +20,8 @@ export default {
 				if (ref && ref.initWidgetValue) {
 					var nextValue = nextState.values[field];
 					var prevValue = values ? values[field] : undefined;
-					if (typeof nextValue !== 'undefined' && nextValue !== null && typeof prevValue === 'undefined') {
+					if (typeof nextValue !== 'undefined' && nextValue !== null
+						&& nextValue !== '' && typeof prevValue === 'undefined') {
 						ref.initWidgetValue(nextValue);
 					}
 				}
