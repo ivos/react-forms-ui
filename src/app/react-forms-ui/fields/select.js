@@ -51,7 +51,6 @@ export default React.createClass({
 	},
 
 	setSelection(value) {
-		this._selection = value;
 		var $element = $(React.findDOMNode(this.refs.input));
 		if (typeof value === 'object') {
 			value = value.id;

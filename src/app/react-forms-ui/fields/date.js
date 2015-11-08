@@ -46,10 +46,11 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {query, form} = this.props;
+		var {form} = this.props;
 		$(React.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
+			showClear: true,
 			format: this.localFormat,
 			keyBinds: {
 				enter: function (element) {
@@ -60,6 +61,17 @@ export default React.createClass({
 				}
 			}
 		}).on('dp.change', this._onChange);
+	},
+
+	setSelection(nextValue) {
+		var picker = $(React.findDOMNode(this.refs.group)).data("DateTimePicker");
+		if (picker) {
+			var localValue = nextValue ? moment(nextValue).format(this.localFormat) : null;
+			var {id} = this.props;
+			window.setTimeout(function () {
+				picker.date(localValue);
+			}, 0);
+		}
 	},
 
 	focus() {
