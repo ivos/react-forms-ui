@@ -54,8 +54,10 @@ export default React.createClass({
 			format: this.localFormat,
 			keyBinds: {
 				enter: function (element) {
-					this.hide();
-					if (form) {
+					var open = !!element;
+					if (open) {
+						this.hide();
+					} else if (form) {
 						form._onSubmit();
 					}
 				}

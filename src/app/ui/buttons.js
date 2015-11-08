@@ -5,7 +5,7 @@ var t = i18n.t.bind(i18n);
 export var ButtonSave = React.createClass({
 	render() {
 		return (
-			<button type="submit" className="btn btn-primary" accessKey="S" title="Alt+S">
+			<button type="submit" className="btn btn-primary" accessKey="S" title="Alt+Shift+S">
 				<span className="fa fa-check"></span> {t('button.save')}
 			</button>
 		);

@@ -34,28 +34,31 @@ export default React.createClass({
 		$element.select2({
 			allowClear: true,
 			minimumInputLength: 0,
-			openOnEnter: false,
 			query,
 			initSelection
 		}).on('change', this._onChange)
 			.on('select2-blur', this._onBlur)
 			.select2('readonly', typeof readonly !== 'undefined');
-		if (form) {
-			var $container = $element.prev('.select2-container');
-			$container.on('keyup', function (event) {
-				if (13 === event.keyCode) {
-					form._onSubmit();
-				}
-			});
-		}
+		// when select is first field on form, opening form by select immediately submits it
+		//if (form) {
+		//	var $container = $element.prev('.select2-container');
+		//	$container.on('keyup', function (event) {
+		//		if (13 === event.keyCode) {
+		//			form._onSubmit();
+		//		}
+		//	});
+		//}
 	},
 
 	initWidgetValue(value) {
-		var $element = $(React.findDOMNode(this.refs.input));
-		if (typeof value === 'object') {
-			value = value.id;
+		var {initSelection} = this.props;
+		if (initSelection) {
+			var $element = $(React.findDOMNode(this.refs.input));
+			if (typeof value === 'object') {
+				value = value.id;
+			}
+			$element.select2('val', value);
 		}
-		$element.select2('val', value);
 	},
 
 	focus() {
