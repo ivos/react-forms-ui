@@ -54,7 +54,7 @@ export default React.createClass({
 		var {initSelection} = this.props;
 		if (initSelection) {
 			var $element = $(React.findDOMNode(this.refs.input));
-			if (typeof value === 'object') {
+			if (value && typeof value === 'object') {
 				value = value.id;
 			}
 			$element.select2('val', value);
