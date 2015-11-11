@@ -37,8 +37,7 @@ export default React.createClass({
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
 					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
-					        classes={fieldClasses}
-					        query={this.loadCompanies}/>
+					        classes={fieldClasses} query={this.loadCompanies}/>
 					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
 					        classes={fieldClasses} query={this.loadCompanies} required/>
 					<Select form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}

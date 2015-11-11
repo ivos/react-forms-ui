@@ -9,7 +9,7 @@ export default React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, query, initSelection, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, options, ...otherProps} = this.props;
 		var value = (form && form.state.values) ? form.state.values[id] : null;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
@@ -18,8 +18,21 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					<input ref="input" id={id} name={id} type="hidden" className="form-control field"
-					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
+					{!readonly &&
+					<select ref="select" id={id} name={id} className="form-control field"
+					        placeholder={placeholder || label} {...otherProps}>
+						{options && options.map(function (option) {
+							<option value={option.id}>{option.text}</option>
+						})}
+					</select>
+					}
+					{readonly && <p className="form-control-static">{
+						options && options.map(function (option) {
+							if ('selected' === option.selected) {
+								return option.text;
+							}
+						})
+					}</p>}
 				</div>
 				{!readonly &&
 				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
@@ -30,41 +43,34 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {query, initSelection, readonly, form} = this.props;
-		var $element = $(ReactDOM.findDOMNode(this.refs.input));
-		$element.select2({
-			allowClear: true,
-			minimumInputLength: 0,
-			query,
-			initSelection
-		}).on('change', this._onChange)
-			.on('select2-blur', this._onBlur)
-			.select2('readonly', typeof readonly !== 'undefined');
-		// when select is first field on form, opening form by select immediately submits it
-		//if (form) {
-		//	var $container = $element.prev('.select2-container');
-		//	$container.on('keyup', function (event) {
-		//		if (13 === event.keyCode) {
-		//			form._onSubmit();
-		//		}
-		//	});
-		//}
+		this._initSelect2();
 	},
 
-	initWidgetValue(value) {
-		var {initSelection} = this.props;
-		if (initSelection) {
-			var $element = $(ReactDOM.findDOMNode(this.refs.input));
-			if (value && typeof value === 'object') {
-				value = value.id;
-			}
-			$element.select2('val', value);
-		}
+	_initSelect2() {
+		var $element = $(React.findDOMNode(this.refs.select));
+		$element.select2({
+			//theme: 'bootstrap',
+			allowClear: true,
+			//minimumInputLength: 0,
+		}).on('change', this._onChange)
+			.on('select2-blur', this._onBlur);
+			//.select2('readonly', typeof readonly !== 'undefined');
 	},
+
+	//initWidgetValue(value) {
+	//	var {initSelection} = this.props;
+	//	if (initSelection) {
+	//		var $element = $(React.findDOMNode(this.refs.input));
+	//		if (value && typeof value === 'object') {
+	//			value = value.id;
+	//		}
+	//		$element.select2('val', value);
+	//	}
+	//},
 
 	focus() {
-		var $element = $(ReactDOM.findDOMNode(this.refs.input));
-		$element.select2('focus');
+		var $element = $(React.findDOMNode(this.refs.select));
+		$element.focus();
 	},
 
 	_onChange(event) {
