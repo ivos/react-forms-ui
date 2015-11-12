@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
+import Select from 'react-select';
 
 export default React.createClass({
 
 	mixins: [FieldMixin],
 
+	getInitialState() {
+		return {data: []};
+	},
+
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, query, initSelection, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, loadData, ...otherProps} = this.props;
 		var value = (form && form.state.values) ? form.state.values[id] : null;
+		var {data} = this.state;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
 		return (
@@ -18,8 +24,9 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					<input ref="input" id={id} name={id} type="hidden" className="form-control field"
-					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}/>
+					<Select ref="select" id={id} name={id} className="form-control field"
+					        placeholder={placeholder || label} value={value} {...otherProps} options={data}
+					        onChange={this._onChange}/>
 				</div>
 				{!readonly &&
 				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
@@ -30,48 +37,23 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {query, initSelection, readonly, form} = this.props;
-		var $element = $(ReactDOM.findDOMNode(this.refs.input));
-		$element.select2({
-			allowClear: true,
-			minimumInputLength: 0,
-			query,
-			initSelection
-		}).on('change', this._onChange)
-			.on('select2-blur', this._onBlur)
-			.select2('readonly', typeof readonly !== 'undefined');
-		// when select is first field on form, opening form by select immediately submits it
-		//if (form) {
-		//	var $container = $element.prev('.select2-container');
-		//	$container.on('keyup', function (event) {
-		//		if (13 === event.keyCode) {
-		//			form._onSubmit();
-		//		}
-		//	});
-		//}
+		var {loadData} = this.props;
+		loadData(null, this.setData);
 	},
 
-	initWidgetValue(value) {
-		var {initSelection} = this.props;
-		if (initSelection) {
-			var $element = $(ReactDOM.findDOMNode(this.refs.input));
-			if (value && typeof value === 'object') {
-				value = value.id;
-			}
-			$element.select2('val', value);
-		}
+	setData(data) {
+		this.setState({data})
 	},
 
 	focus() {
-		var $element = $(ReactDOM.findDOMNode(this.refs.input));
-		$element.select2('focus');
+		var $element = $(ReactDOM.findDOMNode(this.refs.select));
+		$element.focus();
 	},
 
-	_onChange(event) {
+	_onChange(value) {
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
 		if (form) {
-			var value = event.val;
 			form._onChange(id, value);
 		}
 	}
