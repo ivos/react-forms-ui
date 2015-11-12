@@ -6,6 +6,7 @@ import {ButtonSave} from '../ui/buttons';
 import {getList, getOne} from '../store';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
+import Select2 from 'react-select';
 
 export default React.createClass({
 
@@ -36,6 +37,8 @@ export default React.createClass({
 		return (
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
+					<Select2 name="form-field-name" value="one" options={[{value:'one',label:'One'},{value:'two',label:'Two'}]}/>
+
 					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
 					        classes={fieldClasses} loadData={this.loadCompanies}/>
 					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
@@ -89,25 +92,25 @@ export default React.createClass({
 			data: {name: query},
 			success: function (data) {
 				var formatted = data.map(function (item) {
-					return {id: item.id, text: item.name};
+					return {value: item.id, label: item.name};
 				});
 				callback(formatted);
 			}
 		});
 	},
 
-	initSelectionCompany($element, callback) {
-		var preloaded = this._selectPreloaded[$element[0].id];
-		if (preloaded) {
-			callback({id: preloaded.id, text: preloaded.name});
-		} else {
-			getOne('companies', $element.val(), {
-				success(data) {
-					callback({id: data.id, text: data.name});
-				}
-			});
-		}
-	},
+	//initSelectionCompany($element, callback) {
+	//	var preloaded = this._selectPreloaded[$element[0].id];
+	//	if (preloaded) {
+	//		callback({id: preloaded.id, text: preloaded.name});
+	//	} else {
+	//		getOne('companies', $element.val(), {
+	//			success(data) {
+	//				callback({id: data.id, text: data.name});
+	//			}
+	//		});
+	//	}
+	//},
 
 	onSubmit() {
 		var {values} = this.state;

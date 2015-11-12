@@ -46,8 +46,7 @@ export default React.createClass({
 	},
 
 	focus() {
-		var $element = $(ReactDOM.findDOMNode(this.refs.select));
-		$element.focus();
+		this.refs.select.focus();
 	},
 
 	_onChange(value) {
