@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, Text, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
@@ -107,7 +108,7 @@ export default React.createClass({
 
 	onSubmit() {
 		var {values} = this.state;
-		$(React.findDOMNode(this.refs.output)).html(JSON.stringify(values, emptyToNull, 2));
+		$(ReactDOM.findDOMNode(this.refs.output)).html(JSON.stringify(values, emptyToNull, 2));
 		console.log(values);
 	}
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {setTitle, focusFirst} from '../ui/utils';
 import {FormMixin, Form, Panel, Text} from '../react-forms-ui/index';
 import {LinkCreate} from '../ui/buttons';
@@ -57,7 +58,7 @@ export default React.createClass({
 			data: values,
 			success: function (data) {
 				this.setState({data, changed}, function () {
-					focusFirst(React.findDOMNode(this.refs.form));
+					focusFirst(ReactDOM.findDOMNode(this.refs.form));
 				});
 			}.bind(this)
 		});

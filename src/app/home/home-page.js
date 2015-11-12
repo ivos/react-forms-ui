@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {focusFirst, setTitle} from '../ui/utils';
 import TextFields from './text-fields';
 import PasswordFields from './password-fields';
@@ -25,7 +26,7 @@ export default React.createClass({
 
 	componentDidMount() {
 		setTitle(t('home.title'));
-		focusFirst(React.findDOMNode(this.refs.wrapper));
+		focusFirst(ReactDOM.findDOMNode(this.refs.wrapper));
 	}
 
 });

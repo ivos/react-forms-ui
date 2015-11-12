@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {setTitle, focusFirst} from '../ui/utils';
 import {FormMixin, Panel, Text, Plain} from '../react-forms-ui/index';
 import {LinkEdit, LinkBack} from '../ui/buttons';
@@ -55,7 +56,7 @@ export default React.createClass({
 			success: function (data) {
 				var values = Nested.expand(data, 'invoicingContact');
 				this.setState({values}, function () {
-					focusFirst(React.findDOMNode(this.refs.buttons));
+					focusFirst(ReactDOM.findDOMNode(this.refs.buttons));
 					setTitle('Company');
 				});
 			}.bind(this)

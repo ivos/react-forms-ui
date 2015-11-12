@@ -1,7 +1,7 @@
 import 'babel-core/polyfill';
 import $ from 'jquery';
 import AppRouter from './router';
-import React from 'react';
+import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createHashHistory';
 import i18n from './i18n';
 import {ReactFormsUiOptions} from './react-forms-ui/index';
@@ -22,5 +22,5 @@ var history = createHistory({
 });
 
 i18n.changeLanguage(locale, function () {
-	React.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
+	ReactDOM.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 });

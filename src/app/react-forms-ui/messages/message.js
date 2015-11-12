@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 require('./message.css');
 
 export default React.createClass({
@@ -44,7 +45,7 @@ export default React.createClass({
 	componentDidMount() {
 		var {type, dismissible} = this.props;
 		if (dismissible && 'success' === type) {
-			$(React.findDOMNode(this.refs.el)).delay(1000).fadeOut(500);
+			$(ReactDOM.findDOMNode(this.refs.el)).delay(1000).fadeOut(500);
 		}
 	}
 

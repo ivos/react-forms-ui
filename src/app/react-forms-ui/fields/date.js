@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -47,7 +48,7 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {form} = this.props;
-		$(React.findDOMNode(this.refs.group)).datetimepicker({
+		$(ReactDOM.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
 			showClear: true,
@@ -66,7 +67,7 @@ export default React.createClass({
 	},
 
 	initWidgetValue(value) {
-		var picker = $(React.findDOMNode(this.refs.group)).data("DateTimePicker");
+		var picker = $(ReactDOM.findDOMNode(this.refs.group)).data("DateTimePicker");
 		if (picker) {
 			var localValue = value ? moment(value).format(this.localFormat) : null;
 			this._initWidgetValue = true;
@@ -77,7 +78,7 @@ export default React.createClass({
 	},
 
 	focus() {
-		React.findDOMNode(this.refs.input).focus();
+		ReactDOM.findDOMNode(this.refs.input).focus();
 	},
 
 	_onChange(event) {

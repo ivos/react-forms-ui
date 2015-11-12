@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import AppRouter from '../router';
 import Header from './header';
 import Footer from './footer';
@@ -23,7 +24,7 @@ export default React.createClass({
 		i18n.changeLanguage(locale, function () {
 			var {history} = this.props;
 			moment.locale(locale);
-			React.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
+			ReactDOM.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 		}.bind(this));
 	}
 

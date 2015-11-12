@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -30,7 +31,7 @@ export default React.createClass({
 
 	componentDidMount() {
 		var {query, initSelection, readonly, form} = this.props;
-		var $element = $(React.findDOMNode(this.refs.input));
+		var $element = $(ReactDOM.findDOMNode(this.refs.input));
 		$element.select2({
 			allowClear: true,
 			minimumInputLength: 0,
@@ -53,7 +54,7 @@ export default React.createClass({
 	initWidgetValue(value) {
 		var {initSelection} = this.props;
 		if (initSelection) {
-			var $element = $(React.findDOMNode(this.refs.input));
+			var $element = $(ReactDOM.findDOMNode(this.refs.input));
 			if (value && typeof value === 'object') {
 				value = value.id;
 			}
@@ -62,7 +63,7 @@ export default React.createClass({
 	},
 
 	focus() {
-		var $element = $(React.findDOMNode(this.refs.input));
+		var $element = $(ReactDOM.findDOMNode(this.refs.input));
 		$element.select2('focus');
 	},
 

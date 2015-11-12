@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -34,7 +35,7 @@ export default React.createClass({
 	},
 
 	focus() {
-		React.findDOMNode(this.refs.input).focus();
+		ReactDOM.findDOMNode(this.refs.input).focus();
 	},
 
 	_onChange() {

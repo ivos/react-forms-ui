@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -8,7 +9,7 @@ export default React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, children, ...otherProps} = this.props;
 		var value = (form && form.state.values) ? form.state.values[id] : null;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
@@ -22,6 +23,7 @@ export default React.createClass({
 					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
 					       onChange={this._onChange} onBlur={this._onBlur}/>
 					}
+					{this.props.children}
 					{!readonly && this.getFeedback()}
 					{readonly && <p className="form-control-static">{value}</p>}
 				</div>
@@ -34,7 +36,7 @@ export default React.createClass({
 	},
 
 	focus() {
-		React.findDOMNode(this.refs.input).focus();
+		ReactDOM.findDOMNode(this.refs.input).focus();
 	},
 
 	_onChange() {
