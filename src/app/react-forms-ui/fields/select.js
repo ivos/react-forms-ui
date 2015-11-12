@@ -8,9 +8,14 @@ export default React.createClass({
 
 	mixins: [FieldMixin],
 
+	getInitialState() {
+		return {data: []};
+	},
+
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, options, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, placeholder, loadData, ...otherProps} = this.props;
 		var value = (form && form.state.values) ? form.state.values[id] : null;
+		var {data} = this.state;
 		classes = classes ? classes.split(',') : [];
 		var formGroupClassName = 'form-group ' + this.getFieldStatus();
 		return (
@@ -20,15 +25,15 @@ export default React.createClass({
 				<div className={classes[1]}>
 					{!readonly &&
 					<select ref="select" id={id} name={id} className="form-control field"
-					        placeholder={placeholder || label} {...otherProps}>
-						{options && options.map(function (option) {
-							<option value={option.id}>{option.text}</option>
+					        placeholder={placeholder || label} value={value} {...otherProps}>
+						{data.map(function (option) {
+							return <option key={id + '.' + option.id} value={option.id}>{option.text}</option>
 						})}
 					</select>
 					}
 					{readonly && <p className="form-control-static">{
-						options && options.map(function (option) {
-							if ('selected' === option.selected) {
+						data.map(function (option) {
+							if (value === option.id) {
 								return option.text;
 							}
 						})
@@ -44,17 +49,30 @@ export default React.createClass({
 
 	componentDidMount() {
 		this._initSelect2();
+		var {loadData} = this.props;
+		loadData(null, this.setData);
 	},
 
 	_initSelect2() {
+		var {label, placeholder} = this.props;
 		var $element = $(React.findDOMNode(this.refs.select));
 		$element.select2({
-			//theme: 'bootstrap',
+			theme: 'bootstrap',
+			placeholder: placeholder || label,
 			allowClear: true,
 			//minimumInputLength: 0,
 		}).on('change', this._onChange)
-			.on('select2-blur', this._onBlur);
-			//.select2('readonly', typeof readonly !== 'undefined');
+			.on('blur', this._onBlur);
+		//.select2('readonly', typeof readonly !== 'undefined');
+	},
+
+	setData(data) {
+		this.setState({data}, this.refreshSelect2);
+	},
+
+	refreshSelect2() {
+		var $element = $(React.findDOMNode(this.refs.select));
+		$element.trigger('change');
 	},
 
 	//initWidgetValue(value) {
@@ -77,7 +95,8 @@ export default React.createClass({
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
 		if (form) {
-			var value = event.val;
+			var $element = $(React.findDOMNode(this.refs.select));
+			var value = $element.val();
 			form._onChange(id, value);
 		}
 	}

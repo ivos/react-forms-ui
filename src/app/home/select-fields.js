@@ -37,24 +37,25 @@ export default React.createClass({
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
 					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
-					        classes={fieldClasses} query={this.loadCompanies}/>
+					        classes={fieldClasses} loadData={this.loadCompanies}/>
 					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
-					        classes={fieldClasses} query={this.loadCompanies} required/>
+					        classes={fieldClasses} loadData={this.loadCompanies} required/>
 					<Select form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
-					        classes={fieldClasses} query={this.loadCompanies}
+					        classes={fieldClasses} loadData={this.loadCompanies}
 					        initSelection={this.initSelectionCompany}/>
 					<Select form={this} ref="selectValueRequired" id="selectValueRequired"
 					        label={t('home.select.selectValueRequired')} classes={fieldClasses}
-					        query={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
+					        loadData={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
 					<Select form={this} ref="selectReadonly" id="selectReadonly" label={t('home.select.selectReadonly')}
-					        classes={fieldClasses} query={this.loadCompanies} initSelection={this.initSelectionCompany}
+					        classes={fieldClasses} loadData={this.loadCompanies}
+					        initSelection={this.initSelectionCompany}
 					        readonly/>
 					<Select form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
 					        label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
-					        query={this.loadCompanies} readonly/>
+					        loadData={this.loadCompanies} readonly/>
 					<Select form={this} ref="selectValPreloaded" id="selectValPreloaded"
 					        label={t('home.select.selectValPreloaded')} classes={fieldClasses}
-					        query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
+					        loadData={this.loadCompanies} initSelection={this.initSelectionCompany}/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>
@@ -86,14 +87,18 @@ export default React.createClass({
 		});
 	},
 
-	loadCompanies(query) {
+	loadCompanies2(query, callback) {
+		callback([{id: 1, text: 'Text'}]);
+	},
+
+	loadCompanies(query, callback) {
 		getList('companies', {
-			data: {name: query.term},
+			data: {name: query},
 			success: function (data) {
 				var formatted = data.map(function (item) {
 					return {id: item.id, text: item.name};
 				});
-				query.callback({results: formatted});
+				callback(formatted);
 			}
 		});
 	},
