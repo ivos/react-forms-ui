@@ -51,7 +51,9 @@ export default {
 				selectValueRequired: 'Select req w/ value',
 				selectReadonly: 'Select readonly',
 				selectReadonlyEmpty: 'Select readonly empty',
-				selectValPreloaded: 'Select val preloaded'
+				selectValPreloaded: 'Select val preloaded',
+				selectGroup: 'Group',
+				selectProduct: 'Product'
 			},
 			date: {
 				title: 'Date field',

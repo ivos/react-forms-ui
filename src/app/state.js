@@ -60,5 +60,70 @@ export default {
 				zip: '63200'
 			}
 		}
+	],
+	groups: [
+		{
+			id: 0,
+			name: 'Tea'
+		},
+		{
+			id: 1,
+			name: 'Water'
+		},
+		{
+			id: 2,
+			name: 'Alcoholic beverage'
+		},
+		{
+			id: 3,
+			name: 'Energy drink'
+		}
+	],
+	products: [
+		{
+			id: 0,
+			group: 0,
+			name: 'Earl grey tea'
+		},
+		{
+			id: 1,
+			group: 0,
+			name: 'English breakfast tea'
+		},
+		{
+			id: 2,
+			group: 0,
+			name: 'Lemon tea'
+		},
+		{
+			id: 3,
+			group: 2,
+			name: 'Red wine'
+		},
+		{
+			id: 4,
+			group: 2,
+			name: 'White wine'
+		},
+		{
+			id: 5,
+			group: 2,
+			name: 'Beer'
+		},
+		{
+			id: 6,
+			group: 2,
+			name: 'Whisky'
+		},
+		{
+			id: 7,
+			group: 3,
+			name: 'Red Bull'
+		},
+		{
+			id: 8,
+			group: 3,
+			name: 'Monster'
+		}
 	]
 };

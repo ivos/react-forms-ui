@@ -20,17 +20,24 @@ export default React.createClass({
 		selectValueRequired: {
 			required: true
 		},
-		selectValPreloaded: {}
+		selectValPreloaded: {},
+		selectGroup: {
+			required: true
+		},
+		selectProduct: {}
 	},
 
 	getInitialState: function () {
 		return {
 			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired',
-				'selectReadonly', 'selectReadonlyEmpty', 'selectValPreloaded']
+				'selectReadonly', 'selectReadonlyEmpty', 'selectValPreloaded', 'selectGroup', 'selectProduct'],
+			values: {}
 		};
 	},
 
 	render() {
+		var {values} = this.state;
+		var groupEmpty = (!values.selectGroup && 0 !== values.selectGroup);
 		var fieldClasses = 'col-sm-2,col-sm-6,col-sm-4';
 		var buttonsClass = 'col-sm-offset-2 col-sm-10';
 		return (
@@ -56,6 +63,12 @@ export default React.createClass({
 					<Select form={this} ref="selectValPreloaded" id="selectValPreloaded"
 					        label={t('home.select.selectValPreloaded')} classes={fieldClasses}
 					        query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
+					<Select form={this} ref="selectGroup" id="selectGroup" label={t('home.select.selectGroup')}
+					        classes={fieldClasses} query={this.loadGroups} initSelection={this.initSelectionGroup}
+					        required/>
+					<Select form={this} ref="selectProduct" id="selectProduct" label={t('home.select.selectProduct')}
+					        classes={fieldClasses} query={this.loadProducts} initSelection={this.initSelectionProduct}
+					        disabled={groupEmpty}/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>
@@ -78,11 +91,13 @@ export default React.createClass({
 		};
 		this.setState({
 			values: {
-				selectValue: '1',
-				selectValueRequired: '2',
-				selectReadonly: '0',
+				selectValue: 1,
+				selectValueRequired: 2,
+				selectReadonly: 0,
 				selectReadonlyEmpty: null,
-				selectValPreloaded: 2
+				selectValPreloaded: 2,
+				selectGroup: 0,
+				selectProduct: 0
 			}
 		});
 	},
@@ -104,11 +119,70 @@ export default React.createClass({
 		if (preloaded) {
 			callback({id: preloaded.id, text: preloaded.name});
 		} else {
-			getOne('companies', $element.val(), {
+			var value = $element.val();
+			value && getOne('companies', value, {
 				success(data) {
 					callback({id: data.id, text: data.name});
 				}
 			});
+		}
+	},
+
+	loadGroups(query) {
+		getList('groups', {
+			data: {name: query.term},
+			success: function (data) {
+				var formatted = data.map(function (item) {
+					return {id: item.id, text: item.name};
+				});
+				query.callback({results: formatted});
+			}
+		});
+	},
+
+	initSelectionGroup($element, callback) {
+		var value = $element.val();
+		value && getOne('groups', $element.val(), {
+			success(data) {
+				callback({id: data.id, text: data.name});
+			}
+		});
+	},
+
+	loadProducts(query) {
+		var {values} = this.state;
+		var group = values.selectGroup;
+		getList('products', {
+			data: {group, name: query.term},
+			success: function (data) {
+				var formatted = data.map(function (item) {
+					return {id: item.id, text: item.name};
+				});
+				query.callback({results: formatted});
+			}
+		});
+	},
+
+	initSelectionProduct($element, callback) {
+		var value = $element.val();
+		value && getOne('products', $element.val(), {
+			success(data) {
+				callback({id: data.id, text: data.name});
+			}
+		});
+	},
+
+	componentDidUpdate(prevProps, prevState) {
+		var {values} = this.state;
+		var group = values.selectGroup;
+		var prevGroup = prevState.values.selectGroup;
+		if (prevGroup !== undefined && group !== prevGroup) {
+			//TODO
+			this.refs.selectProduct.initWidgetValue(null);
+			values = Object.assign(values, {
+				selectProduct: null
+			});
+			this.setState({values});
 		}
 	},
 

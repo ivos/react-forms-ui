@@ -51,7 +51,9 @@ export default {
 				selectValueRequired: 'Výběr pov s hodnotou',
 				selectReadonly: 'Výběr needitovatelný',
 				selectReadonlyEmpty: 'Výběr needit prázdný',
-				selectValPreloaded: 'Výběr preloaded'
+				selectValPreloaded: 'Výběr preloaded',
+				selectGroup: 'Skupina',
+				selectProduct: 'Produkt'
 			},
 			date: {
 				title: 'Datum',

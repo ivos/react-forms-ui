@@ -26,6 +26,9 @@ export function getList(urlBase, options) {
 }
 
 export function getOne(urlBase, id, options) {
+	if (!id) {
+		throw 'Id required, but was: [' + id + ']';
+	}
 	console.log('STORE GET /' + urlBase + '/' + id, options);
 	setTimeout(function () {
 		options.success(State[urlBase][id]);
@@ -33,6 +36,9 @@ export function getOne(urlBase, id, options) {
 }
 
 export function put(urlBase, id, options) {
+	if (!id) {
+		throw 'Id required, but was: [' + id + ']';
+	}
 	console.log('STORE PUT /' + urlBase + '/' + id, options);
 	State[urlBase][id] = options.data;
 	setTimeout(function () {
@@ -41,6 +47,9 @@ export function put(urlBase, id, options) {
 }
 
 export function post(urlBase, options) {
+	if (!id) {
+		throw 'Id required, but was: [' + id + ']';
+	}
 	console.log('STORE POST /' + urlBase + '/', options);
 	var array = State[urlBase];
 	var id = array[array.length - 1].id + 1;
