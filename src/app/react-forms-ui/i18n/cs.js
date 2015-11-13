@@ -8,5 +8,9 @@ export default {
 		maxLength_2: 'Musí mít nejvýše {{count}} znaky.',
 		maxLength_5: 'Musí mít nejvýše {{count}} znaků.',
 		invalidFormat: 'Neplatný formát.'
+	},
+	select2: {
+		searching: 'Načítám...',
+		noMatches: 'Žádný záznam neodpovídá.'
 	}
 }

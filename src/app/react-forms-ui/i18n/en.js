@@ -6,5 +6,9 @@ export default {
 		maxLength: 'Must have at most {{count}} character.',
 		maxLength_plural: 'Must have at most {{count}} characters.',
 		invalidFormat: 'Invalid format.'
+	},
+	select2: {
+		searching: 'Searching...',
+		noMatches: 'No matches found.'
 	}
 }

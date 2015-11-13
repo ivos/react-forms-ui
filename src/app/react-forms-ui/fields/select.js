@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
+import Options from '../options/options';
 
 export default React.createClass({
 
@@ -36,7 +37,13 @@ export default React.createClass({
 			allowClear: true,
 			minimumInputLength: 0,
 			query,
-			initSelection
+			initSelection,
+			formatSearching: function () {
+				return Options.translate ? Options.translate('select2:searching') : 'Searching...';
+			},
+			formatNoMatches: function () {
+				return Options.translate ? Options.translate('select2:noMatches') : 'No matches found.';
+			}
 		}).on('change', this._onChange)
 			.on('select2-blur', this._onBlur)
 			.select2('readonly', typeof readonly !== 'undefined');
