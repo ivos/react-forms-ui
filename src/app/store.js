@@ -8,8 +8,12 @@ export function getList(urlBase, options) {
 		var matches = true;
 		if (options.data) {
 			Object.keys(options.data).forEach(function (key) {
-				if (typeof item[key] === 'string' && options.data[key]
+				if (typeof options.data[key] === 'string'
 					&& !item[key].toLowerCase().startsWith(options.data[key].toLowerCase())) {
+					matches = false;
+				}
+				if (typeof options.data[key] === 'number'
+					&& item[key] !== Number(options.data[key])) {
 					matches = false;
 				}
 			});

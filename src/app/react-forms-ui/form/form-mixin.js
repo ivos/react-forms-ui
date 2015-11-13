@@ -12,17 +12,16 @@ export default {
 		this.focusFirstField();
 	},
 
-	componentWillUpdate(nextProps, nextState) {
+	componentDidUpdate(prevProps, prevState) {
 		var {fields, values} = this.state;
 		if (fields) {
 			fields.forEach(function (field) {
 				var ref = this.refs[field];
 				if (ref && ref.initWidgetValue) {
-					var nextValue = nextState.values[field];
-					var prevValue = values ? values[field] : undefined;
-					if (typeof nextValue !== 'undefined' && nextValue !== null
-						&& nextValue !== '' && typeof prevValue === 'undefined') {
-						ref.initWidgetValue(nextValue);
+					var prevValue = prevState.values && prevState.values[field];
+					var nextValue = values && values[field];
+					if (nextValue !== prevValue) {
+						ref.initWidgetValue(nextValue, prevValue);
 					}
 				}
 			}, this);

@@ -51,7 +51,7 @@ export default React.createClass({
 		//}
 	},
 
-	initWidgetValue(value) {
+	initWidgetValue(value, prevValue) {
 		var {initSelection} = this.props;
 		if (initSelection) {
 			var $element = $(ReactDOM.findDOMNode(this.refs.input));
@@ -72,6 +72,12 @@ export default React.createClass({
 		var {id, form} = this.props;
 		if (form) {
 			var value = event.val;
+			var numericValue = Number(value);
+			if (!value) {
+				value = null;
+			} else if (!isNaN(numericValue)) {
+				value = numericValue;
+			}
 			form._onChange(id, value);
 		}
 	}

@@ -66,14 +66,16 @@ export default React.createClass({
 		}).on('dp.change', this._onChange);
 	},
 
-	initWidgetValue(value) {
-		var picker = $(ReactDOM.findDOMNode(this.refs.group)).data("DateTimePicker");
-		if (picker) {
-			var localValue = value ? moment(value).format(this.localFormat) : null;
-			this._initWidgetValue = true;
-			window.setTimeout(function () {
-				picker.date(localValue);
-			}, 0);
+	initWidgetValue(value, prevValue) {
+		if (undefined === prevValue) { // only initially
+			var picker = $(ReactDOM.findDOMNode(this.refs.group)).data("DateTimePicker");
+			if (picker) {
+				var localValue = value ? moment(value).format(this.localFormat) : null;
+				this._initWidgetValue = true;
+				window.setTimeout(function () {
+					picker.date(localValue);
+				}, 0);
+			}
 		}
 	},
 
