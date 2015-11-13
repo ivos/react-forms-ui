@@ -1,6 +1,6 @@
 import State from './state';
 
-var delay = 200;
+var delay = 300;
 
 export function getList(urlBase, options) {
 	console.log('STORE GET /' + urlBase + '/', options);
