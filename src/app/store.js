@@ -26,7 +26,7 @@ export function getList(urlBase, options) {
 }
 
 export function getOne(urlBase, id, options) {
-	if (!id) {
+	if (!id && 0 !== id) {
 		throw 'Id required, but was: [' + id + ']';
 	}
 	console.log('STORE GET /' + urlBase + '/' + id, options);
@@ -36,7 +36,7 @@ export function getOne(urlBase, id, options) {
 }
 
 export function put(urlBase, id, options) {
-	if (!id) {
+	if (!id && 0 !== id) {
 		throw 'Id required, but was: [' + id + ']';
 	}
 	console.log('STORE PUT /' + urlBase + '/' + id, options);
@@ -47,7 +47,7 @@ export function put(urlBase, id, options) {
 }
 
 export function post(urlBase, options) {
-	if (!id) {
+	if (!id && 0 !== id) {
 		throw 'Id required, but was: [' + id + ']';
 	}
 	console.log('STORE POST /' + urlBase + '/', options);
