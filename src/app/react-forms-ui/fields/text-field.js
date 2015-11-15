@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Text from '../controls/text';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -18,14 +19,11 @@ export default React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{!readonly &&
-					<input ref="input" id={id} name={id} type="text" className="form-control field"
-					       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
-					       onChange={this._onChange} onBlur={this._onBlur}/>
-					}
-					{this.props.children}
+					<Text ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
+					      onChange={this._onChange} onBlur={this._onBlur}>
+						{this.props.children}
+					</Text>
 					{!readonly && this.getFeedback()}
-					{readonly && <p className="form-control-static">{value}</p>}
 				</div>
 				{!readonly &&
 				<Messages ref="messages" id={id} fieldMessages={this.getFieldMessages()}
@@ -36,14 +34,17 @@ export default React.createClass({
 	},
 
 	focus() {
-		ReactDOM.findDOMNode(this.refs.input).focus();
+		this.refs.control.focus();
 	},
 
-	_onChange() {
+	focusError() {
+		this.focus();
+	},
+
+	_onChange(value) {
 		this.setState({showFeedback: 'positive'});
 		var {id, form} = this.props;
 		if (form) {
-			var value = this.refs.input.value;
 			form._onChange(id, value);
 		}
 	}

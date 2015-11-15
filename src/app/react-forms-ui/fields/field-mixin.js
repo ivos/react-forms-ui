@@ -5,10 +5,7 @@ export default {
 	_formField: true,
 
 	propTypes: {
-		type: ReactHelper.validateUnsupportedProp,
-		name: ReactHelper.validateUnsupportedProp,
-		className: ReactHelper.validateUnsupportedProp,
-		autoComplete: ReactHelper.validateUnsupportedProp
+		className: ReactHelper.validateUnsupportedProp
 	},
 
 	getInitialState() {
