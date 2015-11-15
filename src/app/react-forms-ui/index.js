@@ -29,20 +29,20 @@ export var FormMessages = _FormMessages;
 import _FieldMixin from './fields/field-mixin';
 export var FieldMixin = _FieldMixin;
 
-import _Text from './fields/text';
-export var Text = _Text;
+import _TextField from './fields/text-field';
+export var TextField = _TextField;
 
-import _Password from './fields/password';
-export var Password = _Password;
+import _PasswordField from './fields/password-field';
+export var PasswordField = _PasswordField;
 
-import _Select from './fields/select';
-export var Select = _Select;
+import _SelectField from './fields/select-field';
+export var SelectField = _SelectField;
 
-import _Date from './fields/date';
-export var Date = _Date;
+import _DateField from './fields/date-field';
+export var DateField = _DateField;
 
-import _Plain from './fields/plain';
-export var Plain = _Plain;
+import _PlainField from './fields/plain-field';
+export var PlainField = _PlainField;
 
 // panel
 

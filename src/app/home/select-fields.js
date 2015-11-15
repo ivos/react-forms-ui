@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, Select, FormMessages} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, SelectField, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import {getList, getOne} from '../store';
 import i18n from '../i18n';
@@ -29,8 +29,6 @@ export default React.createClass({
 
 	getInitialState: function () {
 		return {
-			fields: ['selectFree', 'selectRequired', 'selectValue', 'selectValueRequired',
-				'selectReadonly', 'selectReadonlyEmpty', 'selectValPreloaded', 'selectGroup', 'selectProduct'],
 			values: {}
 		};
 	},
@@ -43,32 +41,32 @@ export default React.createClass({
 		return (
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
-					<Select form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
-					        classes={fieldClasses}
-					        query={this.loadCompanies}/>
-					<Select form={this} ref="selectRequired" id="selectRequired" label={t('home.select.selectRequired')}
-					        classes={fieldClasses} query={this.loadCompanies} required/>
-					<Select form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
-					        classes={fieldClasses} query={this.loadCompanies}
-					        initSelection={this.initSelectionCompany}/>
-					<Select form={this} ref="selectValueRequired" id="selectValueRequired"
-					        label={t('home.select.selectValueRequired')} classes={fieldClasses}
-					        query={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
-					<Select form={this} ref="selectReadonly" id="selectReadonly" label={t('home.select.selectReadonly')}
-					        classes={fieldClasses} query={this.loadCompanies} initSelection={this.initSelectionCompany}
-					        readonly/>
-					<Select form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
-					        label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
-					        query={this.loadCompanies} readonly/>
-					<Select form={this} ref="selectValPreloaded" id="selectValPreloaded"
-					        label={t('home.select.selectValPreloaded')} classes={fieldClasses}
-					        query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
-					<Select form={this} ref="selectGroup" id="selectGroup" label={t('home.select.selectGroup')}
-					        classes={fieldClasses} query={this.loadGroups} initSelection={this.initSelectionGroup}
-					        required/>
-					<Select form={this} ref="selectProduct" id="selectProduct" label={t('home.select.selectProduct')}
-					        classes={fieldClasses} query={this.loadProducts} initSelection={this.initSelectionProduct}
-					        disabled={groupEmpty}/>
+					<SelectField form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
+					             classes={fieldClasses} query={this.loadCompanies}/>
+					<SelectField form={this} ref="selectRequired" id="selectRequired"
+					             label={t('home.select.selectRequired')} classes={fieldClasses}
+					             query={this.loadCompanies} required/>
+					<SelectField form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
+					             classes={fieldClasses} query={this.loadCompanies}
+					             initSelection={this.initSelectionCompany}/>
+					<SelectField form={this} ref="selectValueRequired" id="selectValueRequired"
+					             label={t('home.select.selectValueRequired')} classes={fieldClasses}
+					             query={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
+					<SelectField form={this} ref="selectReadonly" id="selectReadonly"
+					             label={t('home.select.selectReadonly')} classes={fieldClasses}
+					             query={this.loadCompanies} initSelection={this.initSelectionCompany} readonly/>
+					<SelectField form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
+					             label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
+					             query={this.loadCompanies} readonly/>
+					<SelectField form={this} ref="selectValPreloaded" id="selectValPreloaded"
+					             label={t('home.select.selectValPreloaded')} classes={fieldClasses}
+					             query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
+					<SelectField form={this} ref="selectGroup" id="selectGroup" label={t('home.select.selectGroup')}
+					             classes={fieldClasses} query={this.loadGroups} initSelection={this.initSelectionGroup}
+					             required/>
+					<SelectField form={this} ref="selectProduct" id="selectProduct"
+					             label={t('home.select.selectProduct')} classes={fieldClasses} query={this.loadProducts}
+					             initSelection={this.initSelectionProduct} disabled={groupEmpty}/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>
@@ -116,7 +114,7 @@ export default React.createClass({
 
 	initSelectionCompany($element, callback) {
 		var preloaded = this._selectPreloaded[$element[0].id];
-		if (preloaded) {
+		if (preloaded && String(preloaded.id) === $element.val()) {
 			callback({id: preloaded.id, text: preloaded.name});
 		} else {
 			var value = $element.val();

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {setTitle, focusFirst} from '../ui/utils';
-import {FormMixin, Form, Panel, Text} from '../react-forms-ui/index';
+import {FormMixin, Form, Panel, TextField} from '../react-forms-ui/index';
 import {LinkCreate} from '../ui/buttons';
 import {getList} from '../store';
 
@@ -11,7 +11,6 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
-			fields: ['name'],
 			changed: false,
 			data: [],
 			values: {}
@@ -33,7 +32,7 @@ export default React.createClass({
 					<Panel title={<span>Companies <span className="badge pull-right">{data.length}</span></span>}>
 
 						<div className="panel-body">
-							<Text form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
+							<TextField form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
 						</div>
 
 						<div className="list-group">

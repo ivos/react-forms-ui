@@ -47,9 +47,6 @@ export function put(urlBase, id, options) {
 }
 
 export function post(urlBase, options) {
-	if (!id && 0 !== id) {
-		throw 'Id required, but was: [' + id + ']';
-	}
 	console.log('STORE POST /' + urlBase + '/', options);
 	var array = State[urlBase];
 	var id = array[array.length - 1].id + 1;

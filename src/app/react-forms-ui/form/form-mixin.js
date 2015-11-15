@@ -9,23 +9,21 @@ export default {
 	},
 
 	componentDidMount() {
-		this.focusFirstField();
+		this.focus();
 	},
 
 	componentDidUpdate(prevProps, prevState) {
-		var {fields, values} = this.state;
-		if (fields) {
-			fields.forEach(function (field) {
-				var ref = this.refs[field];
-				if (ref && ref.initWidgetValue) {
-					var prevValue = prevState.values && prevState.values[field];
-					var nextValue = values && values[field];
-					if (nextValue !== prevValue) {
-						ref.initWidgetValue(nextValue, prevValue);
-					}
+		var {values} = this.state;
+		Object.keys(this.refs).forEach(function (field) {
+			var ref = this.refs[field];
+			if (ref.initWidgetValue) {
+				var prevValue = prevState.values && prevState.values[field];
+				var nextValue = values && values[field];
+				if (nextValue !== prevValue) {
+					ref.initWidgetValue(nextValue, prevValue);
 				}
-			}, this);
-		}
+			}
+		}, this);
 	},
 
 	_onChange(id, value) {
@@ -52,50 +50,44 @@ export default {
 		return validation;
 	},
 
-	focusFirstField() {
-		var {fields} = this.state;
-		if (fields) {
-			fields.find(function (field) {
-				var ref = this.refs[field];
-				if (ref && ref.focus) {
-					ref.focus();
-					return true;
-				}
-			}, this);
-		}
+
+	focus() {
+		Object.keys(this.refs).find(function (field) {
+			var ref = this.refs[field];
+			if (ref.focus) {
+				ref.focus();
+				return true;
+			}
+		}, this);
 	},
 
-	focusFirstErrorField() {
-		var {fields} = this.state;
-		if (fields) {
-			fields.find(function (field) {
-				var ref = this.refs[field];
-				if (ref.focus && ref.hasError && ref.hasError()) {
-					ref.focus();
-					return true;
-				}
-			}, this);
-		}
+	focusError() {
+		Object.keys(this.refs).find(function (field) {
+			var ref = this.refs[field];
+			if (ref.focus && ref.hasError && ref.hasError()) {
+				ref.focus();
+				return true;
+			}
+		}, this);
 	},
 
 	showErrorOnAllFields() {
-		var {fields} = this.state;
-		['_form', ...fields].forEach(function (field) {
+		Object.keys(this.refs).forEach(function (field) {
 			var ref = this.refs[field];
-			if (ref && typeof ref.state.showFeedback !== 'undefined') {
+			if (ref.state && typeof ref.state.showFeedback !== 'undefined') {
 				ref.setState({showFeedback: 'all'});
 			}
 		}, this);
 	},
 
 	setAllFieldValues() {
-		var {fields} = this.state;
 		var values = {};
-		if (fields) {
-			fields.forEach(function (field) {
+		Object.keys(this.refs).forEach(function (field) {
+			var ref = this.refs[field];
+			if (ref._formField) {
 				values[field] = '';
-			});
-		}
+			}
+		}, this);
 		values = Object.assign(values, this.state.values);
 		this.setState({values});
 		return values;
@@ -107,7 +99,7 @@ export default {
 		}
 		this.showErrorOnAllFields();
 		var values = this.setAllFieldValues();
-		var validation = this.validate(values, this.focusFirstErrorField);
+		var validation = this.validate(values, this.focusError);
 		if (!validation.hasError()) {
 			this.onSubmit();
 		}

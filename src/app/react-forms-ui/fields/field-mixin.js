@@ -2,6 +2,8 @@ import ReactHelper from '../support/react-helper';
 
 export default {
 
+	_formField: true,
+
 	propTypes: {
 		type: ReactHelper.validateUnsupportedProp,
 		name: ReactHelper.validateUnsupportedProp,
