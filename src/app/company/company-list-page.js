@@ -22,28 +22,29 @@ export default React.createClass({
 		var fieldClasses = 'col-sm-2,col-sm-6,col-sm-4';
 		return (
 			<Form ref="form" onSubmit={this._onSubmit}>
-				{!changed && !data.length ?
-					<div className="alert alert-info">
-						<p><strong>You have no company defined now.</strong></p>
+				{this._reloaded && !changed && !data.length &&
+				<div className="alert alert-info">
+					<p><strong>You have no company defined now.</strong></p>
 
-						<p>Create your first company to start working with it.</p>
+					<p>Create your first company to start working with it.</p>
+				</div>
+				}
+				{this._reloaded && (changed || data.length > 0) &&
+				<Panel title={<span>Companies <span className="badge pull-right">{data.length}</span></span>}>
+
+					<div className="panel-body">
+						<TextField form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
 					</div>
-					:
-					<Panel title={<span>Companies <span className="badge pull-right">{data.length}</span></span>}>
 
-						<div className="panel-body">
-							<TextField form={this} ref="name" id="name" label="Name" classes={fieldClasses}/>
-						</div>
-
-						<div className="list-group">
-							{data.map(function (model, index) {
-								return (
-									<a ref={'row' + index} key={model.id} href={'#companies/' + model.id}
-									   className="list-group-item">{model.name}</a>
-								);
-							})}
-						</div>
-					</Panel>
+					<div className="list-group">
+						{data.map(function (model, index) {
+							return (
+								<a ref={'row' + index} key={model.id} href={'#companies/' + model.id}
+								   className="list-group-item">{model.name}</a>
+							);
+						})}
+					</div>
+				</Panel>
 				}
 				{<LinkCreate href="#companies/new" title="Create new company."/>}
 			</Form>
@@ -56,6 +57,7 @@ export default React.createClass({
 		getList('companies', {
 			data: values,
 			success: function (data) {
+				this._reloaded = true;
 				this.setState({data, changed}, function () {
 					focusFirst(ReactDOM.findDOMNode(this.refs.form));
 				});
