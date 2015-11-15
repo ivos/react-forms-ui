@@ -49,7 +49,7 @@ export function put(urlBase, id, options) {
 export function post(urlBase, options) {
 	console.log('STORE POST /' + urlBase + '/', options);
 	var array = State[urlBase];
-	var id = array[array.length - 1].id + 1;
+	var id = !array.length ? 0 : array[array.length - 1].id + 1;
 	options.data.id = id;
 	array.push(options.data);
 	setTimeout(function () {
