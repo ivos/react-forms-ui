@@ -34,7 +34,9 @@ export default React.createClass({
 					<PasswordField form={this} ref="passwordValue" id="passwordValue"
 					               label={t('home.password.passwordValue')} classes={fieldClasses}/>
 					<PasswordField form={this} ref="passwordValueRequired" id="passwordValueRequired"
-					               label={t('home.password.passwordValueRequired')} classes={fieldClasses} required/>
+					               label={t('home.password.passwordValueRequired.label')} classes={fieldClasses} required>
+						<span className="help-block">{t('home.password.passwordValueRequired.help')}</span>
+					</PasswordField>
 					<PasswordField form={this} ref="passwordReadonly" id="passwordReadonly"
 					               label={t('home.password.passwordReadonly')} classes={fieldClasses} readonly/>
 					<PasswordField form={this} ref="passwordReadonlyEmpty" id="passwordReadonlyEmpty"

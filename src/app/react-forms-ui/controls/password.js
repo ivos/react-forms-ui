@@ -10,11 +10,11 @@ export default React.createClass({
 		var {id, readonly, placeholder, label, value, className,
 			onChange, onBlur, children, ...otherProps} = this.props;
 		if (readonly) {
-			return <p className={(className || '') + ' form-control-static'}>{value}</p>;
+			return <p className={(className || '') + ' form-control-static'}>{value ? '********' : ''}</p>;
 		}
 		return (
 			<span>
-			<input ref="input" id={id} name={id} type="text" className={className+' form-control'}
+			<input ref="input" id={id} name={id} type="password" className={className+' form-control'}
 			       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
 			       onChange={this._onChange} onBlur={this._onBlur}/>
 				{children}

@@ -12,6 +12,15 @@ export default {
 		return {showFeedback: 'none'};
 	},
 
+	getValue() {
+		var {id, form} = this.props;
+		return (form && form.state.values) ? form.state.values[id] : null;
+	},
+
+	setChanging() {
+		this.setState({showFeedback: 'positive'});
+	},
+
 	getFieldMessages() {
 		var {id, form: {state: {messages}}} = this.props;
 		return messages[id];
@@ -65,11 +74,17 @@ export default {
 	},
 
 	hasError() {
-		return this.refs.messages && this.refs.messages.hasError();
+		var fieldMessages = this.getFieldMessages();
+		if (fieldMessages) {
+			return fieldMessages.find(function (message) {
+				return 'error' === message.type || !message.type;
+			}, this);
+		}
 	},
 
 	_onBlur(event) {
-		if ('positive' === this.state.showFeedback) {
+		var {showFeedback} = this.state;
+		if ('positive' === showFeedback) {
 			this.setState({showFeedback: 'all'});
 		}
 		if (this.onBlur) {

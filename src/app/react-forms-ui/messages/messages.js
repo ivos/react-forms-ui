@@ -25,15 +25,6 @@ export default React.createClass({
 
 	isError(message) {
 		return 'error' === message.type || !message.type;
-	},
-
-	hasError() {
-		var {fieldMessages} = this.props;
-		if (fieldMessages) {
-			return fieldMessages.find(function (message) {
-				return this.isError(message);
-			}, this);
-		}
 	}
 
 });

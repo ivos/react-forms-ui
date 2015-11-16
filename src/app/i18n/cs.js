@@ -39,7 +39,10 @@ export default {
 				passwordFree: 'Heslo volné',
 				passwordRequired: 'Heslo povinné',
 				passwordValue: 'Heslo s hodnotou',
-				passwordValueRequired: 'Heslo povinné s hodnotou',
+				passwordValueRequired: {
+					label: 'Heslo povinné s hodnotou',
+					help: 'Heslo povinné s hodnotou.'
+				},
 				passwordReadonly: 'Needitovatelné heslo',
 				passwordReadonlyEmpty: 'Needitovatelné heslo prázdné'
 			},
@@ -60,7 +63,10 @@ export default {
 				dateFree: 'Datum volný',
 				dateRequired: 'Datum povinný',
 				dateValue: 'Datum s hodnotou',
-				dateValueRequired: 'Datum pov s hodnotou',
+				dateValueRequired: {
+					label: 'Datum pov s hodnotou',
+					help: 'Datum povinný s předdefinovanou hodnotou'
+				},
 				dateReadonly: 'Needit datum',
 				dateReadonlyEmpty: 'Needit datum prázdný'
 			}

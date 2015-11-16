@@ -39,7 +39,10 @@ export default {
 				passwordFree: 'Password free',
 				passwordRequired: 'Password required',
 				passwordValue: 'Password w/ value',
-				passwordValueRequired: 'Password req w/ value',
+				passwordValueRequired: {
+					label: 'Password req w/ value',
+					help: 'Password required with value.'
+				},
 				passwordReadonly: 'Password readonly',
 				passwordReadonlyEmpty: 'Password readonly empty'
 			},
@@ -60,7 +63,10 @@ export default {
 				dateFree: 'Date free',
 				dateRequired: 'Date required',
 				dateValue: 'Date w/ value',
-				dateValueRequired: 'Date req w/ value',
+				dateValueRequired: {
+					label: 'Date req w/ value',
+					help: 'Date required with a value predefined.'
+				},
 				dateReadonly: 'Date readonly',
 				dateReadonlyEmpty: 'Date readonly empty'
 			}

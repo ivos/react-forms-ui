@@ -12,13 +12,6 @@ export default {
 		type: ReactHelper.validateUnsupportedProp,
 		name: ReactHelper.validateUnsupportedProp,
 		autoComplete: ReactHelper.validateUnsupportedProp
-	},
-
-	_onBlur(event) {
-		var {onBlur} = this.props;
-		if (onBlur) {
-			onBlur(event);
-		}
 	}
 
 };

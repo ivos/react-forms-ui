@@ -64,8 +64,8 @@ export default {
 	focusError() {
 		Object.keys(this.refs).find(function (field) {
 			var ref = this.refs[field];
-			if (ref.focus && ref.hasError && ref.hasError()) {
-				ref.focus();
+			if (ref.focusError && ref.hasError && ref.hasError()) {
+				ref.focusError();
 				return true;
 			}
 		}, this);

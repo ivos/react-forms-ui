@@ -34,7 +34,9 @@ export default React.createClass({
 					<DateField form={this} ref="dateValue" id="dateValue" label={t('home.date.dateValue')}
 					           classes={fieldClasses}/>
 					<DateField form={this} ref="dateValueRequired" id="dateValueRequired"
-					           label={t('home.date.dateValueRequired')} classes={fieldClasses} required/>
+					           label={t('home.date.dateValueRequired.label')} classes={fieldClasses} required>
+						<span className="help-block">{t('home.date.dateValueRequired.help')}</span>
+					</DateField>
 					<DateField form={this} ref="dateReadonly" id="dateReadonly" label={t('home.date.dateReadonly')}
 					           classes={fieldClasses} readonly/>
 					<DateField form={this} ref="dateReadonlyEmpty" id="dateReadonlyEmpty"

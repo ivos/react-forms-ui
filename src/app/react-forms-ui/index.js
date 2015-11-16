@@ -24,6 +24,17 @@ export var Messages = _Messages;
 import _FormMessages from './messages/form-messages';
 export var FormMessages = _FormMessages;
 
+// controls
+
+import _Text from './controls/text';
+export var Text = _Text;
+
+import _Password from './controls/password';
+export var Password = _Password;
+
+import _Date from './controls/date';
+export var Date = _Date;
+
 // fields
 
 import _FieldMixin from './fields/field-mixin';
