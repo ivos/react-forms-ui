@@ -55,6 +55,7 @@ export default {
 				selectReadonly: 'Select readonly',
 				selectReadonlyEmpty: 'Select readonly empty',
 				selectValPreloaded: 'Select val preloaded',
+				selectROPreloaded: 'Select r/o preld',
 				selectGroup: 'Group',
 				selectProduct: 'Product'
 			},

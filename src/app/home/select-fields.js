@@ -61,6 +61,9 @@ export default React.createClass({
 					<SelectField form={this} ref="selectValPreloaded" id="selectValPreloaded"
 					             label={t('home.select.selectValPreloaded')} classes={fieldClasses}
 					             query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
+					<SelectField form={this} ref="selectROPreloaded" id="selectROPreloaded"
+					             label={t('home.select.selectROPreloaded')} classes={fieldClasses}
+					             query={this.loadCompanies} initSelection={this.initSelectionCompany} readonly/>
 					<SelectField form={this} ref="selectGroup" id="selectGroup" label={t('home.select.selectGroup')}
 					             classes={fieldClasses} query={this.loadGroups} initSelection={this.initSelectionGroup}
 					             required/>
@@ -85,15 +88,17 @@ export default React.createClass({
 
 	componentDidMount() {
 		this._selectPreloaded = {
-			selectValPreloaded: {id: 2, name: 'First sales'}
+			selectValPreloaded: {id: 2, name: 'First sales'},
+			selectROPreloaded: {id: 0, name: 'First business'}
 		};
 		this.setState({
 			values: {
 				selectValue: 1,
 				selectValueRequired: 2,
-				selectReadonly: 0,
+				selectReadonly: 3,
 				selectReadonlyEmpty: null,
 				selectValPreloaded: 2,
+				selectROPreloaded: 0,
 				selectGroup: 0,
 				selectProduct: 0
 			}
@@ -114,11 +119,11 @@ export default React.createClass({
 
 	initSelectionCompany($element, callback) {
 		var preloaded = this._selectPreloaded[$element[0].id];
-		if (preloaded && String(preloaded.id) === $element.val()) {
+		if (preloaded && String(preloaded.id) === String($element.val())) {
 			callback({id: preloaded.id, text: preloaded.name});
 		} else {
 			var value = $element.val();
-			value && getOne('companies', value, {
+			(value || 0 === value) && getOne('companies', value, {
 				success(data) {
 					callback({id: data.id, text: data.name});
 				}
@@ -140,7 +145,7 @@ export default React.createClass({
 
 	initSelectionGroup($element, callback) {
 		var value = $element.val();
-		value && getOne('groups', $element.val(), {
+		(value || 0 === value) && getOne('groups', $element.val(), {
 			success(data) {
 				callback({id: data.id, text: data.name});
 			}
@@ -163,7 +168,7 @@ export default React.createClass({
 
 	initSelectionProduct($element, callback) {
 		var value = $element.val();
-		value && getOne('products', $element.val(), {
+		(value || 0 === value) && getOne('products', $element.val(), {
 			success(data) {
 				callback({id: data.id, text: data.name});
 			}

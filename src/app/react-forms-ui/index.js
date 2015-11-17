@@ -35,6 +35,9 @@ export var Password = _Password;
 import _Date from './controls/date';
 export var Date = _Date;
 
+import _Select from './controls/select';
+export var Select = _Select;
+
 // fields
 
 import _FieldMixin from './fields/field-mixin';
