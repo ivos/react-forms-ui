@@ -55,6 +55,9 @@ export var SelectField = _SelectField;
 import _DateField from './fields/date-field';
 export var DateField = _DateField;
 
+import _DateRangeField from './fields/date-range-field';
+export var DateRangeField = _DateRangeField;
+
 import _PlainField from './fields/plain-field';
 export var PlainField = _PlainField;
 

@@ -70,6 +70,22 @@ export default {
 				},
 				dateReadonly: 'Needit datum',
 				dateReadonlyEmpty: 'Needit datum prázdný'
+			},
+			daterange: {
+				title: 'Interval dat',
+				drFree: 'Int.dat volný',
+				drReq: {
+					label: 'Int.dat pov.',
+					placeholderFrom: 'Interval dat povinný, od',
+					placeholderTo: 'Interval dat povinný, do'
+				},
+				drValue: 'Int.dat s hodnotou',
+				drFromReq: 'Int.dat od pov.',
+				drToReq: 'Int.dat do pov.',
+				drRO: 'Needit. int.dat',
+				drROEmpty: 'Needit. int.dat prázdný',
+				drROFromEmpty: 'Needit. int.dat prázdné od',
+				drROToEmpty: 'Needit. int.dat prázdné do'
 			}
 		}
 	}

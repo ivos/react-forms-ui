@@ -13,14 +13,13 @@ export default React.createClass({
 		var {id, label, classes, required, readonly, form, placeholder,
 			query, initSelection, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
-		var value = this.getValue();
-		var formGroupClassName = 'form-group ' + this.getFieldStatus();
+		var value = this._getValue();
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
-			       showFeedback={showFeedback} fieldStatus={this.getFieldStatus()}
-			       fieldMessages={this.getFieldMessages()}>
+			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
+			       fieldMessages={this._getFieldMessages()}>
 				<Select ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
-				        onChange={this._onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
+				        onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
 				        query={query} initSelection={initSelection} {...otherProps}>
 					{children}
 				</Select>
@@ -32,12 +31,8 @@ export default React.createClass({
 		this.refs.control.focus();
 	},
 
-	focusError() {
-		this.focus();
-	},
-
-	_onChange(value) {
-		this.setChanging();
+	onChange(value) {
+		this._setChanging();
 		var {id, form} = this.props;
 		if (form) {
 			form._onChange(id, value);

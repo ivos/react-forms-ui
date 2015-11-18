@@ -17,11 +17,13 @@ export default {
 		Object.keys(this.refs).forEach(function (field) {
 			var ref = this.refs[field];
 			if (ref.initWidgetValue) {
-				var prevValue = prevState.values && prevState.values[field];
-				var nextValue = values && values[field];
-				if (nextValue !== prevValue) {
-					ref.initWidgetValue(nextValue, prevValue);
-				}
+				ref._getValueKeys().forEach(function (valueKey) {
+					var prevValue = prevState.values && prevState.values[valueKey];
+					var nextValue = values && values[valueKey];
+					if (nextValue !== prevValue) {
+						ref.initWidgetValue(nextValue, prevValue, valueKey);
+					}
+				});
 			}
 		}, this);
 	},
@@ -64,8 +66,8 @@ export default {
 	focusError() {
 		Object.keys(this.refs).find(function (field) {
 			var ref = this.refs[field];
-			if (ref.focusError && ref.hasError && ref.hasError()) {
-				ref.focusError();
+			if (ref._focusError && ref._hasError && ref._hasError()) {
+				ref._focusError();
 				return true;
 			}
 		}, this);
@@ -85,7 +87,9 @@ export default {
 		Object.keys(this.refs).forEach(function (field) {
 			var ref = this.refs[field];
 			if (ref._formField) {
-				values[field] = '';
+				ref._getValueKeys().forEach(function (valueKey) {
+					values[valueKey] = '';
+				});
 			}
 		}, this);
 		values = Object.assign(values, this.state.values);

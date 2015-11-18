@@ -12,44 +12,69 @@ export default {
 		return {showFeedback: 'none'};
 	},
 
-	getValue() {
+	_getValue(suffix) {
 		var {id, form} = this.props;
-		return (form && form.state.values) ? form.state.values[id] : null;
+		var valueKey = id + (suffix || '');
+		return (form && form.state.values) ? form.state.values[valueKey] : null;
 	},
 
-	setChanging() {
+	_getValueKeys() {
+		if (this.getValueKeys) {
+			return this.getValueKeys();
+		}
+		var {id} = this.props;
+		return [id];
+	},
+
+	_focusError() {
+		if (this.focusError) {
+			this.focusError();
+		} else {
+			this.focus();
+		}
+	},
+
+	_setChanging() {
 		this.setState({showFeedback: 'positive'});
 	},
 
-	getFieldMessages() {
+	_getFieldMessages() {
+		if (this.getFieldMessages) {
+			return this.getFieldMessages();
+		}
 		var {id, form: {state: {messages}}} = this.props;
 		return messages[id];
 	},
 
-	getFieldStatusType() {
-		var {showFeedback} = this.state;
-		var fieldMessages = this.getFieldMessages();
-		var type = '';
-		if ('none' !== showFeedback && fieldMessages) {
-			var first = fieldMessages[0];
-			type = first.type ? first.type : 'error';
-			if ('error' === type && 'all' !== showFeedback) {
-				type = '';
-			}
+	_getFieldStatusType() {
+		if (this.getFieldStatusType) {
+			return this.getFieldStatusType();
 		}
-		return type;
+		var fieldMessages = this._getFieldMessages();
+		return this._getMessagesStatusType(fieldMessages);
 	},
 
-	getFieldStatus() {
-		var fieldStatusType = this.getFieldStatusType();
+	_getMessagesStatusType(messages) {
+		var {showFeedback} = this.state;
+		if ('none' !== showFeedback && messages) {
+			if (this._hasError(messages) && 'all' === showFeedback) {
+				return 'error';
+			}
+			return messages[0].type;
+		}
+		return '';
+	},
+
+	_getFieldStatus() {
+		var fieldStatusType = this._getFieldStatusType();
 		if (fieldStatusType) {
 			return 'has-feedback has-' + fieldStatusType;
 		}
 		return '';
 	},
 
-	getFeedbackType() {
-		var fieldStatusType = this.getFieldStatusType();
+	_getFeedbackType() {
+		var fieldStatusType = this._getFieldStatusType();
 		if (fieldStatusType) {
 			switch (fieldStatusType) {
 				case 'error':
@@ -65,30 +90,27 @@ export default {
 		return '';
 	},
 
-	getFeedback() {
-		var feedbackType = this.getFeedbackType();
+	_getFeedback() {
+		var feedbackType = this._getFeedbackType();
 		if (feedbackType) {
 			var className = 'form-control-feedback glyphicon glyphicon-' + feedbackType;
 			return <span className={className}></span>;
 		}
 	},
 
-	hasError() {
-		var fieldMessages = this.getFieldMessages();
-		if (fieldMessages) {
-			return fieldMessages.find(function (message) {
+	_hasError(messages) {
+		messages = messages || this._getFieldMessages();
+		if (messages) {
+			return messages.find(function (message) {
 				return 'error' === message.type || !message.type;
 			}, this);
 		}
 	},
 
-	_onBlur(event) {
+	_onBlur() {
 		var {showFeedback} = this.state;
 		if ('positive' === showFeedback) {
 			this.setState({showFeedback: 'all'});
-		}
-		if (this.onBlur) {
-			this.onBlur(event);
 		}
 	}
 

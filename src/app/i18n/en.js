@@ -70,6 +70,22 @@ export default {
 				},
 				dateReadonly: 'Date readonly',
 				dateReadonlyEmpty: 'Date readonly empty'
+			},
+			daterange: {
+				title: 'Date range fields',
+				drFree: 'Date range free',
+				drReq: {
+					label: 'Date range req',
+					placeholderFrom: 'Date range required from',
+					placeholderTo: 'Date range required to'
+				},
+				drValue: 'Date range value',
+				drFromReq: 'Dt.rg from req',
+				drToReq: 'Dt.rg to req',
+				drRO: 'Dt.rg readonly',
+				drROEmpty: 'Dt.rg readonly empty',
+				drROFromEmpty: 'Dt.rg RO empty from',
+				drROToEmpty: 'Dt.rg RO empty to'
 			}
 		}
 	}

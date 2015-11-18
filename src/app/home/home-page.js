@@ -5,6 +5,7 @@ import TextFields from './text-fields';
 import PasswordFields from './password-fields';
 import SelectFields from './select-fields';
 import DateFields from './date-fields';
+import DateRangeFields from './date-range-fields';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
 
@@ -19,6 +20,7 @@ export default React.createClass({
 				<PasswordFields/>
 				<SelectFields/>
 				<DateFields/>
+				<DateRangeFields/>
 
 			</div>
 		);

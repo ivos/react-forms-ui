@@ -12,14 +12,13 @@ export default React.createClass({
 	render() {
 		var {id, label, classes, required, readonly, form, placeholder, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
-		var value = this.getValue();
-		var formGroupClassName = 'form-group ' + this.getFieldStatus();
+		var value = this._getValue();
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
-			       showFeedback={showFeedback} fieldStatus={this.getFieldStatus()} feedback={this.getFeedback()}
-			       fieldMessages={this.getFieldMessages()}>
+			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
+			       fieldMessages={this._getFieldMessages()}>
 				<Password ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				          readonly={readonly} onChange={this._onChange} onBlur={this._onBlur} {...otherProps}>
+				          readonly={readonly} onChange={this.onChange} onBlur={this._onBlur} {...otherProps}>
 					{children}
 				</Password>
 			</Field>
@@ -30,12 +29,8 @@ export default React.createClass({
 		this.refs.control.focus();
 	},
 
-	focusError() {
-		this.focus();
-	},
-
-	_onChange(value) {
-		this.setChanging();
+	onChange(value) {
+		this._setChanging();
 		var {id, form} = this.props;
 		if (form) {
 			form._onChange(id, value);
