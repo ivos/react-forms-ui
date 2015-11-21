@@ -22,11 +22,11 @@ export default React.createClass({
 	},
 
 	render() {
-		var {id, readonly, placeholder, label, value, className,
+		var {id, readonly, placeholder, label, value, className='', formControl,
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		var localValue = this.state.localValue || this.getLocalValue(value);
 		if (readonly) {
-			return <p className={(className || '') + ' form-control-static'}>{localValue}</p>;
+			return <div className={className+(formControl?' form-control-static':'')}>{localValue}</div>;
 		}
 		return (
 			<span>

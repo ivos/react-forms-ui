@@ -18,7 +18,8 @@ export default React.createClass({
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
 			       fieldMessages={this._getFieldMessages()}>
 				<Date ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
-				      onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit} {...otherProps}>
+				      onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
+				      formControl {...otherProps}>
 					{children}
 				</Date>
 			</Field>

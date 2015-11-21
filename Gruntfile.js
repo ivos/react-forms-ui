@@ -22,8 +22,7 @@ module.exports = function (grunt) {
 			build: {
 				files: {
 					'target/build/global-styles.css': [
-						'src/css/typeahead.css',
-						'src/css/app.css'
+						'src/css/typeahead.css'
 					]
 				}
 			}

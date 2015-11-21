@@ -18,7 +18,7 @@ export default React.createClass({
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()}>
 				<Text ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
-				      onChange={this.onChange} onBlur={this._onBlur} {...otherProps}>
+				      onChange={this.onChange} onBlur={this._onBlur} formControl {...otherProps}>
 					{children}
 				</Text>
 			</Field>

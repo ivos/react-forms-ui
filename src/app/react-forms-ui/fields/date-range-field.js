@@ -21,23 +21,23 @@ export default React.createClass({
 
 				<div className={classes[1]}>
 					{readonly &&
-					<p className="form-control-static">
+					<div className="form-control-static">
 						{Date.prototype.getLocalValue(this._getValue('From'))}
 						{(this._getValue('From') || this._getValue('To')) && ' – '}
 						{Date.prototype.getLocalValue(this._getValue('To'))}
-					</p>
+					</div>
 					}
 					{!readonly &&
 					<div className="row">
 						<div className={'col-xs-6'}>
 							<Date ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
 							      value={this._getValue('From')} readonly={readonly} onChange={this.onChangeFrom}
-							      onBlur={this._onBlur} onSubmit={form._onSubmit} {...otherProps}/>
+							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 						<div className={'col-xs-6'}>
 							<Date ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
 							      value={this._getValue('To')} readonly={readonly} onChange={this.onChangeTo}
-							      onBlur={this._onBlur} onSubmit={form._onSubmit} {...otherProps}/>
+							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 					</div>
 					}

@@ -4,7 +4,7 @@ import ReactHelper from '../support/react-helper';
 export default {
 
 	propTypes: {
-		id: React.PropTypes.string.isRequired,
+		id: React.PropTypes.string,
 		placeholder: React.PropTypes.string,
 		label: React.PropTypes.string,
 		onChange: React.PropTypes.func,

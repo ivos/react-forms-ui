@@ -20,7 +20,7 @@ export default React.createClass({
 			       fieldMessages={this._getFieldMessages()}>
 				<Select ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
 				        onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
-				        query={query} initSelection={initSelection} {...otherProps}>
+				        query={query} initSelection={initSelection} formControl {...otherProps}>
 					{children}
 				</Select>
 			</Field>

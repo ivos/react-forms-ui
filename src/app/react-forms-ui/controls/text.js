@@ -7,10 +7,10 @@ export default React.createClass({
 	mixins: [ControlMixin],
 
 	render() {
-		var {id, readonly, placeholder, label, value, className,
+		var {id, readonly, placeholder, label, value, className='', formControl,
 			onChange, onBlur, children, ...otherProps} = this.props;
 		if (readonly) {
-			return <p className={(className || '') + ' form-control-static'}>{value}</p>;
+			return <div className={className+(formControl?' form-control-static':'')}>{value}</div>;
 		}
 		return (
 			<span>

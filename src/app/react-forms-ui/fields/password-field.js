@@ -18,7 +18,8 @@ export default React.createClass({
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()}>
 				<Password ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				          readonly={readonly} onChange={this.onChange} onBlur={this._onBlur} {...otherProps}>
+				          readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				          formControl {...otherProps}>
 					{children}
 				</Password>
 			</Field>
