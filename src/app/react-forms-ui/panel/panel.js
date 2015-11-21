@@ -3,7 +3,7 @@ import React from 'react';
 export default React.createClass({
 
 	render() {
-		var {className, header, title, footer, type='default', content, ...otherProps} = this.props;
+		var {className='', header, title, footer, type='default', content, ...otherProps} = this.props;
 		className = className + ' panel panel-' + type;
 		return (
 			<div className={className} {...otherProps}>

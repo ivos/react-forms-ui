@@ -4,14 +4,14 @@ import Message from './message';
 export default React.createClass({
 
 	render() {
-		var {id, fieldMessages, className, showFeedback} = this.props;
+		var {id, fieldMessages, className, showFeedback, ...otherProps} = this.props;
 		if (!fieldMessages || 'none' === showFeedback) {
 			return (
-				<div className={className}/>
+				<div className={className} {...otherProps}/>
 			);
 		}
 		return (
-			<div className={className}>
+			<div className={className} {...otherProps}>
 				{
 					fieldMessages.map(function (message) {
 						if ('all' === showFeedback || !this.isError(message)) {

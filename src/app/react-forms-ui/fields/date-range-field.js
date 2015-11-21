@@ -16,9 +16,9 @@ export default React.createClass({
 		classes = classes ? classes.split(',') : [];
 		return (
 			<div className={'form-group '+this._getFieldStatus()}>
-				<div className={classes[0]}>
-					<Label htmlFor={id+'From'} required={required ? 'required' : false}>{label}</Label>
-				</div>
+				<Label htmlFor={id+'From'} className={classes[0]}
+				       required={required ? 'required' : false}>{label}</Label>
+
 				<div className={classes[1]}>
 					{readonly &&
 					<p className="form-control-static">
@@ -30,12 +30,12 @@ export default React.createClass({
 					{!readonly &&
 					<div className="row">
 						<div className={'col-xs-6'}>
-							<Date ref="controlFrom" id={id} placeholder={placeholderFrom} label={label}
+							<Date ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
 							      value={this._getValue('From')} readonly={readonly} onChange={this.onChangeFrom}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} {...otherProps}/>
 						</div>
 						<div className={'col-xs-6'}>
-							<Date ref="controlTo" id={id} placeholder={placeholderTo} label={label}
+							<Date ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
 							      value={this._getValue('To')} readonly={readonly} onChange={this.onChangeTo}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} {...otherProps}/>
 						</div>
@@ -44,10 +44,10 @@ export default React.createClass({
 				</div>
 				{!readonly &&
 				<div className={classes[2]}>
-					<Messages ref="messages" id={id} fieldMessages={this.getFromMessages()} showFeedback={showFeedback}
-					          className="display-inline"/>
-					<Messages ref="messages" id={id} fieldMessages={this.getToMessages()} showFeedback={showFeedback}
-					          className="display-inline"/>
+					<Messages ref="messages" id={id+'From'} fieldMessages={this.getFromMessages()}
+					          showFeedback={showFeedback} style={{display: 'inline'}}/>
+					<Messages ref="messages" id={id+'To'} fieldMessages={this.getToMessages()}
+					          showFeedback={showFeedback} style={{display: 'inline'}}/>
 				</div>}
 			</div>
 		);
