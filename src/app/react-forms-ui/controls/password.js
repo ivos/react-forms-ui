@@ -10,7 +10,9 @@ export default React.createClass({
 		var {id, readonly, placeholder, label, value, className='', formControl,
 			onChange, onBlur, children, ...otherProps} = this.props;
 		if (readonly) {
-			return <div className={className+(formControl?' form-control-static':'')}>{value ? '********' : ''}</div>;
+			return <div className={className+(formControl?' form-control-static':'')} {...otherProps}>
+				{value ? '********' : ''}
+			</div>;
 		}
 		return (
 			<span>

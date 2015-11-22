@@ -26,7 +26,9 @@ export default React.createClass({
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		var localValue = this.state.localValue || this.getLocalValue(value);
 		if (readonly) {
-			return <div className={className+(formControl?' form-control-static':'')}>{localValue}</div>;
+			return <div className={className+(formControl?' form-control-static':'')} {...otherProps}>
+				{localValue}
+			</div>;
 		}
 		return (
 			<span>
