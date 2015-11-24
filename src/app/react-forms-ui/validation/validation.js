@@ -1,33 +1,49 @@
 import Options from '../options/options';
 
-var Validation = function (values) {
-	this.messages = {};
+var Validation = function (values, tableForm) {
 	this.values = values;
+	this.tableForm = tableForm;
+	this.messages = this.tableForm ? [] : {};
 };
 
 Object.assign(Validation.prototype, {
 
 	hasError() {
-		return !!Object.keys(this.messages).find(function (field) {
-			return this.hasFieldError(field);
+		if (this.tableForm) {
+			return this.messages.find(function (messagesRow, row) {
+				return this.hasRowError(messagesRow, row);
+			}, this);
+		} else {
+			return this.hasRowError(this.messages);
+		}
+	},
+
+	hasRowError(messagesRow, row) {
+		return !!Object.keys(messagesRow).find(function (field) {
+			return this.hasFieldError(field, row);
 		}, this);
 	},
 
-	hasFieldError(field) {
-		var fieldMessages = this.messages[field];
+	hasFieldError(field, row) {
+		var messages = this.tableForm ? (this.messages[row] || {}) : this.messages;
+		var fieldMessages = messages[field];
 		return fieldMessages && fieldMessages.find(function (message) {
 				return 'error' === message.type || !message.type;
 			});
 	},
 
-	add(field, text, type) {
-		if (!this.messages[field]) {
-			this.messages[field] = [];
+	add(field, text, type, row) {
+		var messages = this.tableForm ? this.messages[row] : this.messages;
+		if (this.tableForm && !messages) {
+			messages = this.messages[row] = {};
+		}
+		if (!messages[field]) {
+			messages[field] = [];
 		}
 		if (!type) {
-			this.messages[field].push(text);
+			messages[field].push(text);
 		} else {
-			this.messages[field].push({
+			messages[field].push({
 				text: text,
 				type: type
 			});
@@ -59,45 +75,90 @@ Object.assign(Validation.prototype, {
 	},
 
 	required(field) {
-		var value = this.values[field];
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._requiredRow(field, valuesRow[field], row);
+			}, this);
+		} else {
+			this._requiredRow(field, this.values[field]);
+		}
+	},
+
+	_requiredRow(field, value, row) {
 		if (typeof value !== 'undefined' && null === value || '' === value) {
 			var label = Options.translate ? Options.translate('validation:required') : 'Required.';
-			this.add(field, label);
+			this.add(field, label, undefined, row);
 		}
 	},
 
 	minLength(field, minLength) {
-		var value = this.values[field];
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._minLengthRow(field, minLength, valuesRow[field], row);
+			}, this);
+		} else {
+			this._minLengthRow(field, minLength, this.values[field]);
+		}
+	},
+
+	_minLengthRow(field, minLength, value, row) {
 		if (value && minLength && value.length < minLength) {
 			var label = Options.translate ?
 				Options.translate('validation:minLength', {count: minLength})
 				: 'Must have at least ' + minLength + ' characters.';
-			this.add(field, label);
+			this.add(field, label, undefined, row);
 		}
 	},
 
-	maxLength(field, maxLength) {
-		var value = this.values[field];
+	maxLength(field, minLength) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._maxLengthRow(field, minLength, valuesRow[field], row);
+			}, this);
+		} else {
+			this._maxLengthRow(field, minLength, this.values[field]);
+		}
+	},
+
+	_maxLengthRow(field, maxLength, value, row) {
 		if (value && maxLength && value.length > maxLength) {
 			var label = Options.translate ?
 				Options.translate('validation:maxLength', {count: maxLength})
 				: 'Must have at most ' + maxLength + ' characters.';
-			this.add(field, label);
+			this.add(field, label, undefined, row);
 		}
 	},
 
-	pattern(field, pattern) {
-		var value = this.values[field];
+	pattern(field, minLength) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._patternRow(field, minLength, valuesRow[field], row);
+			}, this);
+		} else {
+			this._patternRow(field, minLength, this.values[field]);
+		}
+	},
+
+	_patternRow(field, pattern, value, row) {
 		if (value && pattern && !pattern.test(value)) {
 			var label = Options.translate ? Options.translate('validation:invalidFormat') : 'Invalid format.';
-			this.add(field, label);
+			this.add(field, label, undefined, row);
 		}
 	},
 
-	autoSuccess(field){
-		var value = this.values[field];
-		if (!this.hasFieldError(field) && (typeof value !== 'undefined')) {
-			this.add(field, null, 'success');
+	autoSuccess(field) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._autoSuccessRow(field, valuesRow[field], row);
+			}, this);
+		} else {
+			this._autoSuccessRow(field, this.values[field]);
+		}
+	},
+
+	_autoSuccessRow(field, value, row) {
+		if (!this.hasFieldError(field, row) && (typeof value !== 'undefined')) {
+			this.add(field, null, 'success', row);
 		}
 	},
 

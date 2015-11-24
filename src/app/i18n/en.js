@@ -86,6 +86,12 @@ export default {
 				drROEmpty: 'Dt.rg readonly empty',
 				drROFromEmpty: 'Dt.rg RO empty from',
 				drROToEmpty: 'Dt.rg RO empty to'
+			},
+			table: {
+				text: 'Text (uppercase)',
+				password: 'Password',
+				date: 'Date',
+				dr: 'Date range'
 			}
 		}
 	}

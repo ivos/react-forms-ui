@@ -4,24 +4,32 @@ import Date from '../controls/date';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
+require('./date-range-field.css');
 
 export default React.createClass({
 
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form,
-			placeholderFrom, placeholderTo, children, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholderFrom, placeholderTo,
+			row, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
 		classes = classes ? classes.split(',') : [];
+		var formGroupClassName = 'form-group ' + this._getFieldStatus();
 		var valueFrom = this._getValue('From');
 		var valueTo = this._getValue('To');
+		if (tableForm) {
+			id = id + '-' + row;
+			formGroupClassName += ' table-form-group';
+		}
 		return (
-			<div className={'form-group '+this._getFieldStatus()}>
+			<div className={formGroupClassName}>
+				{!tableForm &&
 				<Label htmlFor={id+'From'} className={classes[0]}
 				       required={required ? 'required' : false}>{label}</Label>
+				}
 
-				<div className={classes[1]}>
+				<div className={tableForm ? 'col-xs-12' : classes[1]}>
 					{readonly &&
 					<div className="form-control-static">
 						{Date.prototype.getLocalValue(valueFrom)}
@@ -31,12 +39,12 @@ export default React.createClass({
 					}
 					{!readonly &&
 					<div className="row">
-						<div className={'col-xs-6'}>
+						<div className="col-xs-6 date-range-date-wrapper">
 							<Date ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
 							      value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
-						<div className={'col-xs-6'}>
+						<div className="col-xs-6 date-range-date-wrapper">
 							<Date ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
 							      value={valueTo} readonly={readonly} onChange={this.onChangeTo}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
@@ -45,7 +53,7 @@ export default React.createClass({
 					}
 				</div>
 				{!readonly &&
-				<div className={classes[2]}>
+				<div className={tableForm ? 'col-xs-12' : classes[2]}>
 					<Messages ref="messages" id={id+'From'} fieldMessages={this.getFromMessages()}
 					          showFeedback={showFeedback} style={{display: 'inline'}}/>
 					<Messages ref="messages" id={id+'To'} fieldMessages={this.getToMessages()}
@@ -75,12 +83,18 @@ export default React.createClass({
 	},
 
 	getFromMessages() {
-		var {id, form: {state: {messages}}} = this.props;
+		var {id, form: {tableForm, state: {messages}}, row} = this.props;
+		if (tableForm) {
+			return messages[row] ? messages[row][id + 'From'] : null;
+		}
 		return messages[id + 'From'];
 	},
 
 	getToMessages() {
-		var {id, form: {state: {messages}}} = this.props;
+		var {id, form: {tableForm, state: {messages}}, row} = this.props;
+		if (tableForm) {
+			return messages[row] ? messages[row][id + 'To'] : null;
+		}
 		return messages[id + 'To'];
 	},
 
@@ -112,17 +126,17 @@ export default React.createClass({
 
 	onChangeFrom(value) {
 		this._setChanging();
-		var {id, form} = this.props;
+		var {id, form, row} = this.props;
 		if (form) {
-			form._onChange(id + 'From', value);
+			form._onChange(id + 'From', value, row);
 		}
 	},
 
 	onChangeTo(value) {
 		this._setChanging();
-		var {id, form} = this.props;
+		var {id, form, row} = this.props;
 		if (form) {
-			form._onChange(id + 'To', value);
+			form._onChange(id + 'To', value, row);
 		}
 	},
 

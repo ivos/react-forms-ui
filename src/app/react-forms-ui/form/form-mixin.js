@@ -4,7 +4,7 @@ export default {
 
 	getInitialState: function () {
 		return {
-			messages: {}
+			messages: this.tableForm ? [] : {}
 		};
 	},
 
@@ -28,10 +28,15 @@ export default {
 		}, this);
 	},
 
-	_onChange(id, value) {
+	_onChange(id, value, row) {
 		var {values} = this.state;
-		values = Object.assign({}, values);
-		values[id] = value;
+		if (this.tableForm) {
+			values[row] = Object.assign({}, values[row]);
+			values[row][id] = value;
+		} else {
+			values = Object.assign({}, values);
+			values[id] = value;
+		}
 		this.setState({values}, this.changed);
 	},
 
@@ -44,7 +49,7 @@ export default {
 
 	validate(values, afterMessagesSet) {
 		values = values || this.state.values;
-		var validation = new Validation(values);
+		var validation = new Validation(values, this.tableForm);
 		validation.autoValidate(this.validations);
 		this.setState({
 			messages: validation.messages
@@ -84,15 +89,35 @@ export default {
 
 	setAllFieldValues() {
 		var values = {};
+		if (this.tableForm) {
+			values = [];
+			if (this.state.values) {
+				this.state.values.forEach(function () {
+					values.push({});
+				});
+			}
+		}
 		Object.keys(this.refs).forEach(function (field) {
 			var ref = this.refs[field];
 			if (ref._formField) {
 				ref._getValueKeys().forEach(function (valueKey) {
-					values[valueKey] = '';
-				});
+					if (this.tableForm) {
+						values[ref.props.row][valueKey] = '';
+					} else {
+						values[valueKey] = '';
+					}
+				}.bind(this));
 			}
 		}, this);
-		values = Object.assign(values, this.state.values);
+		if (this.tableForm) {
+			if (this.state.values) {
+				this.state.values.forEach(function (valuesRow, row) {
+					values[row] = Object.assign(values[row], this.state.values[row]);
+				}.bind(this));
+			}
+		} else {
+			values = Object.assign(values, this.state.values);
+		}
 		this.setState({values});
 		return values;
 	},

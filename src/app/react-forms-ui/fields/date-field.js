@@ -4,19 +4,24 @@ import Date from '../controls/date';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
+require('./date-field.css');
 
 export default React.createClass({
 
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, placeholder, children, ...otherProps} = this.props;
+		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholder,
+			row, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
 		var value = this._getValue();
+		if (tableForm) {
+			id = id + '-' + row;
+		}
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
-			       fieldMessages={this._getFieldMessages()}>
+			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
 				<Date ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
 				      onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
 				      formControl {...otherProps}>
@@ -32,9 +37,9 @@ export default React.createClass({
 
 	onChange(value) {
 		this._setChanging();
-		var {id, form} = this.props;
+		var {id, form, row} = this.props;
 		if (form) {
-			form._onChange(id, value);
+			form._onChange(id, value, row);
 		}
 	},
 

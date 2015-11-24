@@ -7,7 +7,7 @@ export default React.createClass({
 		var {id, fieldMessages, className, showFeedback, ...otherProps} = this.props;
 		if (!fieldMessages || 'none' === showFeedback) {
 			return (
-				<div className={className} {...otherProps}/>
+				<div className={className} {...otherProps}></div>
 			);
 		}
 		return (

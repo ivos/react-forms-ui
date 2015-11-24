@@ -13,9 +13,12 @@ export default {
 	},
 
 	_getValue(suffix) {
-		var {id, form} = this.props;
+		var {id, form, form: {tableForm}, row} = this.props;
 		var valueKey = id + (suffix || '');
-		return (form && form.state.values) ? form.state.values[valueKey] : null;
+		if (!form || !form.state.values) {
+			return null;
+		}
+		return (tableForm) ? form.state.values[row][valueKey] : form.state.values[valueKey];
 	},
 
 	_getValueKeys() {
@@ -42,8 +45,11 @@ export default {
 		if (this.getFieldMessages) {
 			return this.getFieldMessages();
 		}
-		var {id, form: {state: {messages}}} = this.props;
-		return messages[id];
+		var {id, form, form: {tableForm, state: {messages}}, row} = this.props;
+		if (tableForm) {
+			return messages[row] ? messages[row][id] : null;
+		}
+		return (tableForm) ? messages[row][id] : messages[id];
 	},
 
 	_getFieldStatusType() {
@@ -94,7 +100,7 @@ export default {
 		var feedbackType = this._getFeedbackType();
 		if (feedbackType) {
 			var className = 'form-control-feedback glyphicon glyphicon-' + feedbackType;
-			return <span className={className}></span>;
+			return <span className={className}> </span>;
 		}
 	},
 

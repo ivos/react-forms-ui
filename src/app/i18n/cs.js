@@ -86,6 +86,12 @@ export default {
 				drROEmpty: 'Needit. int.dat prázdný',
 				drROFromEmpty: 'Needit. int.dat prázdné od',
 				drROToEmpty: 'Needit. int.dat prázdné do'
+			},
+			table: {
+				text: 'Text (velká písmena)',
+				password: 'Heslo',
+				date: 'Datum',
+				dr: 'Interval dat'
 			}
 		}
 	}

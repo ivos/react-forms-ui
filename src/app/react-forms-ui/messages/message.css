@@ -10,6 +10,10 @@
 	}
 }
 
+.table-form-group .inline-message {
+	margin-top: 2px;
+}
+
 .inline-message-icon {
 	font-size: 115%;
 }
