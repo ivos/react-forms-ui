@@ -1,0 +1,42 @@
+.well-white {
+	background-color: white;
+}
+
+/* Action buttons */
+.action-buttons-group {
+	margin-bottom: 5px;
+}
+
+.action-buttons-group button, .action-buttons-group a.btn {
+	margin-bottom: 5px;
+}
+
+.action-buttons-group a:not(.btn) {
+	margin: 5px;
+}
+
+/* Fixed navbar */
+body {
+	padding-top: 70px;
+}
+
+/* Help */
+.help-block {
+	margin-bottom: 0;
+}
+
+.help-icon {
+	font-size: 130%;
+	padding: 6px 0px;
+	height: 32px;
+}
+
+a.help-link {
+	margin-right: 3px;
+	height: 32px;
+}
+
+/* Focused record in table grayed as on hover */
+.table-hover>tbody>tr:focus {
+	background-color: #f5f5f5;
+}
