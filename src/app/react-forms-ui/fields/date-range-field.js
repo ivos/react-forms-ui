@@ -14,6 +14,8 @@ export default React.createClass({
 			placeholderFrom, placeholderTo, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
 		classes = classes ? classes.split(',') : [];
+		var valueFrom = this._getValue('From');
+		var valueTo = this._getValue('To');
 		return (
 			<div className={'form-group '+this._getFieldStatus()}>
 				<Label htmlFor={id+'From'} className={classes[0]}
@@ -22,21 +24,21 @@ export default React.createClass({
 				<div className={classes[1]}>
 					{readonly &&
 					<div className="form-control-static">
-						{Date.prototype.getLocalValue(this._getValue('From'))}
-						{(this._getValue('From') || this._getValue('To')) && ' – '}
-						{Date.prototype.getLocalValue(this._getValue('To'))}
+						{Date.prototype.getLocalValue(valueFrom)}
+						{(valueFrom || valueTo) && ' – '}
+						{Date.prototype.getLocalValue(valueTo)}
 					</div>
 					}
 					{!readonly &&
 					<div className="row">
 						<div className={'col-xs-6'}>
 							<Date ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
-							      value={this._getValue('From')} readonly={readonly} onChange={this.onChangeFrom}
+							      value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 						<div className={'col-xs-6'}>
 							<Date ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
-							      value={this._getValue('To')} readonly={readonly} onChange={this.onChangeTo}
+							      value={valueTo} readonly={readonly} onChange={this.onChangeTo}
 							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 					</div>
