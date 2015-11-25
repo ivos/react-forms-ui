@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, Label, TextField, PasswordField,
-	DateField, DateRangeField, FormMessages} from '../react-forms-ui/index';
+	DateField, DateRangeField, BooleanField, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
@@ -39,7 +39,7 @@ export default React.createClass({
 		var buttonsClass = 'col-sm-offset-2 col-sm-10';
 		return (
 			<Form onSubmit={this._onSubmit}>
-				<Panel content="panel-body" title={t('home.text.title')}>
+				<Panel content="panel-body" title={t('home.table.title')}>
 
 					<Panel title={t('activityItems.title')}>
 						<table className="table table-bordered table-condensed">
@@ -49,6 +49,7 @@ export default React.createClass({
 								<th><Label required>{t('home.table.password')}</Label></th>
 								<th><Label required>{t('home.table.date')}</Label></th>
 								<th><Label required>{t('home.table.dr')}</Label></th>
+								<th>{t('home.table.boolean')}</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -72,6 +73,10 @@ export default React.createClass({
 											<DateRangeField form={this} ref={'dr-'+index} id="dr" row={index}
 											                label={t('home.table.dr')} classes={fieldClasses}
 											                required/>
+										</td>
+										<td>
+											<BooleanField form={this} ref={'boolean-'+index} id="boolean" row={index}
+											              label={t('home.table.boolean')} classes={fieldClasses}/>
 										</td>
 									</tr>
 								);
@@ -104,7 +109,8 @@ export default React.createClass({
 					password: 'Password A',
 					date: '2015-05-10',
 					drFrom: '2015-06-20',
-					drTo: '2015-06-21'
+					drTo: '2015-06-21',
+					boolean: true
 				},
 				{
 					id: 1,
@@ -112,7 +118,8 @@ export default React.createClass({
 					password: 'Password B',
 					date: '2015-05-11',
 					drFrom: '2015-06-22',
-					drTo: '2015-06-23'
+					drTo: '2015-06-23',
+					boolean: false
 				},
 				{
 					id: 2,
@@ -120,7 +127,8 @@ export default React.createClass({
 					password: 'Password C',
 					date: '2015-05-12',
 					drFrom: '2015-06-24',
-					drTo: '2015-06-25'
+					drTo: '2015-06-25',
+					boolean: true
 				},
 				{
 					id: 3

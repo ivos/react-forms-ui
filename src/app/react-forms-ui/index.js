@@ -38,6 +38,9 @@ export var Date = _Date;
 import _Select from './controls/select';
 export var Select = _Select;
 
+import _Boolean from './controls/boolean';
+export var Boolean = _Boolean;
+
 // fields
 
 import _FieldMixin from './fields/field-mixin';
@@ -57,6 +60,9 @@ export var DateField = _DateField;
 
 import _DateRangeField from './fields/date-range-field';
 export var DateRangeField = _DateRangeField;
+
+import _BooleanField from './fields/boolean-field';
+export var BooleanField = _BooleanField;
 
 import _PlainField from './fields/plain-field';
 export var PlainField = _PlainField;

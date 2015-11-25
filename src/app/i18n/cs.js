@@ -88,10 +88,18 @@ export default {
 				drROToEmpty: 'Needit. int.dat prázdné do'
 			},
 			table: {
+				title: 'Formulář v tabulce',
 				text: 'Text (velká písmena)',
 				password: 'Heslo',
 				date: 'Datum',
-				dr: 'Interval dat'
+				dr: 'Interval dat',
+				boolean: 'Boolean'
+			},
+			boolean: {
+				title: 'Boolean',
+				bool: 'Checkbox',
+				boolChecked: 'Checkbox zaškrtnutý',
+				boolRO: 'Checkbox needitovatelný'
 			}
 		}
 	}

@@ -72,7 +72,7 @@ export default {
 				dateReadonlyEmpty: 'Date readonly empty'
 			},
 			daterange: {
-				title: 'Date range fields',
+				title: 'Date range field',
 				drFree: 'Date range free',
 				drReq: {
 					label: 'Date range req',
@@ -88,10 +88,18 @@ export default {
 				drROToEmpty: 'Dt.rg RO empty to'
 			},
 			table: {
+				title: 'Table form',
 				text: 'Text (uppercase)',
 				password: 'Password',
 				date: 'Date',
-				dr: 'Date range'
+				dr: 'Date range',
+				boolean: 'Boolean'
+			},
+			boolean: {
+				title: 'Boolean field',
+				bool: 'Checkbox',
+				boolChecked: 'Checkbox checked',
+				boolRO: 'Checkbox read-only'
 			}
 		}
 	}
