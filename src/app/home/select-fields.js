@@ -20,7 +20,6 @@ export default React.createClass({
 		selectValueRequired: {
 			required: true
 		},
-		selectValPreloaded: {},
 		selectGroup: {
 			required: true
 		},
@@ -42,34 +41,31 @@ export default React.createClass({
 			<Form onSubmit={this._onSubmit}>
 				<Panel content="panel-body" title={t('home.select.title')}>
 					<SelectField form={this} ref="selectFree" id="selectFree" label={t('home.select.selectFree')}
-					             classes={fieldClasses} query={this.loadCompanies}/>
+					             classes={fieldClasses} getList={this.getListCompanies}
+					             formatItem={this.formatItemCompany}/>
 					<SelectField form={this} ref="selectRequired" id="selectRequired"
 					             label={t('home.select.selectRequired')} classes={fieldClasses}
-					             query={this.loadCompanies} required/>
+					             getList={this.getListCompanies}
+					             formatItem={this.formatItemCompany} required/>
 					<SelectField form={this} ref="selectValue" id="selectValue" label={t('home.select.selectValue')}
-					             classes={fieldClasses} query={this.loadCompanies}
-					             initSelection={this.initSelectionCompany}/>
+					             classes={fieldClasses} getList={this.getListCompanies}
+					             formatItem={this.formatItemCompany}/>
 					<SelectField form={this} ref="selectValueRequired" id="selectValueRequired"
 					             label={t('home.select.selectValueRequired')} classes={fieldClasses}
-					             query={this.loadCompanies} initSelection={this.initSelectionCompany} required/>
+					             getList={this.getListCompanies} formatItem={this.formatItemCompany} required/>
 					<SelectField form={this} ref="selectReadonly" id="selectReadonly"
 					             label={t('home.select.selectReadonly')} classes={fieldClasses}
-					             query={this.loadCompanies} initSelection={this.initSelectionCompany} readonly/>
+					             formatItem={this.formatItemCompany} readonly/>
 					<SelectField form={this} ref="selectReadonlyEmpty" id="selectReadonlyEmpty"
 					             label={t('home.select.selectReadonlyEmpty')} classes={fieldClasses}
-					             query={this.loadCompanies} readonly/>
-					<SelectField form={this} ref="selectValPreloaded" id="selectValPreloaded"
-					             label={t('home.select.selectValPreloaded')} classes={fieldClasses}
-					             query={this.loadCompanies} initSelection={this.initSelectionCompany}/>
-					<SelectField form={this} ref="selectROPreloaded" id="selectROPreloaded"
-					             label={t('home.select.selectROPreloaded')} classes={fieldClasses}
-					             query={this.loadCompanies} initSelection={this.initSelectionCompany} readonly/>
+					             formatItem={this.formatItemCompany} readonly/>
 					<SelectField form={this} ref="selectGroup" id="selectGroup" label={t('home.select.selectGroup')}
-					             classes={fieldClasses} query={this.loadGroups} initSelection={this.initSelectionGroup}
-					             required/>
+					             classes={fieldClasses} getList={this.getListGroups}
+					             formatItem={this.formatItemGroup} required/>
 					<SelectField form={this} ref="selectProduct" id="selectProduct"
-					             label={t('home.select.selectProduct')} classes={fieldClasses} query={this.loadProducts}
-					             initSelection={this.initSelectionProduct} disabled={groupEmpty}/>
+					             label={t('home.select.selectProduct')} classes={fieldClasses}
+					             getList={this.getListProducts} formatItem={this.formatItemProduct}
+					             disabled={groupEmpty}/>
 
 					<div className="form-group">
 						<div className={buttonsClass}>
@@ -87,92 +83,52 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		this._selectPreloaded = {
-			selectValPreloaded: {id: 2, name: 'First sales'},
-			selectROPreloaded: {id: 0, name: 'First business'}
-		};
-		this.setState({
-			values: {
-				selectValue: 1,
-				selectValueRequired: 2,
-				selectReadonly: 3,
-				selectReadonlyEmpty: null,
-				selectValPreloaded: 2,
-				selectROPreloaded: 0,
-				selectGroup: 0,
-				selectProduct: 0
-			}
-		});
-	},
-
-	loadCompanies(query) {
-		getList('companies', {
-			data: {name: query.term},
-			success: function (data) {
-				var formatted = data.map(function (item) {
-					return {id: item.id, text: item.name};
-				});
-				query.callback({results: formatted});
-			}
-		});
-	},
-
-	initSelectionCompany($element, callback) {
-		var preloaded = this._selectPreloaded[$element[0].id];
-		if (preloaded && String(preloaded.id) === String($element.val())) {
-			callback({id: preloaded.id, text: preloaded.name});
-		} else {
-			var value = $element.val();
-			(value || 0 === value) && getOne('companies', value, {
-				success(data) {
-					callback({id: data.id, text: data.name});
+		window.setTimeout(function () {
+			this.setState({
+				values: {
+					selectValue: {id: 1, name: 'Acme'},
+					selectValueRequired: {id: 2, name: 'First sales'},
+					selectReadonly: {id: 3, name: 'Big wig'},
+					selectReadonlyEmpty: null,
+					selectGroup: {id: 0, name: 'Tea'},
+					selectProduct: {id: 0, name: 'Earl grey tea'}
 				}
 			});
-		}
+		}.bind(this), 100);
 	},
 
-	loadGroups(query) {
+	getListCompanies(query, callback) {
+		getList('companies', {
+			data: {name: query},
+			success: callback
+		});
+	},
+
+	formatItemCompany(item) {
+		return item.name;
+	},
+
+	getListGroups(query, callback) {
 		getList('groups', {
-			data: {name: query.term},
-			success: function (data) {
-				var formatted = data.map(function (item) {
-					return {id: item.id, text: item.name};
-				});
-				query.callback({results: formatted});
-			}
+			data: {name: query},
+			success: callback
 		});
 	},
 
-	initSelectionGroup($element, callback) {
-		var value = $element.val();
-		(value || 0 === value) && getOne('groups', $element.val(), {
-			success(data) {
-				callback({id: data.id, text: data.name});
-			}
-		});
+	formatItemGroup(item) {
+		return item.name;
 	},
 
-	loadProducts(query) {
-		var {values} = this.state;
-		var group = values.selectGroup;
+	getListProducts(query, callback) {
+		var group = this.state.values.selectGroup.id;
 		getList('products', {
-			data: {group, name: query.term},
-			success: function (data) {
-				var formatted = data.map(function (item) {
-					return {id: item.id, text: item.name};
-				});
-				query.callback({results: formatted});
-			}
+			data: {group, name: query},
+			success: callback
 		});
 	},
 
-	initSelectionProduct($element, callback) {
-		var value = $element.val();
-		(value || 0 === value) && getOne('products', $element.val(), {
-			success(data) {
-				callback({id: data.id, text: data.name});
-			}
-		});
+	formatItemProduct(item) {
+		return item.name;
 	},
 
 	componentDidUpdate(prevProps, prevState) {
@@ -182,7 +138,7 @@ export default React.createClass({
 		if (prevGroup !== undefined && group !== prevGroup) {
 			//TODO
 			this.refs.selectProduct.initWidgetValue(null);
-			values = Object.assign(values, {
+			values = Object.assign({}, values, {
 				selectProduct: null
 			});
 			this.setState({values});

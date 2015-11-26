@@ -9,30 +9,30 @@ export default React.createClass({
 
 	render() {
 		var {id, readonly, placeholder, label, value, className='', formControl,
-			query, initSelection, onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
+			getList, formatItem, onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		if (readonly) {
 			return <div ref="readonly" className={className+(formControl?' form-control-static':'')} {...otherProps}>
-				{value}
+				{(value && formatItem) ? formatItem(value) : ''}
 			</div>;
 		}
 		return (
 			<span>
 				<input ref="input" id={id} name={id} type="hidden" className={className+' form-control'}
-				       autoComplete="off" placeholder={placeholder || label} value={value} {...otherProps}
-				       onChange={this._onChange} onBlur={this._onBlur}/>
+				       autoComplete="off" placeholder={placeholder || label} value={value ? value.id : null}
+				       onChange={this._onChange} onBlur={this._onBlur} {...otherProps}/>
 				{children}
 			</span>
 		);
 	},
 
 	componentDidMount() {
-		var {query, initSelection, onSubmit} = this.props;
+		var {onSubmit} = this.props;
 		var $element = $(ReactDOM.findDOMNode(this.refs.input));
 		$element.select2({
 			allowClear: true,
 			minimumInputLength: 0,
-			query,
-			initSelection,
+			query: this.query,
+			initSelection: this.initSelection,
 			formatSearching: function () {
 				return Options.translate ? Options.translate('select2:searching') : 'Searching...';
 			},
@@ -52,25 +52,32 @@ export default React.createClass({
 		//}
 	},
 
-	initWidgetValue(value, prevValue) {
-		var {id, initSelection, readonly} = this.props;
-		if (initSelection) {
-			if (readonly) {
-				var mock$Element = [{id}];
-				mock$Element.val = function () {
-					return value;
-				};
-				initSelection(mock$Element, function (data) {
-					$(ReactDOM.findDOMNode(this.refs.readonly)).html(data.text);
-				}.bind(this));
-			} else {
-				var $element = $(ReactDOM.findDOMNode(this.refs.input));
-				if (value && typeof value === 'object') {
-					value = value.id;
-				}
-				$element.select2('val', value);
-			}
+	query(query) {
+		var {getList, formatItem} = this.props;
+		if (getList && formatItem) {
+			getList(query.term, function (list) {
+				this._list = list;
+				var results = list.map(function (item) {
+					return {id: item.id, text: formatItem(item)};
+				});
+				query.callback({results});
+			}.bind(this));
 		}
+	},
+
+	initSelection($element, callback) {
+		var {value, formatItem} = this.props;
+		callback({id: value.id, text: formatItem(value)});
+	},
+
+	initWidgetValue(value, prevValue) {
+		//if (undefined === prevValue && value) { // only initially
+		var {readonly} = this.props;
+		if (!readonly) {
+			var $element = $(ReactDOM.findDOMNode(this.refs.input));
+			$element.select2('val', value ? value.id : null);
+		}
+		//}
 	},
 
 	focus() {
@@ -81,14 +88,13 @@ export default React.createClass({
 	_onChange(event) {
 		var {onChange} = this.props;
 		if (onChange) {
-			var value = event.val;
-			var numericValue = Number(value);
-			if (!value) {
-				value = null;
-			} else if (!isNaN(numericValue)) {
-				value = numericValue;
+			var value = event.val, item = null;
+			if (value) {
+				item = this._list.find(function (item) {
+					return value === '' + item.id;
+				});
 			}
-			onChange(value);
+			onChange(item);
 		}
 	},
 

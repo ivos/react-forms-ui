@@ -11,7 +11,7 @@ export default React.createClass({
 
 	render() {
 		var {id, label, classes, required, readonly, form, placeholder,
-			query, initSelection, children, ...otherProps} = this.props;
+				getList, formatItem, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
 		var value = this._getValue();
 		return (
@@ -20,7 +20,7 @@ export default React.createClass({
 			       fieldMessages={this._getFieldMessages()}>
 				<Select ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
 				        onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
-				        query={query} initSelection={initSelection} formControl {...otherProps}>
+				        getList={getList} formatItem={formatItem} formControl {...otherProps}>
 					{children}
 				</Select>
 			</Field>

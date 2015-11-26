@@ -54,8 +54,6 @@ export default {
 				selectValueRequired: 'Výběr pov s hodnotou',
 				selectReadonly: 'Výběr needitovatelný',
 				selectReadonlyEmpty: 'Výběr needit prázdný',
-				selectValPreloaded: 'Výběr preloaded',
-				selectROPreloaded: 'Výběr needit preld',
 				selectGroup: 'Skupina',
 				selectProduct: 'Produkt'
 			},
