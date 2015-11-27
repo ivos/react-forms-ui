@@ -2,7 +2,7 @@
   "name": "react-forms-ui",
   "version": "0.1.0",
   "private": false,
-  "author": "Lastware sro.",
+  "author": "Ivo Maixner <ivo.maixner@gmail.com> (http://lastware.cz)",
   "repository": {
     "type": "git",
     "url": "git@github.com:ivos/react-forms-ui.git"
