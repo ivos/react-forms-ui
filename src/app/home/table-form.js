@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
 import {FormMixin, Panel, Form, Label, TextField, PasswordField,
-	DateField, DateRangeField, BooleanField, FormMessages} from '../react-forms-ui/index';
+	DateField, DateRangeField, SelectField, BooleanField, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
+import {getList, getOne} from '../store';
 import i18n from '../i18n';
 var t = i18n.t.bind(i18n);
 
@@ -30,6 +31,9 @@ export default React.createClass({
 		},
 		drTo: {
 			required: true
+		},
+		select: {
+			required: true
 		}
 	},
 
@@ -49,6 +53,7 @@ export default React.createClass({
 								<th><Label required>{t('home.table.password')}</Label></th>
 								<th><Label required>{t('home.table.date')}</Label></th>
 								<th><Label required>{t('home.table.dr')}</Label></th>
+								<th><Label required>{t('home.table.select')}</Label></th>
 								<th>{t('home.table.boolean')}</th>
 							</tr>
 							</thead>
@@ -73,6 +78,12 @@ export default React.createClass({
 											<DateRangeField form={this} ref={'dr-'+index} id="dr" row={index}
 											                label={t('home.table.dr')} classes={fieldClasses}
 											                required/>
+										</td>
+										<td>
+											<SelectField form={this} ref={'select-'+index} id="select" row={index}
+											             label={t('home.table.select')} classes={fieldClasses}
+											             getList={this.getListCompanies}
+											             formatItem={this.formatItemCompany}/>
 										</td>
 										<td>
 											<BooleanField form={this} ref={'boolean-'+index} id="boolean" row={index}
@@ -110,6 +121,7 @@ export default React.createClass({
 					date: '2015-05-10',
 					drFrom: '2015-06-20',
 					drTo: '2015-06-21',
+					select: {id: 1, name: 'Acme'},
 					boolean: true
 				},
 				{
@@ -119,6 +131,7 @@ export default React.createClass({
 					date: '2015-05-11',
 					drFrom: '2015-06-22',
 					drTo: '2015-06-23',
+					select: {id: 2, name: 'First sales'},
 					boolean: false
 				},
 				{
@@ -128,6 +141,7 @@ export default React.createClass({
 					date: '2015-05-12',
 					drFrom: '2015-06-24',
 					drTo: '2015-06-25',
+					select: {id: 3, name: 'Big wig'},
 					boolean: true
 				},
 				{
@@ -135,6 +149,17 @@ export default React.createClass({
 				}
 			]
 		});
+	},
+
+	getListCompanies(query, callback) {
+		getList('companies', {
+			data: {name: query},
+			success: callback
+		});
+	},
+
+	formatItemCompany(item) {
+		return item.name;
 	},
 
 	onSubmit() {

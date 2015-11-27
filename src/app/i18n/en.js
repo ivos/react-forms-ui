@@ -91,6 +91,7 @@ export default {
 				password: 'Password',
 				date: 'Date',
 				dr: 'Date range',
+				select: 'Select',
 				boolean: 'Boolean'
 			},
 			boolean: {

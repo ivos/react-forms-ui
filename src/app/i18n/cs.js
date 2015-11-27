@@ -91,6 +91,7 @@ export default {
 				password: 'Heslo',
 				date: 'Datum',
 				dr: 'Interval dat',
+				select: 'Výběr',
 				boolean: 'Boolean'
 			},
 			boolean: {
