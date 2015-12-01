@@ -7,6 +7,8 @@ export default {
 		maxLength: 'Musí mít nejvýše {{count}} znak.',
 		maxLength_2: 'Musí mít nejvýše {{count}} znaky.',
 		maxLength_5: 'Musí mít nejvýše {{count}} znaků.',
+		min: 'Musí být nejméně {{count}}.',
+		max: 'Musí být nejvýše {{count}}.',
 		invalidFormat: 'Neplatný formát.'
 	},
 	select2: {

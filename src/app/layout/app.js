@@ -4,6 +4,7 @@ import AppRouter from '../router';
 import Header from './header';
 import Footer from './footer';
 import i18n from '../i18n';
+import numeral from 'numeral';
 
 export default React.createClass({
 
@@ -21,6 +22,7 @@ export default React.createClass({
 	},
 
 	setLocale(locale){
+		numeral.language(locale);
 		i18n.changeLanguage(locale, function () {
 			var {history} = this.props;
 			moment.locale(locale);

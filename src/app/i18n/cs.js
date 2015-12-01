@@ -46,6 +46,29 @@ export default {
 				passwordReadonly: 'Needitovatelné heslo',
 				passwordReadonlyEmpty: 'Needitovatelné heslo prázdné'
 			},
+			number: {
+				title: 'Číselné pole',
+				numberFree: 'Číslo volné',
+				numberRequired: 'Číslo povinné',
+				numberValue: {
+					label: 'Číslo s hodnotou',
+					help: 'Standardní formát je 0,0.[00], což znamená zaokrouhlit na maximálně 2 desetinná místa a zobrazit oddělovač tisíců.'
+				},
+				numberValueRequired: {
+					label: 'Číslo pov.s hod.',
+					help: 'Číslo povinné s hodnotou.'
+				},
+				numberReadonly: 'Needit. číslo',
+				numberReadonlyEmpty: 'Needit. číslo prázdné',
+				numberCustomFormat: {
+					label: 'Číslo s fmt.',
+					help: 'Číslo s nastaveným formátem pevná 3 desetinná místa a nezobrazovat oddělovač: 0.000'
+				},
+				numberMinMax: {
+					label: 'Číslo min max',
+					help: 'Číslo s minimem 3 a maximem 30.'
+				}
+			},
 			select: {
 				title: 'Výběr',
 				selectFree: 'Výběr volný',

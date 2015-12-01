@@ -46,6 +46,29 @@ export default {
 				passwordReadonly: 'Password readonly',
 				passwordReadonlyEmpty: 'Password readonly empty'
 			},
+			number: {
+				title: 'Number field',
+				numberFree: 'Number free',
+				numberRequired: 'Number required',
+				numberValue: {
+					label: 'Number w/ value',
+					help: 'Default format is 0,0.[00] which means round to max 2 decimal places and show thousands separator.'
+				},
+				numberValueRequired: {
+					label: 'Number req w/ value',
+					help: 'Number required with value.'
+				},
+				numberReadonly: 'Number readonly',
+				numberReadonlyEmpty: 'Number readonly empty',
+				numberCustomFormat: {
+					label: 'Number w/ fmt',
+					help: 'Number with custom format with fixed 3 decimal places and no thousands separator: 0.000'
+				},
+				numberMinMax: {
+					label: 'Number min max',
+					help: 'Number with minimum 3 and maximum 30.'
+				}
+			},
 			select: {
 				title: 'Select field',
 				selectFree: 'Select free',
@@ -89,6 +112,7 @@ export default {
 				title: 'Table form',
 				text: 'Text (uppercase)',
 				password: 'Password',
+				number: 'Number',
 				date: 'Date',
 				dr: 'Date range',
 				select: 'Select',

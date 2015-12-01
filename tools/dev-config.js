@@ -12,6 +12,7 @@ var config = {
 		'webpack-dev-server/client?http://localhost:3000',
 		'webpack/hot/dev-server',
 		mainPath],
+	debug: true,
 	output: {
 		path: buildPath,
 		filename: 'bundle.js',

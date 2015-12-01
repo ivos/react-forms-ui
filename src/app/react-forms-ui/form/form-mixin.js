@@ -102,9 +102,9 @@ export default {
 			if (ref._formField) {
 				ref._getValueKeys().forEach(function (valueKey) {
 					if (this.tableForm) {
-						values[ref.props.row][valueKey] = '';
+						values[ref.props.row][valueKey] = null;
 					} else {
-						values[valueKey] = '';
+						values[valueKey] = null;
 					}
 				}.bind(this));
 			}

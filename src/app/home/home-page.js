@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {focusFirst, setTitle} from '../ui/utils';
 import TextFields from './text-fields';
 import PasswordFields from './password-fields';
+import NumberFields from './number-fields';
 import SelectFields from './select-fields';
 import DateFields from './date-fields';
 import DateRangeFields from './date-range-fields';
@@ -20,6 +21,7 @@ export default React.createClass({
 
 				<TextFields/>
 				<PasswordFields/>
+				<NumberFields/>
 				<SelectFields/>
 				<DateFields/>
 				<DateRangeFields/>

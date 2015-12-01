@@ -32,6 +32,9 @@ export var Text = _Text;
 import _Password from './controls/password';
 export var Password = _Password;
 
+import _Number from './controls/number';
+export var Number = _Number;
+
 import _Date from './controls/date';
 export var Date = _Date;
 
@@ -51,6 +54,9 @@ export var TextField = _TextField;
 
 import _PasswordField from './fields/password-field';
 export var PasswordField = _PasswordField;
+
+import _NumberField from './fields/number-field';
+export var NumberField = _NumberField;
 
 import _SelectField from './fields/select-field';
 export var SelectField = _SelectField;

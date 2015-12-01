@@ -1,4 +1,5 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var contextPath = path.resolve(__dirname, '..');
 var mainPath = path.resolve(__dirname, '../src', 'app', 'main.js');
@@ -9,23 +10,26 @@ var config = {
 	context: contextPath,
 	devtool: 'eval-source-map',
 	entry: [mainPath],
+	//debug: false,
 	output: {
 		path: buildPath,
 		filename: 'bundle.js',
 		publicPath: '/app/'
 	},
 	module: {
-		loaders: [{
-			test: /\.js$/,
-			loader: 'babel',
-			exclude: [nodeModulesPath]
-		}, {
-			test: /\.css$/,
-			loader: ExtractTextPlugin.extract("css-loader")
-		}]
+		loaders: [
+			{test: /\.js$/, loader: 'babel', exclude: [nodeModulesPath]},
+			{test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader')}
+		]
 	},
 	plugins: [
-		new ExtractTextPlugin("component-styles.css", {allChunks: true})
+		new ExtractTextPlugin('component-styles.css', {allChunks: true}),
+		//new webpack.optimize.DedupePlugin(),
+		//new webpack.optimize.UglifyJsPlugin({
+		//	compress: {
+		//		warnings: false
+		//	}
+		//})
 	],
 	externals: {
 		react: 'React',

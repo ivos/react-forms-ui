@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createHashHistory';
 import i18n from './i18n';
 import {ReactFormsUiOptions} from './react-forms-ui/index';
+import numeral from 'numeral';
+import numeralCs from 'numeral/languages/cs';
+numeral.language('cs', numeralCs);
 
 ReactFormsUiOptions.translate = i18n.t.bind(i18n);
 
@@ -21,6 +24,7 @@ var history = createHistory({
 	queryKey: false
 });
 
+numeral.language(locale);
 i18n.changeLanguage(locale, function () {
 	ReactDOM.render(<AppRouter history={history} locale={locale}/>, document.getElementById('app-content'));
 });

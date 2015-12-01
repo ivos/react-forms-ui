@@ -65,6 +65,12 @@ Object.assign(Validation.prototype, {
 			if (validation.maxLength) {
 				this.maxLength(field, validation.maxLength);
 			}
+			if (validation.min) {
+				this.min(field, validation.min);
+			}
+			if (validation.max) {
+				this.max(field, validation.max);
+			}
 			if (validation.pattern) {
 				this.pattern(field, validation.pattern);
 			}
@@ -110,13 +116,13 @@ Object.assign(Validation.prototype, {
 		}
 	},
 
-	maxLength(field, minLength) {
+	maxLength(field, maxLength) {
 		if (this.tableForm) {
 			this.values.forEach(function (valuesRow, row) {
-				this._maxLengthRow(field, minLength, valuesRow[field], row);
+				this._maxLengthRow(field, maxLength, valuesRow[field], row);
 			}, this);
 		} else {
-			this._maxLengthRow(field, minLength, this.values[field]);
+			this._maxLengthRow(field, maxLength, this.values[field]);
 		}
 	},
 
@@ -129,13 +135,51 @@ Object.assign(Validation.prototype, {
 		}
 	},
 
-	pattern(field, minLength) {
+	min(field, min) {
 		if (this.tableForm) {
 			this.values.forEach(function (valuesRow, row) {
-				this._patternRow(field, minLength, valuesRow[field], row);
+				this._min(field, min, valuesRow[field], row);
 			}, this);
 		} else {
-			this._patternRow(field, minLength, this.values[field]);
+			this._min(field, min, this.values[field]);
+		}
+	},
+
+	_min(field, min, value, row) {
+		if ((null != value) && min && (typeof value === 'number') && value < min) {
+			var label = Options.translate ?
+				Options.translate('validation:min', {count: min})
+				: 'Must be at least ' + min + '.';
+			this.add(field, label, undefined, row);
+		}
+	},
+
+	max(field, max) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._max(field, max, valuesRow[field], row);
+			}, this);
+		} else {
+			this._max(field, max, this.values[field]);
+		}
+	},
+
+	_max(field, max, value, row) {
+		if ((null != value) && max && (typeof value === 'number') && value > max) {
+			var label = Options.translate ?
+				Options.translate('validation:max', {count: max})
+				: 'Must be at most ' + max + '.';
+			this.add(field, label, undefined, row);
+		}
+	},
+
+	pattern(field, pattern) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._patternRow(field, pattern, valuesRow[field], row);
+			}, this);
+		} else {
+			this._patternRow(field, pattern, this.values[field]);
 		}
 	},
 

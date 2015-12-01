@@ -18,7 +18,11 @@ export default React.createClass({
 	},
 
 	getIsoValue(localValue) {
-		return moment(localValue, this.localFormat).format(this.isoFormat);
+		var iso = moment(localValue, this.localFormat).format(this.isoFormat);
+		if ('Invalid date' === iso) {
+			return null;
+		}
+		return iso;
 	},
 
 	render() {
