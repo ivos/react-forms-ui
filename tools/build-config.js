@@ -8,9 +8,8 @@ var buildPath = path.resolve(__dirname, '../target', 'build');
 
 var config = {
 	context: contextPath,
-	devtool: 'eval-source-map',
 	entry: [mainPath],
-	//debug: false,
+	debug: false,
 	output: {
 		path: buildPath,
 		filename: 'bundle.js',
@@ -24,12 +23,11 @@ var config = {
 	},
 	plugins: [
 		new ExtractTextPlugin('component-styles.css', {allChunks: true}),
-		//new webpack.optimize.DedupePlugin(),
-		//new webpack.optimize.UglifyJsPlugin({
-		//	compress: {
-		//		warnings: false
-		//	}
-		//})
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			minimize: true,
+			compress: {warnings: false}
+		})
 	],
 	externals: {
 		react: 'React',
