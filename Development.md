@@ -4,7 +4,7 @@
 
 Execute:
 
-	git clone git@github.com:ivos/react-forms-ui.git
+	git clone https://github.com/ivos/react-forms-ui.git
 	cd react-forms-ui
 	npm install
 
