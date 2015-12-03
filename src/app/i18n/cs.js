@@ -112,6 +112,7 @@ export default {
 				title: 'Formulář v tabulce',
 				text: 'Text (velká písmena)',
 				password: 'Heslo',
+				number: 'Číslo',
 				date: 'Datum',
 				dr: 'Interval dat',
 				select: 'Výběr',

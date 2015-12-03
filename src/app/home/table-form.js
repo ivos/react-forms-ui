@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, Label, TextField, PasswordField,
+import {FormMixin, Panel, Form, Label, TextField, PasswordField, NumberField,
 	DateField, DateRangeField, SelectField, BooleanField, FormMessages} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import {getList, getOne} from '../store';
@@ -21,6 +21,9 @@ export default React.createClass({
 			pattern: /^[0-9A-Z ]*$/
 		},
 		password: {
+			required: true
+		},
+		number: {
 			required: true
 		},
 		date: {
@@ -51,6 +54,7 @@ export default React.createClass({
 							<tr>
 								<th><Label required>{t('home.table.text')}</Label></th>
 								<th><Label required>{t('home.table.password')}</Label></th>
+								<th><Label required>{t('home.table.number')}</Label></th>
 								<th><Label required>{t('home.table.date')}</Label></th>
 								<th><Label required>{t('home.table.dr')}</Label></th>
 								<th><Label required>{t('home.table.select')}</Label></th>
@@ -69,6 +73,11 @@ export default React.createClass({
 											<PasswordField form={this} ref={'password-'+index} id="password" row={index}
 											               label={t('home.table.password')} classes={fieldClasses}
 											               required/>
+										</td>
+										<td>
+											<NumberField form={this} ref={'number-'+index} id="number" row={index}
+											             label={t('home.table.number')} classes={fieldClasses}
+											             required/>
 										</td>
 										<td>
 											<DateField form={this} ref={'date-'+index} id="date" row={index}
@@ -118,6 +127,7 @@ export default React.createClass({
 					id: 0,
 					text: 'TEXT A',
 					password: 'Password A',
+					number: 23,
 					date: '2015-05-10',
 					drFrom: '2015-06-20',
 					drTo: '2015-06-21',
@@ -128,6 +138,7 @@ export default React.createClass({
 					id: 1,
 					text: 'TEXT B',
 					password: 'Password B',
+					number: 24,
 					date: '2015-05-11',
 					drFrom: '2015-06-22',
 					drTo: '2015-06-23',
@@ -138,6 +149,7 @@ export default React.createClass({
 					id: 2,
 					text: 'TEXT C',
 					password: 'Password C',
+					number: 25,
 					date: '2015-05-12',
 					drFrom: '2015-06-24',
 					drTo: '2015-06-25',
