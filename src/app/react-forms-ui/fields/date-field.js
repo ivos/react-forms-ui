@@ -11,7 +11,7 @@ export default React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholder,
+		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholder, minDate, maxDate,
 			row, children, ...otherProps} = this.props;
 		var {showFeedback} = this.state;
 		var value = this._getValue();
@@ -23,8 +23,8 @@ export default React.createClass({
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
 				<DateControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				             readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
-				             onSubmit={form._onSubmit} formControl {...otherProps}>
+				             minDate={minDate} maxDate={maxDate} readonly={readonly} onChange={this.onChange}
+				             onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}>
 					{children}
 				</DateControl>
 			</Field>

@@ -194,7 +194,7 @@ export default React.createClass({
 			values: [
 				{
 					id: 0,
-					text: 'TEXT RO FIELDS',
+					text: 'TXT FIELDS',
 					password: 'Password RO',
 					number: 2200.34,
 					date: '2015-05-09',
@@ -205,7 +205,7 @@ export default React.createClass({
 				},
 				{
 					id: 1,
-					text: 'TEXT RO CONTROLS',
+					text: 'TXT CTROLS',
 					password: 'Password A',
 					number: 2300.45,
 					date: '2015-05-10',

@@ -18,6 +18,9 @@ export default React.createClass({
 		dateValue: {},
 		dateValueRequired: {
 			required: true
+		},
+		dateMinMax: {
+			required: true
 		}
 	},
 
@@ -36,6 +39,12 @@ export default React.createClass({
 					<DateField form={this} ref="dateValueRequired" id="dateValueRequired"
 					           label={t('home.date.dateValueRequired.label')} classes={fieldClasses} required>
 						<span className="help-block">{t('home.date.dateValueRequired.help')}</span>
+					</DateField>
+					<DateField form={this} ref="dateMinMax" id="dateMinMax" label={t('home.date.dateMinMax.label')}
+					           classes={fieldClasses} required
+					           minDate={moment().startOf('day').subtract(7, 'days')}
+					           maxDate={moment().startOf('day').add(7, 'days')}>
+						<span className="help-block">{t('home.date.dateMinMax.help')}</span>
 					</DateField>
 					<DateField form={this} ref="dateReadonly" id="dateReadonly" label={t('home.date.dateReadonly')}
 					           classes={fieldClasses} readonly/>

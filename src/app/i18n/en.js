@@ -89,6 +89,10 @@ export default {
 					label: 'Date req w/ value',
 					help: 'Date required with a value predefined.'
 				},
+				dateMinMax: {
+					label: 'Date min max',
+					help: 'Date required with a minimum and maximum value defined. The allowed interval is +- 7 days.'
+				},
 				dateReadonly: 'Date readonly',
 				dateReadonlyEmpty: 'Date readonly empty'
 			},

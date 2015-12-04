@@ -26,7 +26,7 @@ export default React.createClass({
 	},
 
 	render() {
-		var {id, readonly, placeholder, label, value, className='', formControl,
+		var {id, readonly, placeholder, label, value, className='', formControl, minDate, maxDate,
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		var localValue = this.state.localValue || this.getLocalValue(value);
 		if (readonly) {
@@ -45,7 +45,7 @@ export default React.createClass({
 					<input ref="input" id={id} name={id} type="text" className={className+' form-control datepicker'}
 					       autoComplete="off" placeholder={placeholder || label} value={localValue} {...otherProps}
 					       onChange={this._onChange} onBlur={this._onBlur}/>
-					<span className="input-group-addon"><span className="fa fa-calendar"></span></span>
+					<span className="input-group-addon"><span className="fa fa-calendar"> </span></span>
 				</div>
 				{children}
 			</span>
@@ -53,7 +53,7 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {onSubmit} = this.props;
+		var {onSubmit, minDate, maxDate} = this.props;
 		$(ReactDOM.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
@@ -68,15 +68,22 @@ export default React.createClass({
 						onSubmit();
 					}
 				}
-			}
-		}).on('dp.change', this._onChange);
+			},
+			minDate,
+			maxDate
+		}).on('dp.change', this._onWidgetChange);
 	},
 
 	initWidgetValue(value, prevValue) {
-		if (undefined === prevValue && value) { // only initially
+		if (!this.state.localValue) { // only when not manually editing
 			var picker = $(ReactDOM.findDOMNode(this.refs.group)).data("DateTimePicker");
 			if (picker) {
 				var localValue = this.getLocalValue(value);
+				var pickerValue = picker.date();
+				if ((!localValue && !pickerValue) ||
+					(pickerValue && localValue === pickerValue.format(this.localFormat))) {
+					return;
+				}
 				this._initWidgetValue = true;
 				window.setTimeout(function () {
 					picker.date(localValue);
@@ -92,35 +99,56 @@ export default React.createClass({
 		}
 	},
 
-	_onChange(event) {
+	_onWidgetChange(event) {
 		if (this._initWidgetValue) {
 			this._initWidgetValue = undefined;
 			return;
 		}
 		var {onChange} = this.props;
-		if (!event.date) { // partial date being entered manually
-			this.setState({localValue: event.target.value});
-			if (onChange) {
-				onChange(null);
-			}
-		}
-		else { // full valid date selected or entered
+		if (this.state.localValue) {
 			this.setState({localValue: null});
-			if (onChange) {
-				var value = event.date.format(this.isoFormat);
-				onChange(value);
-			}
 		}
+		if (onChange) {
+			var value = event.date ? event.date.format(this.isoFormat) : event.date;
+			onChange(value);
+		}
+	},
+
+	_onChange(event) {
+		var {onChange} = this.props;
+		var localValue = event.target.value;
+		if (this.state.localValue !== localValue) {
+			this.setState({localValue});
+		}
+		if (onChange) {
+			localValue = this.coerceLocalValue(localValue);
+			var value = this.getIsoValue(localValue);
+			onChange(value);
+		}
+	},
+
+	coerceLocalValue(localValue) {
+		var {minDate, maxDate} = this.props;
+		var result = localValue;
+		if (minDate) {
+			result = moment.max(moment(result, this.localFormat), moment(minDate)).format(this.localFormat);
+		}
+		if (maxDate) {
+			result = moment.min(moment(result, this.localFormat), moment(maxDate)).format(this.localFormat);
+		}
+		return result;
 	},
 
 	_onBlur(event) {
 		var {onChange, onBlur} = this.props;
 		var {localValue} = this.state;
 		if (localValue) {
-			localValue = event.target.value;
-			this.setState({
-				localValue
-			});
+			localValue = this.coerceLocalValue(localValue);
+			if (this.state.localValue) {
+				this.setState({localValue: null}, function () {
+					this.initWidgetValue(this.getIsoValue(localValue));
+				});
+			}
 			if (onChange) {
 				var value = this.getIsoValue(localValue);
 				onChange(value);

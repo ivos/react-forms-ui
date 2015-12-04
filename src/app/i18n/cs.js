@@ -89,6 +89,10 @@ export default {
 					label: 'Datum pov s hodnotou',
 					help: 'Datum povinný s předdefinovanou hodnotou'
 				},
+				dateMinMax: {
+					label: 'Datum min max',
+					help: 'Datum povinný s minimem a maximem. Povolený interval je +- 7 dní.'
+				},
 				dateReadonly: 'Needit datum',
 				dateReadonlyEmpty: 'Needit datum prázdný'
 			},
