@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from './field';
-import Date from '../controls/date';
+import DateControl from '../controls/date-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -32,22 +32,22 @@ export default React.createClass({
 				<div className={tableForm ? 'col-xs-12' : classes[1]}>
 					{readonly &&
 					<div className="form-control-static">
-						{Date.prototype.getLocalValue(valueFrom)}
+						{DateControl.prototype.getLocalValue(valueFrom)}
 						{(valueFrom || valueTo) && ' – '}
-						{Date.prototype.getLocalValue(valueTo)}
+						{DateControl.prototype.getLocalValue(valueTo)}
 					</div>
 					}
 					{!readonly &&
 					<div className="row">
 						<div className="col-xs-6 date-range-date-wrapper">
-							<Date ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
-							      value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
-							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
+							<DateControl ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
+							             value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 						<div className="col-xs-6 date-range-date-wrapper">
-							<Date ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
-							      value={valueTo} readonly={readonly} onChange={this.onChangeTo}
-							      onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
+							<DateControl ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
+							             value={valueTo} readonly={readonly} onChange={this.onChangeTo}
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
 						</div>
 					</div>
 					}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from './field';
-import Select from '../controls/select';
+import SelectControl from '../controls/select-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -21,11 +21,12 @@ export default React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<Select ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
-				        onChange={this.onChange} onBlur={this._onBlur} onSubmit={form._onSubmit}
-				        getList={getList} formatItem={formatItem} formControl {...otherProps}>
+				<SelectControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
+				               readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				               onSubmit={form._onSubmit} getList={getList} formatItem={formatItem}
+				               formControl {...otherProps}>
 					{children}
-				</Select>
+				</SelectControl>
 			</Field>
 		);
 	},

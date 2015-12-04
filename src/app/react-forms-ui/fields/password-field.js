@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from './field';
-import Password from '../controls/password';
+import PasswordControl from '../controls/password-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -21,11 +21,11 @@ export default React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<Password ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				          readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
-				          formControl {...otherProps}>
+				<PasswordControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
+				                 readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				                 formControl {...otherProps}>
 					{children}
-				</Password>
+				</PasswordControl>
 			</Field>
 		);
 	},

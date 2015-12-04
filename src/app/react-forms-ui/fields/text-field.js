@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from './field';
-import Text from '../controls/text';
+import TextControl from '../controls/text-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
@@ -21,10 +21,11 @@ export default React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<Text ref="control" id={id} placeholder={placeholder} label={label} value={value} readonly={readonly}
-				      onChange={this.onChange} onBlur={this._onBlur} formControl {...otherProps}>
+				<TextControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
+				             readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				             formControl {...otherProps}>
 					{children}
-				</Text>
+				</TextControl>
 			</Field>
 		);
 	},

@@ -26,23 +26,23 @@ export var FormMessages = _FormMessages;
 
 // controls
 
-import _Text from './controls/text';
-export var Text = _Text;
+import _TextControl from './controls/text-control';
+export var TextControl = _TextControl;
 
-import _Password from './controls/password';
-export var Password = _Password;
+import _PasswordControl from './controls/password-control';
+export var PasswordControl = _PasswordControl;
 
-import _Number from './controls/number';
-export var Number = _Number;
+import _NumberControl from './controls/number-control';
+export var NumberControl = _NumberControl;
 
-import _Date from './controls/date';
-export var Date = _Date;
+import _DateControl from './controls/date-control';
+export var DateControl = _DateControl;
 
-import _Select from './controls/select';
-export var Select = _Select;
+import _SelectControl from './controls/select-control';
+export var SelectControl = _SelectControl;
 
-import _Boolean from './controls/boolean';
-export var Boolean = _Boolean;
+import _BooleanControl from './controls/boolean-control';
+export var BooleanControl = _BooleanControl;
 
 // fields
 
