@@ -17,7 +17,10 @@ export default React.createClass({
 	},
 
 	focus() {
-		ReactDOM.findDOMNode(this.refs.input).focus();
+		var {input} = this.refs;
+		if (input) {
+			ReactDOM.findDOMNode(input).focus();
+		}
 	},
 
 	_onChange() {

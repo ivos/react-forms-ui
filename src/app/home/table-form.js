@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {emptyToNull} from '../ui/utils';
-import {FormMixin, Panel, Form, Label, TextField, PasswordField, NumberField,
-	DateField, DateRangeField, SelectField, BooleanField, FormMessages} from '../react-forms-ui/index';
+import {FormMixin, Panel, Form, Label, FormMessages,
+	TextField, PasswordField, NumberField,DateField, DateRangeField, SelectField, BooleanField,
+	TextControl, PasswordControl, NumberControl,DateControl, SelectControl, BooleanControl
+} from '../react-forms-ui/index';
 import {ButtonSave} from '../ui/buttons';
 import {getList, getOne} from '../store';
 import i18n from '../i18n';
@@ -41,7 +43,10 @@ export default React.createClass({
 	},
 
 	render() {
-		var values = this.state.values || [];
+		var {values} = this.state;
+		if (!values) {
+			return <div></div>;
+		}
 		var fieldClasses = 'col-sm-2,col-sm-6,col-sm-4';
 		var buttonsClass = 'col-sm-offset-2 col-sm-10';
 		return (
@@ -62,7 +67,71 @@ export default React.createClass({
 							</tr>
 							</thead>
 							<tbody>
+							<tr>
+								<td>
+									<TextField form={this} ref="text-ro" id="text" row={0}
+									           label={t('home.table.text')} classes={fieldClasses} readonly/>
+								</td>
+								<td>
+									<PasswordField form={this} ref="password-ro" id="password" row={0}
+									               label={t('home.table.password')} classes={fieldClasses}
+									               readonly/>
+								</td>
+								<td>
+									<NumberField form={this} ref="number-ro" id="number" row={0}
+									             label={t('home.table.number')} classes={fieldClasses}
+									             readonly/>
+								</td>
+								<td>
+									<DateField form={this} ref="date-ro" id="date" row={0}
+									           label={t('home.table.date')} classes={fieldClasses} readonly/>
+								</td>
+								<td>
+									<DateRangeField form={this} ref="dr-ro" id="dr" row={0}
+									                label={t('home.table.dr')} classes={fieldClasses}
+									                readonly/>
+								</td>
+								<td>
+									<SelectField form={this} ref="select-ro" id="select" row={0}
+									             label={t('home.table.select')} classes={fieldClasses}
+									             getList={this.getListCompanies}
+									             formatItem={this.formatItemCompany} readonly/>
+								</td>
+								<td>
+									<BooleanField form={this} ref="boolean-ro" id="boolean" row={0}
+									              label={t('home.table.boolean')} classes={fieldClasses} readonly/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<TextControl value={values[1].text} readonly/>
+								</td>
+								<td>
+									<PasswordControl value={values[1].password} readonly/>
+								</td>
+								<td>
+									<NumberControl value={values[1].number} readonly/>
+								</td>
+								<td>
+									<DateControl value={values[1].date} readonly/>
+								</td>
+								<td>
+									<DateControl value={values[1].drFrom} readonly/>
+									{' – '}
+									<DateControl value={values[1].drTo} readonly/>
+								</td>
+								<td>
+									<SelectControl value={values[1].select} formatItem={this.formatItemCompany}
+									               readonly/>
+								</td>
+								<td>
+									<BooleanControl value={values[1].boolean} readonly/>
+								</td>
+							</tr>
 							{values.map(function (item, index) {
+								if (index <= 1) {
+									return;
+								}
 								return (
 									<tr ref={'row-' + index} key={item.id}>
 										<td>
@@ -125,9 +194,20 @@ export default React.createClass({
 			values: [
 				{
 					id: 0,
-					text: 'TEXT A',
+					text: 'TEXT RO FIELDS',
+					password: 'Password RO',
+					number: 2200.34,
+					date: '2015-05-09',
+					drFrom: '2015-06-18',
+					drTo: '2015-06-19',
+					select: {id: 0, name: 'First business'},
+					boolean: true
+				},
+				{
+					id: 1,
+					text: 'TEXT RO CONTROLS',
 					password: 'Password A',
-					number: 23,
+					number: 2300.45,
 					date: '2015-05-10',
 					drFrom: '2015-06-20',
 					drTo: '2015-06-21',
@@ -135,10 +215,10 @@ export default React.createClass({
 					boolean: true
 				},
 				{
-					id: 1,
+					id: 2,
 					text: 'TEXT B',
 					password: 'Password B',
-					number: 24,
+					number: 2400.56,
 					date: '2015-05-11',
 					drFrom: '2015-06-22',
 					drTo: '2015-06-23',
@@ -146,10 +226,10 @@ export default React.createClass({
 					boolean: false
 				},
 				{
-					id: 2,
+					id: 3,
 					text: 'TEXT C',
 					password: 'Password C',
-					number: 25,
+					number: 2500.67,
 					date: '2015-05-12',
 					drFrom: '2015-06-24',
 					drTo: '2015-06-25',
@@ -157,7 +237,7 @@ export default React.createClass({
 					boolean: true
 				},
 				{
-					id: 3
+					id: 4
 				}
 			]
 		});

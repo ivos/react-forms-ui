@@ -10,9 +10,14 @@ export default React.createClass({
 		var {id, readonly, placeholder, label, value, className='', formControl,
 			onChange, onBlur, children, ...otherProps} = this.props;
 		if (readonly) {
-			return <div className={className+(formControl?' form-control-static':'')} {...otherProps}>
+			if (formControl) {
+				return <div className={className+' form-control-static'} {...otherProps}>
+					{value}
+				</div>;
+			}
+			return <span className={className} {...otherProps}>
 				{value}
-			</div>;
+			</span>;
 		}
 		return (
 			<span>
@@ -25,7 +30,10 @@ export default React.createClass({
 	},
 
 	focus() {
-		ReactDOM.findDOMNode(this.refs.input).focus();
+		var {input} = this.refs;
+		if (input) {
+			ReactDOM.findDOMNode(input).focus();
+		}
 	},
 
 	_onChange() {

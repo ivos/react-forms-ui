@@ -30,9 +30,14 @@ export default React.createClass({
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		var localValue = this.state.localValue || this.getLocalValue(value);
 		if (readonly) {
-			return <div className={className+(formControl?' form-control-static':'')} {...otherProps}>
+			if (formControl) {
+				return <div className={className+' form-control-static'} {...otherProps}>
+					{localValue}
+				</div>;
+			}
+			return <span className={className} {...otherProps}>
 				{localValue}
-			</div>;
+			</span>;
 		}
 		return (
 			<span>
@@ -81,7 +86,10 @@ export default React.createClass({
 	},
 
 	focus() {
-		ReactDOM.findDOMNode(this.refs.input).focus();
+		var {input} = this.refs;
+		if (input) {
+			ReactDOM.findDOMNode(input).focus();
+		}
 	},
 
 	_onChange(event) {

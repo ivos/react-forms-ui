@@ -16,7 +16,7 @@ export default {
 		var {values} = this.state;
 		Object.keys(this.refs).forEach(function (field) {
 			var ref = this.refs[field];
-			if (ref.initWidgetValue) {
+			if (ref.initWidgetValue && ref._getValueKeys) {
 				ref._getValueKeys().forEach(function (valueKey) {
 					var prevValue = prevState.values && prevState.values[valueKey];
 					var nextValue = values && values[valueKey];

@@ -11,9 +11,15 @@ export default React.createClass({
 		var {id, readonly, placeholder, label, value, className='', formControl,
 			getList, formatItem, onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		if (readonly) {
-			return <div ref="readonly" className={className+(formControl?' form-control-static':'')} {...otherProps}>
-				{(value && formatItem) ? formatItem(value) : ''}
-			</div>;
+			value = (value && formatItem) ? formatItem(value) : '';
+			if (formControl) {
+				return <div className={className+' form-control-static'} {...otherProps}>
+					{value}
+				</div>;
+			}
+			return <span className={className} {...otherProps}>
+				{value}
+			</span>;
 		}
 		return (
 			<span>
@@ -81,8 +87,11 @@ export default React.createClass({
 	},
 
 	focus() {
-		var $element = $(ReactDOM.findDOMNode(this.refs.input));
-		$element.select2('focus');
+		var {input} = this.refs;
+		if (input) {
+			var $element = $(ReactDOM.findDOMNode(this.refs.input));
+			$element.select2('focus');
+		}
 	},
 
 	_onChange(event) {
