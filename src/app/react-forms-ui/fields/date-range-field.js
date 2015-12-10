@@ -42,12 +42,14 @@ export default React.createClass({
 						<div className="col-xs-6 date-range-date-wrapper">
 							<DateControl ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
 							             value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
-							             onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} maxDate={this.getFromMaxDate}
+							             formControl {...otherProps}/>
 						</div>
 						<div className="col-xs-6 date-range-date-wrapper">
 							<DateControl ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
 							             value={valueTo} readonly={readonly} onChange={this.onChangeTo}
-							             onBlur={this._onBlur} onSubmit={form._onSubmit} formControl {...otherProps}/>
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} minDate={this.getToMinDate}
+							             formControl {...otherProps}/>
 						</div>
 					</div>
 					}
@@ -61,6 +63,14 @@ export default React.createClass({
 				</div>}
 			</div>
 		);
+	},
+
+	getToMinDate() {
+		return this._getValue('From');
+	},
+
+	getFromMaxDate() {
+		return this._getValue('To');
 	},
 
 	getValueKeys() {

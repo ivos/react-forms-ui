@@ -25,6 +25,26 @@ export default React.createClass({
 		return iso;
 	},
 
+	getPropDate(date) {
+		if (typeof date === 'function') {
+			date = date();
+		}
+		if (typeof date === 'string') {
+			date = moment(date);
+		}
+		return date || false;
+	},
+
+	getMinDate() {
+		var {minDate} = this.props;
+		return this.getPropDate(minDate);
+	},
+
+	getMaxDate() {
+		var {maxDate} = this.props;
+		return this.getPropDate(maxDate);
+	},
+
 	render() {
 		var {id, readonly, placeholder, label, value, className='', formControl, minDate, maxDate,
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
@@ -53,7 +73,9 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		var {onSubmit, minDate, maxDate} = this.props;
+		var {onSubmit} = this.props;
+		var minDate = this.getMinDate();
+		var maxDate = this.getMaxDate();
 		$(ReactDOM.findDOMNode(this.refs.group)).datetimepicker({
 			locale: moment.locale(),
 			showTodayButton: true,
@@ -71,7 +93,15 @@ export default React.createClass({
 			},
 			minDate,
 			maxDate
-		}).on('dp.change', this._onWidgetChange);
+		}).on('dp.change', this._onWidgetChange).on('dp.show', this._onWidgetShow);
+	},
+
+	_onWidgetShow() {
+		var minDate = this.getMinDate();
+		var maxDate = this.getMaxDate();
+		var picker = $(ReactDOM.findDOMNode(this.refs.group)).data("DateTimePicker");
+		picker.minDate(minDate);
+		picker.maxDate(maxDate);
 	},
 
 	initWidgetValue(value, prevValue) {
@@ -109,7 +139,12 @@ export default React.createClass({
 			this.setState({localValue: null});
 		}
 		if (onChange) {
-			var value = event.date ? event.date.format(this.isoFormat) : event.date;
+			var value = event.date;
+			if (value) {
+				var localValue = value.format(this.localFormat);
+				localValue = this.coerceLocalValue(localValue);
+				value = this.getIsoValue(localValue);
+			}
 			onChange(value);
 		}
 	},
@@ -128,13 +163,14 @@ export default React.createClass({
 	},
 
 	coerceLocalValue(localValue) {
-		var {minDate, maxDate} = this.props;
+		var minDate = this.getMinDate();
+		var maxDate = this.getMaxDate();
 		var result = localValue;
 		if (minDate) {
-			result = moment.max(moment(result, this.localFormat), moment(minDate)).format(this.localFormat);
+			result = moment.max(moment(result, this.localFormat), minDate).format(this.localFormat);
 		}
 		if (maxDate) {
-			result = moment.min(moment(result, this.localFormat), moment(maxDate)).format(this.localFormat);
+			result = moment.min(moment(result, this.localFormat), maxDate).format(this.localFormat);
 		}
 		return result;
 	},
