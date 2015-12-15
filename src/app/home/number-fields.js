@@ -20,7 +20,8 @@ export default React.createClass({
 			required: true
 		},
 		numberCustomFormat: {
-			required: true
+			required: true,
+			min: 0
 		},
 		numberMinMax: {
 			required: true,

@@ -59,16 +59,16 @@ Object.assign(Validation.prototype, {
 			if (validation.required) {
 				this.required(field);
 			}
-			if (validation.minLength) {
+			if (null != validation.minLength) {
 				this.minLength(field, validation.minLength);
 			}
-			if (validation.maxLength) {
+			if (null != validation.maxLength) {
 				this.maxLength(field, validation.maxLength);
 			}
-			if (validation.min) {
+			if (null != validation.min) {
 				this.min(field, validation.min);
 			}
-			if (validation.max) {
+			if (null != validation.max) {
 				this.max(field, validation.max);
 			}
 			if (validation.pattern) {
@@ -108,7 +108,7 @@ Object.assign(Validation.prototype, {
 	},
 
 	_minLengthRow(field, minLength, value, row) {
-		if (value && minLength && value.length < minLength) {
+		if (value && (null != minLength) && value.length < minLength) {
 			var label = Options.translate ?
 				Options.translate('validation:minLength', {count: minLength})
 				: 'Must have at least ' + minLength + ' characters.';
@@ -127,7 +127,7 @@ Object.assign(Validation.prototype, {
 	},
 
 	_maxLengthRow(field, maxLength, value, row) {
-		if (value && maxLength && value.length > maxLength) {
+		if (value && (null != maxLength) && value.length > maxLength) {
 			var label = Options.translate ?
 				Options.translate('validation:maxLength', {count: maxLength})
 				: 'Must have at most ' + maxLength + ' characters.';
@@ -146,7 +146,7 @@ Object.assign(Validation.prototype, {
 	},
 
 	_min(field, min, value, row) {
-		if ((null != value) && min && (typeof value === 'number') && value < min) {
+		if ((null != value) && (null != min) && (typeof value === 'number') && value < min) {
 			var label = Options.translate ?
 				Options.translate('validation:min', {count: min})
 				: 'Must be at least ' + min + '.';
@@ -165,7 +165,7 @@ Object.assign(Validation.prototype, {
 	},
 
 	_max(field, max, value, row) {
-		if ((null != value) && max && (typeof value === 'number') && value > max) {
+		if ((null != value) && (null != max) && (typeof value === 'number') && value > max) {
 			var label = Options.translate ?
 				Options.translate('validation:max', {count: max})
 				: 'Must be at most ' + max + '.';

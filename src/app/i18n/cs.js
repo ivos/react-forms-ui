@@ -62,7 +62,7 @@ export default {
 				numberReadonlyEmpty: 'Needit. číslo prázdné',
 				numberCustomFormat: {
 					label: 'Číslo s fmt.',
-					help: 'Číslo s nastaveným formátem pevná 3 desetinná místa a nezobrazovat oddělovač: 0.000'
+					help: 'Číslo s nastaveným formátem pevná 3 desetinná místa a nezobrazovat oddělovač: 0.000. Minimální hodnota je 0.'
 				},
 				numberMinMax: {
 					label: 'Číslo min max',
