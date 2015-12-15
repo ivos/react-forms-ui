@@ -23,7 +23,7 @@ export default React.createClass({
 			formGroupClassName += ' table-form-group';
 		}
 		return (
-			<div className={formGroupClassName}>
+			<div className={formGroupClassName + ' no-feedback-icon'}>
 				{!tableForm &&
 				<Label htmlFor={id+'From'} className={classes[0]}
 				       required={required ? 'required' : false}>{label}</Label>

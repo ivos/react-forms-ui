@@ -20,7 +20,7 @@ export default React.createClass({
 		}
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
-			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
+			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus() + ' no-feedback-icon'}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
 				<DateControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
 				             minDate={minDate} maxDate={maxDate} readonly={readonly} onChange={this.onChange}
