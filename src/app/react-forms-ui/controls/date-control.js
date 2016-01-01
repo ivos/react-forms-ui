@@ -125,7 +125,9 @@ export default React.createClass({
 	focus() {
 		var {input} = this.refs;
 		if (input) {
-			ReactDOM.findDOMNode(input).focus();
+			var el = ReactDOM.findDOMNode(input);
+			el.focus();
+			el.select();
 		}
 	},
 
