@@ -1,4 +1,4 @@
-tools/config/production.json
+lib/
 node_modules/
 target/
 .idea/
