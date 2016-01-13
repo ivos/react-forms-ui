@@ -85,3 +85,11 @@ export var FormMixin = _FormMixin;
 
 import _Form from './form/form';
 export var Form = _Form;
+
+// i18n
+
+import _I18nEn from './i18n/en';
+export var I18nEn = _I18nEn;
+
+import _I18nCs from './i18n/cs';
+export var I18nCs = _I18nCs;
