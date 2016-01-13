@@ -6,6 +6,10 @@ A comprehensive UI toolbox for React.
 
 The [live demo](http://react-forms-ui.s3-website-us-east-1.amazonaws.com/app).
 
+## 2. Install
+
+    npm i --save react-forms-ui
+
 ## 2. Usage
 
 	validations: {
