@@ -20,10 +20,10 @@ export default React.createClass({
 		var valueTo = this._getValue('To');
 		if (tableForm) {
 			id = id + '-' + row;
-			formGroupClassName += ' table-form-group';
+			formGroupClassName += ' _rfu-table-form-group';
 		}
 		return (
-			<div className={formGroupClassName + ' no-feedback-icon'}>
+			<div className={formGroupClassName + ' _rfu-no-feedback-icon'}>
 				{!tableForm &&
 				<Label htmlFor={id+'From'} className={classes[0]}
 				       required={required ? 'required' : false}>{label}</Label>
@@ -39,13 +39,13 @@ export default React.createClass({
 					}
 					{!readonly &&
 					<div className="row">
-						<div className="col-xs-6 date-range-date-wrapper">
+						<div className="col-xs-6 _rfu-date-range-date-wrapper">
 							<DateControl ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
 							             value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
 							             onBlur={this._onBlur} onSubmit={form._onSubmit} maxDate={this.getFromMaxDate}
 							             formControl {...otherProps}/>
 						</div>
-						<div className="col-xs-6 date-range-date-wrapper">
+						<div className="col-xs-6 _rfu-date-range-date-wrapper">
 							<DateControl ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
 							             value={valueTo} readonly={readonly} onChange={this.onChangeTo}
 							             onBlur={this._onBlur} onSubmit={form._onSubmit} minDate={this.getToMinDate}

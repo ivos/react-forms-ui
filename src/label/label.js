@@ -13,7 +13,7 @@ export default React.createClass({
 		return (
 			<label className={className} {...otherProps}>
 				{children}
-				{required ? <span className="required" title={label}>&nbsp;*</span> : ''}
+				{required ? <span className="_rfu-required" title={label}>&nbsp;*</span> : ''}
 			</label>
 		);
 	}

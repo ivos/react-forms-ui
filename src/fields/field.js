@@ -12,7 +12,7 @@ export default React.createClass({
 		var formGroupClass = checkbox ? 'checkbox' : 'form-group';
 		formGroupClass += ' ' + fieldStatus;
 		if (tableForm) {
-			formGroupClass += ' table-form-group';
+			formGroupClass += ' _rfu-table-form-group';
 		}
 		return (
 			<div className={formGroupClass}>

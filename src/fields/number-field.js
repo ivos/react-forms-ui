@@ -19,7 +19,7 @@ export default React.createClass({
 		}
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
-			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus() + ' no-feedback-icon'}
+			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus() + ' _rfu-no-feedback-icon'}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
 				<NumberControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
 				               readonly={readonly} onChange={this.onChange} onBlur={this._onBlur} format={format}

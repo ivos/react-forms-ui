@@ -1,6 +1,6 @@
-.table-form-group {
+._rfu-table-form-group {
 	margin-bottom: 0;
 }
-.has-feedback.no-feedback-icon .form-control {
+.has-feedback._rfu-no-feedback-icon .form-control {
 	padding-right: 12px;
 }

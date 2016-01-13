@@ -9,9 +9,9 @@ export default React.createClass({
 		if (!text) {
 			return <span/>;
 		}
-		var outerClass = 'inline-message alert alert-' + this.getAlertType()
+		var outerClass = '_rfu-inline-message alert alert-' + this.getAlertType()
 			+ (dismissible ? ' alert-dismissible' : '');
-		var innerClass = 'inline-message-icon glyphicon glyphicon-' + this.getGlyphicon();
+		var innerClass = '_rfu-inline-message-icon glyphicon glyphicon-' + this.getGlyphicon();
 		return (
 			<span ref="el" className={outerClass}>
 				{dismissible && <button type="button" className="close" data-dismiss="alert">&times;</button>}

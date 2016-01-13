@@ -61,7 +61,7 @@ export default React.createClass({
 		}
 		return (
 			<span>
-				<div ref="group" className="input-group date">
+				<div ref="group" className="input-group _rfu-date">
 					<input ref="input" id={id} name={id} type="text" className={className+' form-control datepicker'}
 					       autoComplete="off" placeholder={placeholder || label} value={localValue} {...otherProps}
 					       onChange={this._onChange} onBlur={this._onBlur}/>

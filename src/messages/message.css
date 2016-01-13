@@ -1,20 +1,20 @@
-.inline-message {
+._rfu-inline-message {
 	padding: 5px 15px;
 	margin: 1px 5px 0 0;
 	display: inline-block;
 }
 
 @media (max-width: 767px) {
-	.inline-message {
+	._rfu-inline-message {
 		margin-top: 2px;
 	}
 }
 
-.table-form-group .inline-message {
+._rfu-table-form-group ._rfu-inline-message {
 	margin-top: 2px;
 }
 
-.inline-message-icon {
+._rfu-inline-message-icon {
 	font-size: 115%;
 }
 
