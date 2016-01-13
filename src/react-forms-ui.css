@@ -1,0 +1,50 @@
+/* date */
+._rfu-table-form-group .input-group._rfu-date {
+	width: 140px;
+}
+
+/* date-range-field */
+._rfu-table-form-group ._rfu-date-range-date-wrapper {
+	width: 145px;
+}
+
+/* field */
+._rfu-table-form-group {
+	margin-bottom: 0;
+}
+
+.has-feedback._rfu-no-feedback-icon .form-control {
+	padding-right: 12px;
+}
+
+/* label */
+._rfu-required {
+	color: red;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+/* message */
+._rfu-inline-message {
+	padding: 5px 15px;
+	margin: 1px 5px 0 0;
+	display: inline-block;
+}
+
+@media (max-width: 767px) {
+	._rfu-inline-message {
+		margin-top: 2px;
+	}
+}
+
+._rfu-table-form-group ._rfu-inline-message {
+	margin-top: 2px;
+}
+
+._rfu-inline-message-icon {
+	font-size: 115%;
+}
+
+.alert-dismissible {
+	padding-right: 35px;
+}

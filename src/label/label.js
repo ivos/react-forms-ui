@@ -1,5 +1,4 @@
 import React from 'react';
-require('./label.css');
 import Options from '../options/options';
 
 export default React.createClass({

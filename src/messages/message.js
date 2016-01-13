@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-require('./message.css');
 
 export default React.createClass({
 

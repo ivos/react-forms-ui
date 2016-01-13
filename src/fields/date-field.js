@@ -4,7 +4,6 @@ import DateControl from '../controls/date-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
-require('./date-field.css');
 
 export default React.createClass({
 
