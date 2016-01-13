@@ -4,7 +4,7 @@ A comprehensive UI toolbox for React.
 
 ## 1. Demo
 
-[Demo showcase](http://react-forms-ui.s3-website-us-east-1.amazonaws.com/app).
+The [live demo](http://react-forms-ui.s3-website-us-east-1.amazonaws.com/app).
 
 ## 2. Usage
 
