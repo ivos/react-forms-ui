@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactHelper from '../support/react-helper';
 
 export default {

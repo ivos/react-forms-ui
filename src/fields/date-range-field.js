@@ -1,5 +1,4 @@
 import React from 'react';
-import Field from './field';
 import DateControl from '../controls/date-control';
 import Label from '../label/label';
 import Messages from '../messages/messages';

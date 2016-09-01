@@ -11,7 +11,7 @@ export default React.createClass({
 			onChange, onBlur, children, ...otherProps} = this.props;
 		return (
 			<input ref="input" id={id} name={id} type="checkbox" className={className}
-			       autoComplete="off" placeholder={placeholder || label} checked={value}
+			       autoComplete="off" placeholder={placeholder || label} checked={value || false}
 			       disabled={readonly} {...otherProps} onChange={this._onChange} onBlur={this._onBlur}/>
 		);
 	},

@@ -10,12 +10,11 @@ The [live demo](http://react-forms-ui.s3-website-us-east-1.amazonaws.com/app).
 
 Install the node package:
 
-    npm i --save react-forms-ui
+    npm i --save react react-dom numeral react-forms-ui
 
 Import the .css file in your main .js file:
 
-    require('react-forms-ui/lib/react-forms-ui.css');
-
+    import 'react-forms-ui/lib/react-forms-ui.css'
 
 ## 2. Usage
 

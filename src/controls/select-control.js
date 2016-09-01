@@ -24,7 +24,7 @@ export default React.createClass({
 		return (
 			<span>
 				<input ref="input" id={id} name={id} type="hidden" className={className+' form-control'}
-				       autoComplete="off" placeholder={placeholder || label} value={value ? value.id : null}
+				       autoComplete="off" placeholder={placeholder || label} value={value ? value.id : ''}
 				       onChange={this._onChange} onBlur={this._onBlur} {...otherProps}/>
 				{children}
 			</span>

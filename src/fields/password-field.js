@@ -1,8 +1,6 @@
 import React from 'react';
 import Field from './field';
 import PasswordControl from '../controls/password-control';
-import Label from '../label/label';
-import Messages from '../messages/messages';
 import FieldMixin from './field-mixin';
 
 export default React.createClass({

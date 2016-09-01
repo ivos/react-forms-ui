@@ -48,7 +48,7 @@ export default React.createClass({
 	render() {
 		var {id, readonly, placeholder, label, value, className='', formControl, minDate, maxDate,
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
-		var localValue = this.state.localValue || this.getLocalValue(value);
+		var localValue = this.state.localValue || this.getLocalValue(value) || '';
 		if (readonly) {
 			if (formControl) {
 				return <div className={className+' form-control-static'} {...otherProps}>
