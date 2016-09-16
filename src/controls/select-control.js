@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ControlMixin from './control-mixin';
 import Options from '../options/options';
+import $ from 'jquery'
 
 export default React.createClass({
 
