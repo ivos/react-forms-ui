@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactHelper from '../support/react-helper';
+import React from 'react'
+import ReactHelper from '../support/react-helper'
 
 export default {
 
@@ -10,115 +10,117 @@ export default {
 	},
 
 	getInitialState() {
-		return {showFeedback: 'none'};
+		return {showFeedback: 'none'}
 	},
 
 	_getValue(suffix) {
-		var {id, form, form: {tableForm}, row} = this.props;
-		var valueKey = id + (suffix || '');
+		const {id, row} = this.props
+		const {form, form: {tableForm}} = this.context
+		const valueKey = id + (suffix || '')
 		if (!form || !form.state.values) {
-			return null;
+			return null
 		}
-		return (tableForm) ? form.state.values[row][valueKey] : form.state.values[valueKey];
+		return (tableForm) ? form.state.values[row][valueKey] : form.state.values[valueKey]
 	},
 
 	_getValueKeys() {
 		if (this.getValueKeys) {
-			return this.getValueKeys();
+			return this.getValueKeys()
 		}
-		var {id} = this.props;
-		return [id];
+		const {id} = this.props
+		return [id]
 	},
 
 	_focusError() {
 		if (this.focusError) {
-			this.focusError();
+			this.focusError()
 		} else {
-			this.focus();
+			this.focus()
 		}
 	},
 
 	_setChanging() {
-		this.setState({showFeedback: 'positive'});
+		this.setState({showFeedback: 'positive'})
 	},
 
 	_getFieldMessages() {
 		if (this.getFieldMessages) {
-			return this.getFieldMessages();
+			return this.getFieldMessages()
 		}
-		var {id, form, form: {tableForm, state: {messages}}, row} = this.props;
+		const {id, row} = this.props
+		const {form: {tableForm, state: {messages}}} = this.context
 		if (tableForm) {
-			return messages[row] ? messages[row][id] : null;
+			return messages[row] ? messages[row][id] : null
 		}
-		return (tableForm) ? messages[row][id] : messages[id];
+		return (tableForm) ? messages[row][id] : messages[id]
 	},
 
 	_getFieldStatusType() {
 		if (this.getFieldStatusType) {
-			return this.getFieldStatusType();
+			return this.getFieldStatusType()
 		}
-		var fieldMessages = this._getFieldMessages();
-		return this._getMessagesStatusType(fieldMessages);
+		const fieldMessages = this._getFieldMessages()
+		return this._getMessagesStatusType(fieldMessages)
 	},
 
 	_getMessagesStatusType(messages) {
-		var {showFeedback} = this.state;
+		const {showFeedback} = this.state
 		if ('none' !== showFeedback && messages) {
 			if (this._hasError(messages) && 'all' === showFeedback) {
-				return 'error';
+				return 'error'
 			}
-			return messages[0].type;
+			return messages[0].type
 		}
-		return '';
+		return ''
 	},
 
 	_getFieldStatus() {
-		var fieldStatusType = this._getFieldStatusType();
+		const fieldStatusType = this._getFieldStatusType()
 		if (fieldStatusType) {
-			return 'has-feedback has-' + fieldStatusType;
+			return 'has-feedback has-' + fieldStatusType
 		}
-		return '';
+		return ''
 	},
 
 	_getFeedbackType() {
-		var fieldStatusType = this._getFieldStatusType();
+		const fieldStatusType = this._getFieldStatusType()
 		if (fieldStatusType) {
 			switch (fieldStatusType) {
 				case 'error':
-					return 'remove';
+					return 'remove'
 				case 'success':
-					return 'ok';
+					return 'ok'
 				case 'warning':
-					return 'question-sign';
+					return 'question-sign'
 				case 'info':
-					return 'info-sign';
+					return 'info-sign'
 			}
 		}
-		return '';
+		return ''
 	},
 
 	_getFeedback() {
-		var feedbackType = this._getFeedbackType();
+		const feedbackType = this._getFeedbackType()
 		if (feedbackType) {
-			var className = 'form-control-feedback glyphicon glyphicon-' + feedbackType;
-			return <span className={className}> </span>;
+			const className = 'form-control-feedback glyphicon glyphicon-' + feedbackType
+			return <span className={className}> </span>
 		}
 	},
 
 	_hasError(messages) {
-		messages = messages || this._getFieldMessages();
+		messages = messages || this._getFieldMessages()
 		if (messages) {
 			return messages.find(function (message) {
-				return 'error' === message.type || !message.type;
-			}, this);
+				return 'error' === message.type || !message.type
+			}, this)
 		}
 	},
 
 	_onBlur() {
-		var {showFeedback} = this.state;
+		const {showFeedback} = this.state
 		if ('positive' === showFeedback) {
-			this.setState({showFeedback: 'all'});
+			this.setState({showFeedback: 'all'})
 		}
-	}
+	},
 
-};
+}

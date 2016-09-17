@@ -1,15 +1,16 @@
-import React from 'react';
-import Label from '../label/label';
-import Messages from '../messages/messages';
-import FieldMixin from './field-mixin';
+import React from 'react'
+import Label from '../label/label'
+import Messages from '../messages/messages'
+import FieldMixin from './field-mixin'
 
-export default React.createClass({
+const PlainField = React.createClass({
 
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, ...otherProps} = this.props;
-		classes = classes ? classes.split(',') : [];
+		const {id, label, required, readonly} = this.props
+		let {classes} = this.props
+		classes = classes ? classes.split(',') : []
 		return (
 			<div className="form-group">
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
@@ -22,7 +23,9 @@ export default React.createClass({
 				          showFeedback={this.state.showFeedback} className={classes[2]}/>
 				}
 			</div>
-		);
-	}
+		)
+	},
 
-});
+})
+
+export default PlainField

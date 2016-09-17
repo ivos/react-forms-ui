@@ -1,29 +1,31 @@
-import React from 'react';
-import DateControl from '../controls/date-control';
-import Label from '../label/label';
-import Messages from '../messages/messages';
-import FieldMixin from './field-mixin';
+import React from 'react'
+import DateControl from '../controls/date-control'
+import Label from '../label/label'
+import Messages from '../messages/messages'
+import FieldMixin from './field-mixin'
 
-export default React.createClass({
+const DateRangeField = React.createClass({
 
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholderFrom, placeholderTo,
-			row, children, ...otherProps} = this.props;
-		var {showFeedback} = this.state;
-		classes = classes ? classes.split(',') : [];
-		var formGroupClassName = 'form-group ' + this._getFieldStatus();
-		var valueFrom = this._getValue('From');
-		var valueTo = this._getValue('To');
+		let {
+			id, classes, label, required, readonly, placeholderFrom, placeholderTo, row, children, ...otherProps
+		} = this.props
+		const {showFeedback} = this.state
+		const {form, form: {tableForm}} = this.context
+		classes = classes ? classes.split(',') : []
+		let formGroupClassName = 'form-group ' + this._getFieldStatus()
+		const valueFrom = this._getValue('From')
+		const valueTo = this._getValue('To')
 		if (tableForm) {
-			id = id + '-' + row;
-			formGroupClassName += ' _rfu-table-form-group';
+			id = id + '-' + row
+			formGroupClassName += ' _rfu-table-form-group'
 		}
 		return (
 			<div className={formGroupClassName + ' _rfu-no-feedback-icon'}>
 				{!tableForm &&
-				<Label htmlFor={id+'From'} className={classes[0]}
+				<Label htmlFor={id + 'From'} className={classes[0]}
 				       required={required ? 'required' : false}>{label}</Label>
 				}
 
@@ -38,15 +40,15 @@ export default React.createClass({
 					{!readonly &&
 					<div className="row">
 						<div className="col-xs-6 _rfu-date-range-date-wrapper">
-							<DateControl ref="controlFrom" id={id+'From'} placeholder={placeholderFrom} label={label}
+							<DateControl ref="controlFrom" id={id + 'From'} placeholder={placeholderFrom} label={label}
 							             value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
-							             onBlur={this._onBlur} onSubmit={form._onSubmit} maxDate={this.getFromMaxDate}
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} max={this.getFromMaxDate}
 							             formControl {...otherProps}/>
 						</div>
 						<div className="col-xs-6 _rfu-date-range-date-wrapper">
-							<DateControl ref="controlTo" id={id+'To'} placeholder={placeholderTo} label={label}
+							<DateControl ref="controlTo" id={id + 'To'} placeholder={placeholderTo} label={label}
 							             value={valueTo} readonly={readonly} onChange={this.onChangeTo}
-							             onBlur={this._onBlur} onSubmit={form._onSubmit} minDate={this.getToMinDate}
+							             onBlur={this._onBlur} onSubmit={form._onSubmit} min={this.getToMinDate}
 							             formControl {...otherProps}/>
 						</div>
 					</div>
@@ -54,108 +56,116 @@ export default React.createClass({
 				</div>
 				{!readonly &&
 				<div className={tableForm ? 'col-xs-12' : classes[2]}>
-					<Messages ref="messages" id={id+'From'} fieldMessages={this.getFromMessages()}
+					<Messages ref="messages" id={id + 'From'} fieldMessages={this.getFromMessages()}
 					          showFeedback={showFeedback} style={{display: 'inline'}}/>
-					<Messages ref="messages" id={id+'To'} fieldMessages={this.getToMessages()}
+					<Messages ref="messages" id={id + 'To'} fieldMessages={this.getToMessages()}
 					          showFeedback={showFeedback} style={{display: 'inline'}}/>
 				</div>}
 			</div>
-		);
+		)
 	},
 
 	getToMinDate() {
-		return this._getValue('From');
+		return this._getValue('From')
 	},
 
 	getFromMaxDate() {
-		return this._getValue('To');
+		return this._getValue('To')
 	},
 
 	getValueKeys() {
-		var {id} = this.props;
-		return [id + 'From', id + 'To'];
+		const {id} = this.props
+		return [id + 'From', id + 'To']
 	},
 
 	focus() {
-		this.refs.controlFrom && this.refs.controlFrom.focus();
+		this.refs.controlFrom && this.refs.controlFrom.focus()
 	},
 
 	focusError() {
-		var fromType = this._getMessagesStatusType(this.getFromMessages());
-		var toType = this._getMessagesStatusType(this.getToMessages());
+		const fromType = this._getMessagesStatusType(this.getFromMessages())
 		if ('error' === fromType) {
-			this.refs.controlFrom.focus();
+			this.refs.controlFrom.focus()
 		} else {
-			this.refs.controlTo.focus();
+			this.refs.controlTo.focus()
 		}
 	},
 
 	getFromMessages() {
-		var {id, form: {tableForm, state: {messages}}, row} = this.props;
+		const {id, row} = this.props
+		const {form: {tableForm, state: {messages}}} = this.context
 		if (tableForm) {
-			return messages[row] ? messages[row][id + 'From'] : null;
+			return messages[row] ? messages[row][id + 'From'] : null
 		}
-		return messages[id + 'From'];
+		return messages[id + 'From']
 	},
 
 	getToMessages() {
-		var {id, form: {tableForm, state: {messages}}, row} = this.props;
+		const {id, row} = this.props
+		const {form: {tableForm, state: {messages}}} = this.context
 		if (tableForm) {
-			return messages[row] ? messages[row][id + 'To'] : null;
+			return messages[row] ? messages[row][id + 'To'] : null
 		}
-		return messages[id + 'To'];
+		return messages[id + 'To']
 	},
 
 	getFieldMessages() {
-		var messagesFrom = this.getFromMessages();
-		var messagesTo = this.getToMessages();
-		var result = [];
+		const messagesFrom = this.getFromMessages()
+		const messagesTo = this.getToMessages()
+		let result = []
 		if (messagesFrom) {
-			result = result.concat(messagesFrom);
+			result = result.concat(messagesFrom)
 		}
 		if (messagesTo) {
-			result = result.concat(messagesTo);
+			result = result.concat(messagesTo)
 		}
-		return (messagesFrom || messagesTo) ? result : null;
+		return (messagesFrom || messagesTo) ? result : null
 	},
 
 	getFieldStatusType() {
-		var {showFeedback} = this.state;
-		var fromType = this._getMessagesStatusType(this.getFromMessages());
-		var toType = this._getMessagesStatusType(this.getToMessages());
+		const fromType = this._getMessagesStatusType(this.getFromMessages())
+		const toType = this._getMessagesStatusType(this.getToMessages())
 		if ('error' === fromType || 'error' === toType) {
-			return 'error';
+			return 'error'
 		}
 		if ('success' === fromType && 'success' === toType) {
-			return 'success';
+			return 'success'
 		}
-		return '';
+		return ''
 	},
 
 	onChangeFrom(value) {
-		this._setChanging();
-		var {id, form, row} = this.props;
+		this._setChanging()
+		const {id, row} = this.props
+		const {form} = this.context
 		if (form) {
-			form._onChange(id + 'From', value, row);
+			form._onChange(id + 'From', value, row)
 		}
 	},
 
 	onChangeTo(value) {
-		this._setChanging();
-		var {id, form, row} = this.props;
+		this._setChanging()
+		const {id, row} = this.props
+		const {form} = this.context
 		if (form) {
-			form._onChange(id + 'To', value, row);
+			form._onChange(id + 'To', value, row)
 		}
 	},
 
 	initWidgetValue(value, prevValue, valueKey) {
-		var {id} = this.props;
+		const {id} = this.props
 		if (id + 'From' === valueKey && this.refs.controlFrom) {
-			this.refs.controlFrom.initWidgetValue(value, prevValue);
+			this.refs.controlFrom.initWidgetValue(value, prevValue)
 		}
 		if (id + 'To' === valueKey && this.refs.controlTo) {
-			this.refs.controlTo.initWidgetValue(value, prevValue);
+			this.refs.controlTo.initWidgetValue(value, prevValue)
 		}
-	}
+	},
 
-});
+})
+
+DateRangeField.contextTypes = {
+	form: React.PropTypes.object
+}
+
+export default DateRangeField

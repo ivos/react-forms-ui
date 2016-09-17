@@ -38,17 +38,17 @@ export default React.createClass({
 	},
 
 	getMinDate() {
-		var {minDate} = this.props;
-		return this.getPropDate(minDate);
+		var {min} = this.props;
+		return this.getPropDate(min);
 	},
 
 	getMaxDate() {
-		var {maxDate} = this.props;
-		return this.getPropDate(maxDate);
+		var {max} = this.props;
+		return this.getPropDate(max);
 	},
 
 	render() {
-		var {id, readonly, placeholder, label, value, className='', formControl, minDate, maxDate,
+		var {id, readonly, placeholder, label, value, className='', formControl, min, max,
 			onChange, onBlur, onSubmit, children, ...otherProps} = this.props;
 		var localValue = this.state.localValue || this.getLocalValue(value) || '';
 		if (readonly) {

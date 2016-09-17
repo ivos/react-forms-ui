@@ -1,19 +1,19 @@
-import React from 'react';
-import Field from './field';
-import NumberControl from '../controls/number-control';
-import FieldMixin from './field-mixin';
+import React from 'react'
+import Field from './field'
+import NumberControl from '../controls/number-control'
+import FieldMixin from './field-mixin'
 
-export default React.createClass({
+const NumberField = React.createClass({
 
 	mixins: [FieldMixin],
 
 	render() {
-		var {id, label, classes, required, readonly, form, form: {tableForm}, placeholder, format,
-			row, children, ...otherProps} = this.props;
-		var {showFeedback} = this.state;
-		var value = this._getValue();
+		let {id, label, classes, required, readonly, placeholder, format, row, children, ...otherProps} = this.props
+		const {showFeedback} = this.state
+		const {form: {tableForm}} = this.context
+		const value = this._getValue()
 		if (tableForm) {
-			id = id + '-' + row;
+			id = id + '-' + row
 		}
 		return (
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
@@ -25,19 +25,26 @@ export default React.createClass({
 					{children}
 				</NumberControl>
 			</Field>
-		);
+		)
 	},
 
 	focus() {
-		this.refs.control.focus();
+		this.refs.control.focus()
 	},
 
 	onChange(value) {
-		this._setChanging();
-		var {id, form, row} = this.props;
+		this._setChanging()
+		const {id, row} = this.props
+		const {form} = this.context
 		if (form) {
-			form._onChange(id, value, row);
+			form._onChange(id, value, row)
 		}
-	}
+	},
 
-});
+})
+
+NumberField.contextTypes = {
+	form: React.PropTypes.object
+}
+
+export default NumberField
