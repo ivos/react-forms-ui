@@ -1,23 +1,30 @@
-import React from 'react';
-import Messages from './messages';
+import React from 'react'
+import Messages from './messages'
 
-export default React.createClass({
+const FormMessages = React.createClass({
 
 	getInitialState() {
-		return {showFeedback: 'none'};
+		return {showFeedback: 'none'}
 	},
 
 	render() {
-		var {className, form: {state: {messages: {_form: fieldMessages}}}} = this.props;
-		var {showFeedback} = this.state;
+		const {className} = this.props
+		const {showFeedback} = this.state
+		const {form: {state: {messages: {_form: fieldMessages}}}} = this.context
 		if (!fieldMessages) {
-			return <div/>;
+			return <div/>
 		}
 		return (
 			<div className="form-group">
 				<Messages id="_form" fieldMessages={fieldMessages} showFeedback={showFeedback} className={className}/>
 			</div>
-		);
-	}
+		)
+	},
 
-});
+})
+
+FormMessages.contextTypes = {
+	form: React.PropTypes.object
+}
+
+export default FormMessages
