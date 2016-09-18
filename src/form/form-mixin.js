@@ -6,10 +6,17 @@ export default {
 		return {form: this}
 	},
 
-	getInitialState: function () {
+	getInitialState() {
 		return {
 			messages: this.tableForm ? [] : {}
 		}
+	},
+
+	registerField(field) {
+		if (!this.fields) {
+			this.fields = []
+		}
+		this.fields.push(field)
 	},
 
 	componentDidMount() {
@@ -18,18 +25,19 @@ export default {
 
 	componentDidUpdate(prevProps, prevState) {
 		const {values} = this.state
-		Object.keys(this.refs).forEach(function (field) {
-			const ref = this.refs[field]
-			if (ref.initWidgetValue && ref._getValueKeys) {
-				ref._getValueKeys().forEach(function (valueKey) {
-					const prevValue = prevState.values && prevState.values[valueKey]
-					const nextValue = values && values[valueKey]
-					if (nextValue !== prevValue) {
-						ref.initWidgetValue(nextValue, prevValue, valueKey)
-					}
-				})
-			}
-		}, this)
+		if (this.fields) {
+			this.fields.forEach(function (field) {
+				if (field.initWidgetValue && field._getValueKeys) {
+					field._getValueKeys().forEach(function (valueKey) {
+						const prevValue = prevState.values && prevState.values[valueKey]
+						const nextValue = values && values[valueKey]
+						if (nextValue !== prevValue) {
+							field.initWidgetValue(nextValue, prevValue, valueKey)
+						}
+					})
+				}
+			}, this)
+		}
 	},
 
 	_onChange(id, value, row) {
@@ -62,32 +70,35 @@ export default {
 	},
 
 	focus() {
-		Object.keys(this.refs).find(function (field) {
-			const ref = this.refs[field]
-			if (ref.focus) {
-				ref.focus()
-				return true
-			}
-		}, this)
+		if (this.fields) {
+			this.fields.find(function (field) {
+				if (field.focus) {
+					field.focus()
+					return true
+				}
+			}, this)
+		}
 	},
 
 	focusError() {
-		Object.keys(this.refs).find(function (field) {
-			const ref = this.refs[field]
-			if (ref._focusError && ref._hasError && ref._hasError()) {
-				ref._focusError()
-				return true
-			}
-		}, this)
+		if (this.fields) {
+			this.fields.find(function (field) {
+				if (field._focusError && field._hasError && field._hasError()) {
+					field._focusError()
+					return true
+				}
+			}, this)
+		}
 	},
 
 	showErrorOnAllFields() {
-		Object.keys(this.refs).forEach(function (field) {
-			const ref = this.refs[field]
-			if (ref.state && typeof ref.state.showFeedback !== 'undefined') {
-				ref.setState({showFeedback: 'all'})
-			}
-		}, this)
+		if (this.fields) {
+			this.fields.forEach(function (field) {
+				if (field.state && typeof field.state.showFeedback !== 'undefined') {
+					field.setState({showFeedback: 'all'})
+				}
+			})
+		}
 	},
 
 	setAllFieldValues() {
@@ -100,18 +111,19 @@ export default {
 				})
 			}
 		}
-		Object.keys(this.refs).forEach(function (field) {
-			const ref = this.refs[field]
-			if (ref._formField) {
-				ref._getValueKeys().forEach(function (valueKey) {
-					if (this.tableForm) {
-						values[ref.props.row][valueKey] = null
-					} else {
-						values[valueKey] = null
-					}
-				}.bind(this))
-			}
-		}, this)
+		if (this.fields) {
+			this.fields.forEach(function (field) {
+				if (field._formField) {
+					field._getValueKeys().forEach(function (valueKey) {
+						if (this.tableForm) {
+							values[field.props.row][valueKey] = null
+						} else {
+							values[valueKey] = null
+						}
+					}.bind(this))
+				}
+			}, this)
+		}
 		if (this.tableForm) {
 			if (this.state.values) {
 				this.state.values.forEach(function (valuesRow, row) {

@@ -13,6 +13,13 @@ export default {
 		return {showFeedback: 'none'}
 	},
 
+	componentWillMount() {
+		const {form} = this.context
+		if (form) {
+			form.registerField(this)
+		}
+	},
+
 	_getValue(suffix) {
 		const {id, row} = this.props
 		const {form, form: {tableForm}} = this.context

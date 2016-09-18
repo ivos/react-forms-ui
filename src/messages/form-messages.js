@@ -7,6 +7,13 @@ const FormMessages = React.createClass({
 		return {showFeedback: 'none'}
 	},
 
+	componentWillMount() {
+		const {form} = this.context
+		if (form) {
+			form.registerField(this)
+		}
+	},
+
 	render() {
 		const {className} = this.props
 		const {showFeedback} = this.state
