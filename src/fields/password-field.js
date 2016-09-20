@@ -10,7 +10,7 @@ const PasswordField = React.createClass({
 	render() {
 		let {id, label, classes, required, readonly, placeholder, row, children, ...otherProps} = this.props
 		const {showFeedback} = this.state
-		const {form: {tableForm}} = this.context
+		const {form: {props: {tableForm}}} = this.context
 		const value = this._getValue()
 		if (tableForm) {
 			id = id + '-' + row

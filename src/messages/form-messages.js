@@ -17,13 +17,14 @@ const FormMessages = React.createClass({
 	render() {
 		const {className} = this.props
 		const {showFeedback} = this.state
-		const {form: {state: {messages: {_form: fieldMessages}}}} = this.context
-		if (!fieldMessages) {
+		const {form: {props: {state}}} = this.context
+		if (!state || !state.messages || !state.messages._form) {
 			return <div/>
 		}
 		return (
 			<div className="form-group">
-				<Messages id="_form" fieldMessages={fieldMessages} showFeedback={showFeedback} className={className}/>
+				<Messages id="_form" fieldMessages={state.messages._form} showFeedback={showFeedback}
+				          className={className}/>
 			</div>
 		)
 	},
@@ -31,7 +32,7 @@ const FormMessages = React.createClass({
 })
 
 FormMessages.contextTypes = {
-	form: React.PropTypes.object
+	form: React.PropTypes.object.isRequired,
 }
 
 export default FormMessages

@@ -12,7 +12,7 @@ const SelectField = React.createClass({
 			id, label, classes, required, readonly, placeholder, getList, formatItem, row, children, ...otherProps
 		} = this.props
 		const {showFeedback} = this.state
-		const {form, form: {tableForm}} = this.context
+		const {form, form: {props: {tableForm}}} = this.context
 		const value = this._getValue()
 		if (tableForm) {
 			id = id + '-' + row

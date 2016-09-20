@@ -1,95 +1,42 @@
 // options
-
-import _Options from './options/options';
-export var ReactFormsUiOptions = _Options;
+export ReactFormsUiOptions from './options/options'
 
 // validation
-
-import _Validation from './validation/validation';
-export var Validation = _Validation;
+export Validation from './validation/validation'
 
 // label
-
-import _Label from './label/label';
-export var Label = _Label;
+export Label from './label/label'
 
 // messages
-
-import _Message from './messages/message';
-export var Message = _Message;
-
-import _Messages from './messages/messages';
-export var Messages = _Messages;
-
-import _FormMessages from './messages/form-messages';
-export var FormMessages = _FormMessages;
+export Message from './messages/message'
+export Messages from './messages/messages'
+export FormMessages from './messages/form-messages'
 
 // controls
-
-import _TextControl from './controls/text-control';
-export var TextControl = _TextControl;
-
-import _PasswordControl from './controls/password-control';
-export var PasswordControl = _PasswordControl;
-
-import _NumberControl from './controls/number-control';
-export var NumberControl = _NumberControl;
-
-import _DateControl from './controls/date-control';
-export var DateControl = _DateControl;
-
-import _SelectControl from './controls/select-control';
-export var SelectControl = _SelectControl;
-
-import _BooleanControl from './controls/boolean-control';
-export var BooleanControl = _BooleanControl;
+export TextControl from './controls/text-control'
+export PasswordControl from './controls/password-control'
+export NumberControl from './controls/number-control'
+export DateControl from './controls/date-control'
+export SelectControl from './controls/select-control'
+export BooleanControl from './controls/boolean-control'
 
 // fields
-
-import _FieldMixin from './fields/field-mixin';
-export var FieldMixin = _FieldMixin;
-
-import _TextField from './fields/text-field';
-export var TextField = _TextField;
-
-import _PasswordField from './fields/password-field';
-export var PasswordField = _PasswordField;
-
-import _NumberField from './fields/number-field';
-export var NumberField = _NumberField;
-
-import _SelectField from './fields/select-field';
-export var SelectField = _SelectField;
-
-import _DateField from './fields/date-field';
-export var DateField = _DateField;
-
-import _DateRangeField from './fields/date-range-field';
-export var DateRangeField = _DateRangeField;
-
-import _BooleanField from './fields/boolean-field';
-export var BooleanField = _BooleanField;
-
-import _PlainField from './fields/plain-field';
-export var PlainField = _PlainField;
+export FieldMixin from './fields/field-mixin'
+export TextField from './fields/text-field'
+export PasswordField from './fields/password-field'
+export NumberField from './fields/number-field'
+export SelectField from './fields/select-field'
+export DateField from './fields/date-field'
+export DateRangeField from './fields/date-range-field'
+export BooleanField from './fields/boolean-field'
+export PlainField from './fields/plain-field'
 
 // panel
-
-import _Panel from './panel/panel';
-export var Panel = _Panel;
+export Panel from './panel/panel'
 
 // form
-
-import _FormMixin from './form/form-mixin';
-export var FormMixin = _FormMixin;
-
-import _Form from './form/form';
-export var Form = _Form;
+export Form from './form/form'
 
 // i18n
-
-import _I18nEn from './i18n/en';
-export var I18nEn = _I18nEn;
-
-import _I18nCs from './i18n/cs';
-export var I18nCs = _I18nCs;
+export I18nEn from './i18n/en'
+export I18nCs from './i18n/cs'

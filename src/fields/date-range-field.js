@@ -13,7 +13,7 @@ const DateRangeField = React.createClass({
 			id, classes, label, required, readonly, placeholderFrom, placeholderTo, row, children, ...otherProps
 		} = this.props
 		const {showFeedback} = this.state
-		const {form, form: {tableForm}} = this.context
+		const {form, form: {props: {tableForm}}} = this.context
 		classes = classes ? classes.split(',') : []
 		let formGroupClassName = 'form-group ' + this._getFieldStatus()
 		const valueFrom = this._getValue('From')
@@ -93,20 +93,24 @@ const DateRangeField = React.createClass({
 
 	getFromMessages() {
 		const {id, row} = this.props
-		const {form: {tableForm, state: {messages}}} = this.context
-		if (tableForm) {
-			return messages[row] ? messages[row][id + 'From'] : null
+		const {form: {props: {tableForm, state: {messages}}}} = this.context
+		if (messages) {
+			if (tableForm) {
+				return messages[row] ? messages[row][id + 'From'] : null
+			}
+			return messages[id + 'From']
 		}
-		return messages[id + 'From']
 	},
 
 	getToMessages() {
 		const {id, row} = this.props
-		const {form: {tableForm, state: {messages}}} = this.context
-		if (tableForm) {
-			return messages[row] ? messages[row][id + 'To'] : null
+		const {form: {props: {tableForm, state: {messages}}}} = this.context
+		if (messages) {
+			if (tableForm) {
+				return messages[row] ? messages[row][id + 'To'] : null
+			}
+			return messages[id + 'To']
 		}
-		return messages[id + 'To']
 	},
 
 	getFieldMessages() {

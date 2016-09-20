@@ -21,13 +21,14 @@ export default {
 	},
 
 	_getValue(suffix) {
-		const {id, row} = this.props
-		const {form, form: {tableForm}} = this.context
-		const valueKey = id + (suffix || '')
-		if (!form || !form.state.values) {
+		const {form} = this.context
+		if (!form || !form.props.state || !form.props.state.values) {
 			return null
 		}
-		return (tableForm) ? form.state.values[row][valueKey] : form.state.values[valueKey]
+		const {id, row} = this.props
+		const {tableForm, state:{values}} = form.props
+		const valueKey = id + (suffix || '')
+		return (tableForm) ? values[row][valueKey] : values[valueKey]
 	},
 
 	_getValueKeys() {
@@ -55,11 +56,16 @@ export default {
 			return this.getFieldMessages()
 		}
 		const {id, row} = this.props
-		const {form: {tableForm, state: {messages}}} = this.context
-		if (tableForm) {
-			return messages[row] ? messages[row][id] : null
+		const {form: {props: {tableForm, state}}} = this.context
+		if (state) {
+			const {messages} = state
+			if (messages) {
+				if (tableForm) {
+					return messages[row] ? messages[row][id] : null
+				}
+				return (tableForm) ? messages[row][id] : messages[id]
+			}
 		}
-		return (tableForm) ? messages[row][id] : messages[id]
 	},
 
 	_getFieldStatusType() {
