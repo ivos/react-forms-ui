@@ -9,7 +9,7 @@ const SelectField = React.createClass({
 
 	render() {
 		let {
-			id, label, classes, required, readonly, placeholder, getList, formatItem, row, children, ...otherProps
+			id, label, classes, required, readonly, placeholder, load, formatItem, row, children, ...otherProps
 		} = this.props
 		const {showFeedback} = this.state
 		const {form, form: {props: {tableForm}}} = this.context
@@ -23,7 +23,7 @@ const SelectField = React.createClass({
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
 				<SelectControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
 				               readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
-				               onSubmit={form._onSubmit} getList={getList} formatItem={formatItem}
+				               onSubmit={form._onSubmit} load={load} formatItem={formatItem}
 				               formControl {...otherProps}>
 					{children}
 				</SelectControl>
