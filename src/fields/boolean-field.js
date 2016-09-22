@@ -8,10 +8,11 @@ const BooleanField = React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		let {id, label, classes, required, readonly, placeholder, row, ...otherProps} = this.props
+		let {id, label, classes, readonly, placeholder, row, ...otherProps} = this.props
 		const {showFeedback} = this.state
-		const {form: {props: {tableForm}}} = this.context
+		const {form: {props: {tableForm, validations}}} = this.context
 		const value = this._getValue()
+		const required = (validations && validations[id]) ? validations[id].required : false
 		if (tableForm) {
 			id = id + '-' + row
 		}
@@ -43,6 +44,15 @@ const BooleanField = React.createClass({
 
 BooleanField.contextTypes = {
 	form: React.PropTypes.object
+}
+
+BooleanField.propTypes = {
+	id: React.PropTypes.string.isRequired,
+	label: React.PropTypes.string.isRequired,
+	placeholder: React.PropTypes.string,
+	classes: React.PropTypes.string.isRequired,
+	readonly: React.PropTypes.bool,
+	row: React.PropTypes.number,
 }
 
 export default BooleanField

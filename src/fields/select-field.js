@@ -9,11 +9,12 @@ const SelectField = React.createClass({
 
 	render() {
 		let {
-			id, label, classes, required, readonly, placeholder, load, formatItem, row, children, ...otherProps
+			id, label, classes, readonly, placeholder, load, formatItem, row, children, ...otherProps
 		} = this.props
 		const {showFeedback} = this.state
-		const {form, form: {props: {tableForm}}} = this.context
+		const {form, form: {props: {tableForm, validations}}} = this.context
 		const value = this._getValue()
+		const required = (validations && validations[id]) ? validations[id].required : false
 		if (tableForm) {
 			id = id + '-' + row
 		}
@@ -52,6 +53,21 @@ const SelectField = React.createClass({
 
 SelectField.contextTypes = {
 	form: React.PropTypes.object
+}
+
+SelectField.propTypes = {
+	id: React.PropTypes.string.isRequired,
+	label: React.PropTypes.string.isRequired,
+	placeholder: React.PropTypes.string,
+	classes: React.PropTypes.string.isRequired,
+	readonly: React.PropTypes.bool,
+	row: React.PropTypes.number,
+	load: function (props, propName, componentName) {
+		if (!props.readonly && (typeof props[propName] !== 'function')) {
+			return new Error(`Required prop '${propName}' was not specified in non-read-only '${componentName}'.`)
+		}
+	},
+	formatItem: React.PropTypes.func.isRequired,
 }
 
 export default SelectField

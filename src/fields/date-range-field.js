@@ -10,14 +10,18 @@ const DateRangeField = React.createClass({
 
 	render() {
 		let {
-			id, classes, label, required, readonly, placeholderFrom, placeholderTo, row, children, ...otherProps
+			id, label, classes, readonly, placeholderFrom, placeholderTo, row, children, ...otherProps
 		} = this.props
 		const {showFeedback} = this.state
-		const {form, form: {props: {tableForm}}} = this.context
+		const {form, form: {props: {tableForm, validations}}} = this.context
 		classes = classes ? classes.split(',') : []
 		let formGroupClassName = 'form-group ' + this._getFieldStatus()
 		const valueFrom = this._getValue('From')
 		const valueTo = this._getValue('To')
+		const required = (validations && (
+			(validations[id + 'From'] && validations[id + 'From'].required) ||
+			(validations[id + 'To'] && validations[id + 'To'].required)
+		))
 		if (tableForm) {
 			id = id + '-' + row
 			formGroupClassName += ' _rfu-table-form-group'
@@ -170,6 +174,16 @@ const DateRangeField = React.createClass({
 
 DateRangeField.contextTypes = {
 	form: React.PropTypes.object
+}
+
+DateRangeField.propTypes = {
+	id: React.PropTypes.string.isRequired,
+	label: React.PropTypes.string.isRequired,
+	placeholderFrom: React.PropTypes.string,
+	placeholderTo: React.PropTypes.string,
+	classes: React.PropTypes.string.isRequired,
+	readonly: React.PropTypes.bool,
+	row: React.PropTypes.number,
 }
 
 export default DateRangeField

@@ -28,4 +28,11 @@ const PlainField = React.createClass({
 
 })
 
+PlainField.propTypes = {
+	id: React.PropTypes.string.isRequired,
+	label: React.PropTypes.string.isRequired,
+	required: React.PropTypes.bool,
+	readonly: React.PropTypes.bool,
+}
+
 export default PlainField
