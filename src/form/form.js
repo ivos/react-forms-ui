@@ -15,7 +15,8 @@ const Form = React.createClass({
 	},
 
 	render() {
-		const {...otherProps} = this.props
+		let {className, ...otherProps} = this.props
+		className = className || 'form-horizontal'
 		delete otherProps.state
 		delete otherProps.setState
 		delete otherProps.validations
@@ -23,7 +24,7 @@ const Form = React.createClass({
 		delete otherProps.onSubmit
 		delete otherProps.onChange
 		return (
-			<form action="#" role="form" {...otherProps} onSubmit={this._onSubmit}/>
+			<form className={className} action="#" role="form" {...otherProps} onSubmit={this._onSubmit}/>
 		)
 	},
 
