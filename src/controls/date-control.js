@@ -52,7 +52,7 @@ export default React.createClass({
 		if (!maxDate) {
 			return maxDate
 		}
-		return maxDate.add(1, 'day').subtract(1, 'minute')
+		return maxDate.clone().add(1, 'day').subtract(1, 'minute')
 	},
 
 	render() {
