@@ -299,9 +299,9 @@
 .bootstrap-datetimepicker-widget table td.today:before {
 	content: '';
 	display: inline-block;
-	border: 0 0 7px 7px solid transparent;
+	border: 5px solid transparent;
 	border-bottom-color: #337ab7;
-	border-top-color: rgba(0, 0, 0, 0.2);
+	border-right-color: #337ab7;
 	position: absolute;
 	bottom: 4px;
 	right: 4px;
@@ -314,6 +314,7 @@
 }
 .bootstrap-datetimepicker-widget table td.active.today:before {
 	border-bottom-color: #fff;
+	border-right-color: #fff;
 }
 .bootstrap-datetimepicker-widget table td.disabled,
 .bootstrap-datetimepicker-widget table td.disabled:hover {
