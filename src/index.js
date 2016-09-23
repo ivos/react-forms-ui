@@ -39,9 +39,6 @@ export DateRangeField from './fields/date-range-field'
 export BooleanField from './fields/boolean-field'
 export PlainField from './fields/plain-field'
 
-// panel
-export Panel from './panel/panel'
-
 // form
 export Form from './form/form'
 

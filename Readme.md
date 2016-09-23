@@ -12,6 +12,10 @@ Install the node package:
 
     npm i -S react-forms-ui
 
+Optionally install react-bootstrap:
+
+    npm i -S react-bootstrap
+
 Import .css files and initialize React Forms UI in your index.js file:
 
     import 'bootstrap/dist/css/bootstrap.css'
@@ -23,6 +27,7 @@ Import .css files and initialize React Forms UI in your index.js file:
 ## 2. Usage
 
     import {Form, Panel, TextField, PasswordField, NumberField, DateField} from 'react-forms-ui'
+    import {Panel} from 'react-bootstrap'
 
     const validations = {
       myText: {
@@ -44,7 +49,7 @@ Import .css files and initialize React Forms UI in your index.js file:
         return (
           <Form state={this.state} setState={this.setState.bind(this)} validations={validations}
                 onSubmit={this.onSubmit}>
-            <Panel content="panel-body" title="My form">
+            <Panel header={<h3>My form</h3>}>
               <TextField id="myText" label="My text" placeholder="Enter some text" classes={fieldClasses}/>
               <PasswordField id="myPassword" label="My password" classes={fieldClasses}/>
               <NumberField id="myNumber" label="My number" format="0,0.[00]" classes={fieldClasses}/>
