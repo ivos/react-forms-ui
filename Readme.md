@@ -12,9 +12,13 @@ Install the node package:
 
     npm i -S react-forms-ui
 
-Import the .css file in your index.js file:
+Import .css files and initialize React Forms UI in your index.js file:
 
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'select2/select2.css'
     import 'react-forms-ui/lib/react-forms-ui.css'
+    import {initialize} from 'react-forms-ui'
+    initialize()
 
 ## 2. Usage
 
@@ -32,6 +36,9 @@ Import the .css file in your index.js file:
     }
 
     export default React.createClass({
+      getInitialState() {
+        return {}
+      },
       render() {
         const fieldClasses = 'col-sm-2,col-sm-6,col-sm-4' // label,input,error
         return (
