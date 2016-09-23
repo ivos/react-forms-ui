@@ -1,3 +1,11 @@
+// initialize
+export const initialize = function () {
+	window.jQuery = window.$ = require('jquery')
+	require('select2')
+	window.moment = require('moment')
+	require('react-forms-ui/lib/bootstrap-datetimepicker/bootstrap-datetimepicker')
+}
+
 // options
 export ReactFormsUiOptions from './options/options'
 
