@@ -25,14 +25,14 @@ Import .css files and initialize React Forms UI in your index.js file:
     import {Form, Panel, TextField, PasswordField, NumberField, DateField} from 'react-forms-ui'
 
     const validations = {
-        myText: {
-            required: true,
-            minLength: 4,
-            maxLength: 10,
-        },
-        myNumber: {
-            required: true,
-        },
+      myText: {
+        required: true,
+        minLength: 4,
+        maxLength: 10,
+      },
+      myNumber: {
+        required: true,
+      },
     }
 
     export default React.createClass({
