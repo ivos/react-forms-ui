@@ -3,7 +3,7 @@ import Label from '../label/label'
 import Messages from '../messages/messages'
 import FieldMixin from './field-mixin'
 
-const PlainField = React.createClass({
+const CustomField = React.createClass({
 
 	mixins: [FieldMixin],
 
@@ -16,7 +16,8 @@ const PlainField = React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{this.props.children}
+					{readonly && <div className="form-control-static">{this.props.children}</div>}
+					{!readonly && this.props.children}
 				</div>
 				{!readonly &&
 				<Messages ref="messages" id={id} fieldMessages={this._getFieldMessages()}
@@ -28,11 +29,15 @@ const PlainField = React.createClass({
 
 })
 
-PlainField.propTypes = {
+CustomField.contextTypes = {
+	form: React.PropTypes.object
+}
+
+CustomField.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	label: React.PropTypes.string.isRequired,
 	required: React.PropTypes.bool,
 	readonly: React.PropTypes.bool,
 }
 
-export default PlainField
+export default CustomField

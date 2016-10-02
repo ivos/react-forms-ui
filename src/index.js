@@ -37,7 +37,7 @@ export SelectField from './fields/select-field'
 export DateField from './fields/date-field'
 export DateRangeField from './fields/date-range-field'
 export BooleanField from './fields/boolean-field'
-export PlainField from './fields/plain-field'
+export CustomField from './fields/custom-field'
 
 // form
 export Form from './form/form'
