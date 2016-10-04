@@ -10,7 +10,7 @@ The [live demo](http://react-forms-ui.s3-website-us-east-1.amazonaws.com/app).
 
 Install the node package:
 
-    npm i -S react-forms-ui react-bootstrap font-awesome
+    npm i -S react-forms-ui
 
 Import .css files and initialize React Forms UI in your index.js file:
 

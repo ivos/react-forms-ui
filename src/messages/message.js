@@ -1,52 +1,60 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
-export default React.createClass({
+const Message = React.createClass({
 
 	render() {
-		var {text, dismissible} = this.props;
+		const {text, dismissible} = this.props
 		if (!text) {
-			return <span/>;
+			return <span/>
 		}
-		var outerClass = '_rfu-inline-message alert alert-' + this.getAlertType()
-			+ (dismissible ? ' alert-dismissible' : '');
-		var innerClass = '_rfu-inline-message-icon glyphicon glyphicon-' + this.getGlyphicon();
+		const outerClass = '_rfu-inline-message alert alert-' + this.getAlertType()
+			+ (dismissible ? ' alert-dismissible' : '')
+		const innerClass = '_rfu-inline-message-icon glyphicon glyphicon-' + this.getGlyphicon()
 		return (
 			<span ref="el" className={outerClass}>
-				{dismissible && <button type="button" className="close" data-dismiss="alert">&times;</button>}
-				<span className={innerClass}></span>&nbsp;{text}
+				{dismissible && <button type="button" className="close" data-dismiss="alert">&times</button>}
+				<span className={innerClass}></span>&nbsp{text}
 			</span>
-		);
+		)
 	},
 
 	getAlertType() {
-		var {type} = this.props;
+		const {type} = this.props
 		if ('error' === type || !type) {
-			return 'danger';
+			return 'danger'
 		}
-		return type;
+		return type
 	},
 
 	getGlyphicon() {
-		var {type} = this.props;
+		const {type} = this.props
 		switch (type) {
 			case 'success':
-				return 'ok-sign';
+				return 'ok-sign'
 			case 'info':
-				return 'info-sign';
+				return 'info-sign'
 			case 'warning':
-				return 'warning-sign';
+				return 'warning-sign'
 			default:
-				return 'exclamation-sign';
+				return 'exclamation-sign'
 		}
 	},
 
 	componentDidMount() {
-		var {type, dismissible} = this.props;
+		const {type, dismissible} = this.props
 		if (dismissible && 'success' === type) {
-			$(ReactDOM.findDOMNode(this.refs.el)).delay(1000).fadeOut(500);
+			$(ReactDOM.findDOMNode(this.refs.el)).delay(1000).fadeOut(500)
 		}
-	}
+	},
 
-});
+})
+
+Message.propTypes = {
+	type: React.PropTypes.string.isRequired,
+	text: React.PropTypes.string.isRequired,
+	dismissible: React.PropTypes.bool,
+}
+
+export default Message
