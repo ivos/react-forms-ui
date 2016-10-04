@@ -1,22 +1,25 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import $ from 'jquery'
+import {Alert} from 'react-bootstrap'
 
 const Message = React.createClass({
 
+	getInitialState() {
+		return {}
+	},
+
 	render() {
 		const {text, dismissible} = this.props
-		if (!text) {
+		const {dismissed} = this.state
+		if (!text || dismissed) {
 			return <span/>
 		}
-		const outerClass = '_rfu-inline-message alert alert-' + this.getAlertType()
-			+ (dismissible ? ' alert-dismissible' : '')
+		const outerClass = '_rfu-inline-message' + (dismissible ? ' alert-dismissible' : '')
 		const innerClass = '_rfu-inline-message-icon glyphicon glyphicon-' + this.getGlyphicon()
+		const onDismiss = dismissible ? this.handleDismiss : null
 		return (
-			<span ref="el" className={outerClass}>
-				{dismissible && <button type="button" className="close" data-dismiss="alert">&times</button>}
-				<span className={innerClass}></span>&nbsp{text}
-			</span>
+			<Alert ref="el" bsStyle={this.getAlertType()} className={outerClass} onDismiss={onDismiss}>
+				<span className={innerClass}/> {' '} {text}
+			</Alert>
 		)
 	},
 
@@ -42,18 +45,30 @@ const Message = React.createClass({
 		}
 	},
 
-	componentDidMount() {
+	setupAutoDismiss() {
 		const {type, dismissible} = this.props
 		if (dismissible && 'success' === type) {
-			$(ReactDOM.findDOMNode(this.refs.el)).delay(1000).fadeOut(500)
+			setTimeout(() => this.handleDismiss(), 1500)
 		}
 	},
 
+	componentDidMount() {
+		this.setupAutoDismiss()
+	},
+
+	handleDismiss() {
+		this.setState({dismissed: true})
+	},
+
+	restore() {
+		this.setState({dismissed: false})
+		this.setupAutoDismiss()
+	},
 })
 
 Message.propTypes = {
-	type: React.PropTypes.string.isRequired,
-	text: React.PropTypes.string.isRequired,
+	type: React.PropTypes.string,
+	text: React.PropTypes.string,
 	dismissible: React.PropTypes.bool,
 }
 

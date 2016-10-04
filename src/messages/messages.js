@@ -27,5 +27,4 @@ export default React.createClass({
 	isError(message) {
 		return 'error' === message.type || !message.type
 	},
-
 })

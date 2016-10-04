@@ -19,6 +19,7 @@ export Label from './label/label'
 export Message from './messages/message'
 export Messages from './messages/messages'
 export FormMessages from './messages/form-messages'
+export SystemMessage from './messages/SystemMessage'
 
 // controls
 export TextControl from './controls/text-control'

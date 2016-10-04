@@ -51,3 +51,12 @@
 .alert-dismissible {
 	padding-right: 35px;
 }
+
+/*system message*/
+._rfu-system-message {
+	position: fixed;
+	top: 60px;
+	left: 30%;
+	margin: 0 auto;
+	z-index: 999;
+}
