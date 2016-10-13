@@ -66,6 +66,8 @@ Import .css files and initialize React Forms UI in your index.js file:
 
 See [the source files of the demo](https://github.com/ivos/react-forms-ui-demo) for a comprehensive working usage example.
 
+For a yet more complex example check out a sample front-end application at [https://github.com/ivos/react-frontend](https://github.com/ivos/react-frontend).
+
 ## 4. Development
 
 [Development](Development.md).
