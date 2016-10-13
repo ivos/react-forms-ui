@@ -8,7 +8,7 @@ const CustomField = React.createClass({
 	mixins: [FieldMixin],
 
 	render() {
-		const {id, label, required, readonly} = this.props
+		const {id, label, required, readonly, children} = this.props
 		let {classes} = this.props
 		classes = classes ? classes.split(',') : []
 		return (
@@ -16,8 +16,8 @@ const CustomField = React.createClass({
 				<Label htmlFor={id} className={classes[0]} required={required ? 'required' : false}>{label}</Label>
 
 				<div className={classes[1]}>
-					{readonly && <div className="form-control-static">{this.props.children}</div>}
-					{!readonly && this.props.children}
+					{readonly && <div className="form-control-static">{children}</div>}
+					{!readonly && children}
 				</div>
 				{!readonly &&
 				<Messages ref="messages" id={id} fieldMessages={this._getFieldMessages()}

@@ -29,6 +29,7 @@ export DateControl from './controls/date-control'
 export SelectControl from './controls/select-control'
 export BooleanControl from './controls/boolean-control'
 export RadiosControl from './controls/radios-control'
+export TextAreaControl from './controls/text-area-control'
 
 // fields
 export FieldMixin from './fields/field-mixin'
@@ -41,6 +42,7 @@ export DateRangeField from './fields/date-range-field'
 export BooleanField from './fields/boolean-field'
 export CustomField from './fields/custom-field'
 export RadiosField from './fields/radios-field'
+export TextAreaField from './fields/text-area-field'
 
 // form
 export Form from './form/form'
