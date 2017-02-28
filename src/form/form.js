@@ -53,6 +53,7 @@ const Form = React.createClass({
 	_onChange(id, value, row) {
 		let {values} = this.props.state
 		if (this.props.tableForm) {
+			values = [...values]
 			values[row] = Object.assign({}, values[row])
 			values[row][id] = value
 		} else {
