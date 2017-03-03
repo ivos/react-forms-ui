@@ -74,6 +74,9 @@ Object.assign(Validation.prototype, {
 			if (validation.pattern) {
 				this.pattern(field, validation.pattern)
 			}
+			if (validation.fn) {
+				this.fn(field, validation.fn)
+			}
 			if (false !== validation.autoSuccess) {
 				this.autoSuccess(field)
 			}
@@ -188,6 +191,20 @@ Object.assign(Validation.prototype, {
 			const label = Options.translate ? Options.translate('validation:invalidFormat') : 'Invalid format.'
 			this.add(field, label, undefined, row)
 		}
+	},
+
+	fn(field, fn) {
+		if (this.tableForm) {
+			this.values.forEach(function (valuesRow, row) {
+				this._fn(field, fn, valuesRow[field], row)
+			}, this)
+		} else {
+			this._fn(field, fn, this.values[field])
+		}
+	},
+
+	_fn(field, fn, value, row) {
+		fn(this, field, value, row, this.values)
 	},
 
 	autoSuccess(field) {
