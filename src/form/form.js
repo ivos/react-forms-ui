@@ -87,7 +87,7 @@ const Form = React.createClass({
 	focus() {
 		if (this.fields) {
 			this.fields.find(function (field) {
-				if (field.focus) {
+				if (field.focus && !field.props.readonly) {
 					field.focus()
 					return true
 				}
@@ -98,7 +98,7 @@ const Form = React.createClass({
 	focusError() {
 		if (this.fields) {
 			this.fields.find(function (field) {
-				if (field._focusError && field._hasError && field._hasError()) {
+				if (field._focusError && field._hasError && field._hasError() && !field.props.readonly) {
 					field._focusError()
 					return true
 				}
