@@ -22,8 +22,8 @@ const SelectField = React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<SelectControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				               readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				<SelectControl ref={el => this.control = el} id={id} placeholder={placeholder} label={label}
+				               value={value} readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
 				               onSubmit={form._onSubmit} load={load} formatItem={formatItem}
 				               formControl {...otherProps}>
 					{children}
@@ -33,7 +33,13 @@ const SelectField = React.createClass({
 	},
 
 	focus() {
-		this.refs.control.focus()
+		const {control} = this
+		if (control) {
+			control.focus()
+		} else {
+			console.error('No control on the field.',
+				'Have you reset form\'s fields and forgot to call form.resetFields()?')
+		}
 	},
 
 	onChange(value) {
@@ -46,7 +52,13 @@ const SelectField = React.createClass({
 	},
 
 	initWidgetValue(value, prevValue) {
-		this.refs.control.initWidgetValue(value, prevValue)
+		const {control} = this
+		if (control) {
+			control.initWidgetValue(value, prevValue)
+		} else {
+			console.error('No control on the field.',
+				'Have you reset form\'s fields and forgot to call form.resetFields()?')
+		}
 	},
 
 })

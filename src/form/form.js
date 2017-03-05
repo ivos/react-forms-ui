@@ -7,9 +7,13 @@ const Form = React.createClass({
 		return {form: this}
 	},
 
+	resetFields() {
+		this.fields = []
+	},
+
 	registerField(field) {
 		if (!this.fields) {
-			this.fields = []
+			this.resetFields()
 		}
 		this.fields.push(field)
 	},

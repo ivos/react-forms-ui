@@ -44,14 +44,15 @@ const DateRangeField = React.createClass({
 					{!readonly &&
 					<div className="row">
 						<div className="col-xs-6 _rfu-date-range-date-wrapper">
-							<DateControl ref="controlFrom" id={id + 'From'} placeholder={placeholderFrom} label={label}
-							             value={valueFrom} readonly={readonly} onChange={this.onChangeFrom}
-							             onBlur={this._onBlur} onSubmit={form._onSubmit} max={this.getFromMaxDate}
+							<DateControl ref={el => this.controlFrom = el} id={id + 'From'}
+							             placeholder={placeholderFrom} label={label} value={valueFrom}
+							             readonly={readonly} onChange={this.onChangeFrom} onBlur={this._onBlur}
+							             onSubmit={form._onSubmit} max={this.getFromMaxDate}
 							             formControl {...otherProps}/>
 						</div>
 						<div className="col-xs-6 _rfu-date-range-date-wrapper">
-							<DateControl ref="controlTo" id={id + 'To'} placeholder={placeholderTo} label={label}
-							             value={valueTo} readonly={readonly} onChange={this.onChangeTo}
+							<DateControl ref={el => this.controlTo = el} id={id + 'To'} placeholder={placeholderTo}
+							             label={label} value={valueTo} readonly={readonly} onChange={this.onChangeTo}
 							             onBlur={this._onBlur} onSubmit={form._onSubmit} min={this.getToMinDate}
 							             formControl {...otherProps}/>
 						</div>
@@ -83,15 +84,18 @@ const DateRangeField = React.createClass({
 	},
 
 	focus() {
-		this.refs.controlFrom && this.refs.controlFrom.focus()
+		const {controlFrom} = this
+		if (controlFrom) {
+			controlFrom.focus()
+		}
 	},
 
 	focusError() {
 		const fromType = this._getMessagesStatusType(this.getFromMessages())
 		if ('error' === fromType) {
-			this.refs.controlFrom.focus()
+			this.controlFrom.focus()
 		} else {
-			this.refs.controlTo.focus()
+			this.controlTo.focus()
 		}
 	},
 
@@ -162,11 +166,11 @@ const DateRangeField = React.createClass({
 
 	initWidgetValue(value, prevValue, valueKey) {
 		const {id} = this.props
-		if (id + 'From' === valueKey && this.refs.controlFrom) {
-			this.refs.controlFrom.initWidgetValue(value, prevValue)
+		if (id + 'From' === valueKey && this.controlFrom) {
+			this.controlFrom.initWidgetValue(value, prevValue)
 		}
-		if (id + 'To' === valueKey && this.refs.controlTo) {
-			this.refs.controlTo.initWidgetValue(value, prevValue)
+		if (id + 'To' === valueKey && this.controlTo) {
+			this.controlTo.initWidgetValue(value, prevValue)
 		}
 	},
 

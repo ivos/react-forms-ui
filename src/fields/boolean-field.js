@@ -20,15 +20,21 @@ const BooleanField = React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm} checkbox>
-				<BooleanControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				                readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				<BooleanControl ref={el => this.control = el} id={id} placeholder={placeholder} label={label}
+				                value={value} readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
 				                formControl {...otherProps}/>
 			</Field>
 		)
 	},
 
 	focus() {
-		this.refs.control.focus()
+		const {control} = this
+		if (control) {
+			control.focus()
+		} else {
+			console.error('No control on the field.',
+				'Have you reset form\'s fields and forgot to call form.resetFields()?')
+		}
 	},
 
 	onChange(value) {

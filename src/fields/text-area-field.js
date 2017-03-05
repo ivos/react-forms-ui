@@ -20,9 +20,9 @@ const TextAreaField = React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus()} feedback={this._getFeedback()}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<TextAreaControl ref="control" id={id} placeholder={placeholder} label={label} value={value} rows={rows}
-				                 readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
-				                 formControl {...otherProps}>
+				<TextAreaControl ref={el => this.control = el} id={id} placeholder={placeholder} label={label}
+				                 value={value} rows={rows} readonly={readonly} onChange={this.onChange}
+				                 onBlur={this._onBlur} formControl {...otherProps}>
 					{children}
 				</TextAreaControl>
 			</Field>
@@ -30,7 +30,13 @@ const TextAreaField = React.createClass({
 	},
 
 	focus() {
-		this.refs.control.focus()
+		const {control} = this
+		if (control) {
+			control.focus()
+		} else {
+			console.error('No control on the field.',
+				'Have you reset form\'s fields and forgot to call form.resetFields()?')
+		}
 	},
 
 	onChange(value) {

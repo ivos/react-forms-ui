@@ -20,9 +20,9 @@ const NumberField = React.createClass({
 			<Field id={id} label={label} classes={classes} required={required} readonly={readonly}
 			       showFeedback={showFeedback} fieldStatus={this._getFieldStatus() + ' _rfu-no-feedback-icon'}
 			       fieldMessages={this._getFieldMessages()} tableForm={tableForm}>
-				<NumberControl ref="control" id={id} placeholder={placeholder} label={label} value={value}
-				               readonly={readonly} onChange={this.onChange} onBlur={this._onBlur} format={format}
-				               formControl {...otherProps}>
+				<NumberControl ref={el => this.control = el} id={id} placeholder={placeholder} label={label}
+				               value={value} readonly={readonly} onChange={this.onChange} onBlur={this._onBlur}
+				               format={format} formControl {...otherProps}>
 					{children}
 				</NumberControl>
 			</Field>
@@ -30,7 +30,13 @@ const NumberField = React.createClass({
 	},
 
 	focus() {
-		this.refs.control.focus()
+		const {control} = this
+		if (control) {
+			control.focus()
+		} else {
+			console.error('No control on the field.',
+				'Have you reset form\'s fields and forgot to call form.resetFields()?')
+		}
 	},
 
 	onChange(value) {
